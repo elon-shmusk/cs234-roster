@@ -6,6 +6,9 @@ import java.awt.*;
 /**
  * A Java Swing application to display the Moravian University Women's Basketball Roster
  * using JTabbedPane, JPanel, JTextArea, and JScrollPane.
+ * /*
+ *  * Code generated with assistance from ChatGPT.
+ *
  */
 public class Roster extends JFrame {
 

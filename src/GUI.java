@@ -1,3 +1,7 @@
+package src;
+
+import src.Add_Player;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -7,7 +11,6 @@ import java.awt.event.ActionListener;
 public class GUI
 {
     public static void main(String[] args) {
-        // Create a JFrame
         JFrame frame = new JFrame();
 
         // Create and add tabs
@@ -17,102 +20,41 @@ public class GUI
         frame.setSize(700, 550);
         frame.setLayout(new BorderLayout());
 
-        // Create a JTabbedPane
+        // JTabbedPane
         JTabbedPane tabbedPane = new JTabbedPane();
 
-        // Table data and column names
-        String[] columnNames = {"Number", "Name", "Position", "FTM %", "3FGM %"};
-        Object[][] data = {{"", "", "", "", ""}};
+//        // Table data and column names
+//        String[] columnNames = {"Number", "Name", "Position", "FTM %", "3FGM %"};
+//        Object[][] data = {{"", "", "", "", ""}};
+//
+//        // Create a table model
+//        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+//
+//        // Create the table *TO BE REPLACED*
+//        JTable table = new JTable(model);
+//        JScrollPane scrollPane = new JScrollPane(table);
+//        panel1.add(scrollPane, BorderLayout.CENTER);
 
-        // Create a table model
-        DefaultTableModel model = new DefaultTableModel(data, columnNames);
-
-        // Create the table
-        JTable table = new JTable(model);
-        JScrollPane scrollPane = new JScrollPane(table);
-        panel1.add(scrollPane, BorderLayout.CENTER);
+        //First tab will show the roster and possibly allow for adding and removing players
 
         // Add Player button
-        JButton addButton = new JButton("Add Player");
-        addButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Create a JDialog to show as a popup window
-                JDialog dialog = new JDialog(frame, "Input Dialog", true);
-                dialog.setSize(300, 200);
-                dialog.setLayout(new GridBagLayout());
-
-                // Add components to the dialog for user input
-                JTextField textField = new JTextField(20);
-                JButton okButton = new JButton("OK");
-                okButton.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        // Retrieve user input when OK button is clicked
-
-                    }
-                });
-
-
-
-                JPanel panel1 = new JPanel();
-                panel1.setLayout(new GridBagLayout());
-                GridBagConstraints constraint = new GridBagConstraints();
-
-                constraint.insets = new Insets(10, 10, 1, 1);
-                constraint.anchor = GridBagConstraints.LINE_START;
-                constraint.gridx = 0;
-                constraint.gridy = 0;
-                constraint.gridwidth = 1;
-                panel1.add(new JLabel("Enter Player Name: "));
-
-                constraint = new GridBagConstraints();
-                constraint.insets = new Insets(10, 1, 1, 10);
-                constraint.anchor = GridBagConstraints.HORIZONTAL;
-                constraint.gridx = 1;
-                constraint.gridy = 0;
-                constraint.gridwidth = 1;
-                panel1.add(textField, constraint);
-
-                constraint = new GridBagConstraints();
-                constraint.insets = new Insets(10, 10, 1, 1);
-                constraint.anchor = GridBagConstraints.LINE_START;
-                constraint.gridx = 2;
-                constraint.gridy = 0;
-                constraint.gridwidth = 1;
-                constraint.weighty = 1;
-                panel1.add(new JLabel("Enter Player Number: "));
-
-                constraint = new GridBagConstraints();
-                constraint.insets = new Insets(10, 10, 1, 10);
-                constraint.anchor = GridBagConstraints.HORIZONTAL;
-                constraint.gridx = 3;
-                constraint.gridy = 0;
-                constraint.gridwidth = 1;
-                constraint.weighty = 1;
-                panel1.add(textField);
-
-                constraint = new GridBagConstraints();
-                constraint.insets = new Insets(10, 10, 1, 1);
-                constraint.anchor = GridBagConstraints.LINE_START;
-                constraint.gridx = 4;
-                constraint.gridy = 1;
-                constraint.gridwidth = 1;
-                panel1.add(okButton);
-
-                dialog.add(panel1);
-                dialog.pack();
-                dialog.setVisible(true);
+        JButton add_button = new JButton("Add Player");
+        add_button.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                Add_Player add_window = new Add_Player(frame);
+                add_window.setVisible(true);
             }
         });
-
-
 
         // Remove Player button
         JButton removeButton = new JButton("Remove Player");
         removeButton.removeActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Create a JDialog to show as a popup window
-                JDialog dialog = new JDialog(frame, "Input Dialog", true);
-                dialog.setLayout(new BorderLayout());
+                JDialog remove_window = new JDialog(frame, "Input Dialog", true);
+                remove_window.setLayout(new BorderLayout());
 
                 // Add components to the dialog for user input
                 JTextField textField = new JTextField(20);
@@ -122,7 +64,7 @@ public class GUI
                         // Retrieve user input when OK button is clicked
                         String userInput = textField.getText();
                         JOptionPane.showMessageDialog(frame, "You entered: " + userInput);
-                        dialog.dispose(); // Close the dialog
+                        remove_window.dispose(); // Close the dialog
                     }
                 });
 
@@ -131,29 +73,24 @@ public class GUI
                 panel.add(textField);
                 panel.add(okButton);
 
-                dialog.add(panel, BorderLayout.CENTER);
-                dialog.pack();
-                dialog.setVisible(true);
+                remove_window.add(panel, BorderLayout.CENTER);
+                remove_window.pack();
+                remove_window.setVisible(true);
             }
         });
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.add(addButton);
+        buttonPanel.add(add_button);
         buttonPanel.add(removeButton);
         panel1.add(buttonPanel, BorderLayout.SOUTH);
 
 
         tabbedPane.addTab("Roster", panel1);
-
+        // Will show team stats and trends *NOT FOR SPRINT 1*
         JPanel panel2 = new JPanel();
         panel2.add(new JLabel("This is tab 2"));
         tabbedPane.addTab("Team Stats", panel2);
 
-        JPanel panel3 = new JPanel();
-        panel3.setLayout(new GridBagLayout());
-        panel3.add(new JLabel("This is tab 3"));
-        panel3.add(new Add_Player());
-        tabbedPane.addTab("Add/Remove Player", panel3);
 
 
 

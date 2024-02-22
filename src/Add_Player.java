@@ -1,83 +1,92 @@
+package src;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class Add_Player extends JButton
+public class Add_Player extends JDialog
 {
-    public Add_Player()
-    {
-        JFrame frame = new JFrame();
-        frame.setTitle("Add/Remove Player");
-        frame.setLayout(new GridBagLayout());
+    private JTextField numberField, nameField, positionField, ftmField, threeFtgmField, yearField;
 
-        JTextField num_text_Field = new JTextField(20);
-        JTextField name_text_Field = new JTextField(20);
+
+    public Add_Player(JFrame parent)
+    {
+        super(parent, "Player Input Dialog", true);
+        setSize(300, 300);
+        setLocationRelativeTo(parent);
+        setLayout(new BorderLayout());
+
+        JPanel inputPanel = new JPanel(new GridLayout(6, 2));
+
+        JLabel numberLabel = new JLabel("Number:");
+        numberField = new JTextField(10);
+        inputPanel.add(numberLabel);
+        inputPanel.add(numberField);
+
+        JLabel yearLabel = new JLabel("Year:");
+        yearField = new JTextField(10);
+        inputPanel.add(yearLabel);
+        inputPanel.add(yearField);
+
+        JLabel nameLabel = new JLabel("Name:");
+        nameField = new JTextField(10);
+        inputPanel.add(nameLabel);
+        inputPanel.add(nameField);
+
+        JLabel positionLabel = new JLabel("Position:");
+        positionField = new JTextField(10);
+        inputPanel.add(positionLabel);
+        inputPanel.add(positionField);
+
+        JLabel ftmLabel = new JLabel("FTM:");
+        ftmField = new JTextField(10);
+        inputPanel.add(ftmLabel);
+        inputPanel.add(ftmField);
+
+        JLabel threeFtgmLabel = new JLabel("3FTGM:");
+        threeFtgmField = new JTextField(10);
+        inputPanel.add(threeFtgmLabel);
+        inputPanel.add(threeFtgmField);
+
+        JPanel buttonPanel = new JPanel();
         JButton okButton = new JButton("OK");
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Retrieve user input when OK button is clicked
+                // Retrieve input values
+                String number = numberField.getText();
+                String year = yearField.getText();
+                String name = nameField.getText();
+                String position = positionField.getText();
+                String ftm = ftmField.getText();
+                String threeFtgm = threeFtgmField.getText();
 
+                // Do something with the input (e.g., display or process)
+                System.out.println("Number: " + number);
+                System.out.println("Year: " + year);
+                System.out.println("Name: " + name);
+                System.out.println("Position: " + position);
+                System.out.println("FTM: " + ftm);
+                System.out.println("3FTGM: " + threeFtgm);
+
+                // Close the dialog
+                dispose();
             }
         });
 
-        GridBagConstraints constraint = new GridBagConstraints();
+        JButton cancelButton = new JButton("Cancel");
+        cancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Close the dialog without doing anything
+                dispose();
+            }
+        });
 
-        constraint.insets = new Insets(10, 10, 1, 1);
-        constraint.anchor = GridBagConstraints.LINE_START;
-        constraint.gridx = 0;
-        constraint.gridy = 0;
-        constraint.gridwidth = 1;
-        add(new JLabel("Enter Player Name: "));
+        buttonPanel.add(okButton);
+        buttonPanel.add(cancelButton);
 
-        constraint = new GridBagConstraints();
-        constraint.insets = new Insets(10, 1, 1, 10);
-        constraint.anchor = GridBagConstraints.HORIZONTAL;
-        constraint.gridx = 1;
-        constraint.gridy = 0;
-        constraint.gridwidth = 1;
-
-
-        constraint = new GridBagConstraints();
-        constraint.insets = new Insets(10, 10, 1, 1);
-        constraint.anchor = GridBagConstraints.LINE_START;
-        constraint.gridx = 2;
-        constraint.gridy = 0;
-        constraint.gridwidth = 1;
-        constraint.weighty = 1;
-
-
-        constraint = new GridBagConstraints();
-        constraint.insets = new Insets(10, 10, 1, 10);
-        constraint.anchor = GridBagConstraints.HORIZONTAL;
-        constraint.gridx = 3;
-        constraint.gridy = 0;
-        constraint.gridwidth = 1;
-        constraint.weighty = 1;
-
-
-        constraint = new GridBagConstraints();
-        constraint.insets = new Insets(10, 10, 1, 1);
-        constraint.anchor = GridBagConstraints.LINE_START;
-        constraint.gridx = 4;
-        constraint.gridy = 1;
-        constraint.gridwidth = 1;
-
-        JPanel panel = new JPanel();
-        panel.add(new JLabel("Enter Player Name: "));
-        panel.add(name_text_Field);
-        panel.add(new JLabel("Enter Player Number: "));
-        panel.add(num_text_Field);
-        panel.add(okButton);
-
-
-
-        frame.pack();
-        setVisible(true);
-
-
+        add(inputPanel, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
     }
-
-
 }

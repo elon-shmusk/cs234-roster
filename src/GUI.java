@@ -54,7 +54,7 @@ public class GUI
             public void actionPerformed(ActionEvent e) {
                 // Create a JDialog to show as a popup window
                 JDialog remove_window = new JDialog(frame, "Input Dialog", true);
-                remove_window.setLayout(new BorderLayout());
+                remove_window.setLayout(new GridLayout(16,1));
 
                 // Add components to the dialog for user input
                 JTextField textField = new JTextField(20);

@@ -1,6 +1,7 @@
 package src;
 
 import src.Add_Player;
+import src.Remove_Player;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -10,7 +11,7 @@ import java.awt.event.ActionListener;
 
 public class GUI
 {
-    public static void main(String[] args) {
+    public GUI(){
         JFrame frame = new JFrame();
 
         // Create and add tabs
@@ -43,38 +44,17 @@ public class GUI
         {
             public void actionPerformed(ActionEvent e)
             {
-                Add_Player add_window = new Add_Player(frame);
+                Add_Player add_window = new Add_Player(panel1);
                 add_window.setVisible(true);
             }
         });
 
         // Remove Player button
         JButton removeButton = new JButton("Remove Player");
-        removeButton.removeActionListener(new ActionListener() {
+        removeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Create a JDialog to show as a popup window
-                JDialog remove_window = new JDialog(frame, "Input Dialog", true);
-                remove_window.setLayout(new GridLayout(16,1));
-
-                // Add components to the dialog for user input
-                JTextField textField = new JTextField(20);
-                JButton okButton = new JButton("OK");
-                okButton.removeActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        // Retrieve user input when OK button is clicked
-                        String userInput = textField.getText();
-                        JOptionPane.showMessageDialog(frame, "You entered: " + userInput);
-                        remove_window.dispose(); // Close the dialog
-                    }
-                });
-
-                JPanel panel = new JPanel();
-                panel.add(new JLabel("Enter input: "));
-                panel.add(textField);
-                panel.add(okButton);
-
-                remove_window.add(panel, BorderLayout.CENTER);
-                remove_window.pack();
+               Remove_Player remove_window = new Remove_Player(panel1);
                 remove_window.setVisible(true);
             }
         });
@@ -100,6 +80,7 @@ public class GUI
 
         // Display the frame
         frame.setVisible(true);
-    }
+
+}
 }
 

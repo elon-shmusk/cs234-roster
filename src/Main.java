@@ -17,24 +17,26 @@ TODO: Modify this software so that your team will be added to the course with ea
  import Project00.TeamCool;
  import Project00.Member;
  import database.Database;
- 
- public class Main {
+ import src.GUI;
+
+public class Main {
  
      public static void main(String[] args) {
          // Connect to the SQLite database
          try (Connection conn = Database.connect()) {
              if (conn != null) {
                  System.out.println("Connected to the database.");
- 
+
                  // Creates Players table if it doesn't exist
                  Database.createTable(conn);
- 
+
              } else {
                  System.out.println("Failed to connect to the database.");
              }
          } catch (Exception e) {
              System.out.println(e.getMessage());
          }
- 
+         new GUI();
+
      }
  }

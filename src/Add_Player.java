@@ -11,14 +11,15 @@ public class Add_Player extends JDialog
     private JTextField numberField, nameField, positionField, ftmField, threeFtgmField, yearField;
 
 
-    public Add_Player(JFrame parent)
+    public Add_Player(JPanel GUI)
     {
-        super(parent, "Player Input Dialog", true);
+        super();
         setSize(300, 300);
-        setLocationRelativeTo(parent);
+        setLocationRelativeTo(GUI);
         setLayout(new BorderLayout());
 
         JPanel inputPanel = new JPanel(new GridLayout(6, 2));
+        inputPanel.setBorder(BorderFactory.createTitledBorder("Enter Player Information"));
 
         JLabel numberLabel = new JLabel("Number:");
         numberField = new JTextField(10);
@@ -51,7 +52,8 @@ public class Add_Player extends JDialog
         inputPanel.add(threeFtgmField);
 
         JPanel buttonPanel = new JPanel();
-        JButton okButton = new JButton("OK");
+        //TODO: add action listener to update the roster connected to the database
+        JButton okButton = new JButton("Update Roster");
         okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Retrieve input values

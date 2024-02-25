@@ -64,22 +64,7 @@ public class GUI
         buttonPanel.add(removeButton);
         panel1.add(buttonPanel, BorderLayout.SOUTH);
 
-
-        tabbedPane.addTab("Roster", panel1);
-        // Will show team stats and trends *NOT FOR SPRINT 1*
-        JPanel panel2 = new JPanel();
-        panel2.add(new JLabel("This is tab 2"));
-        tabbedPane.addTab("Team Stats", panel2);
-
-
-
-
-
-        // Add the tabbed pane to the frame
-        frame.add(tabbedPane);
-
-        // Display the frame
-        frame.setVisible(true);
+        //
 
 }
 }

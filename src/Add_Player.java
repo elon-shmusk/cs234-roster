@@ -14,7 +14,7 @@ public class Add_Player extends JDialog
     public Add_Player(JPanel GUI)
     {
         super();
-        setSize(300, 300);
+        GUI.setSize(300, 300);
         setLocationRelativeTo(GUI);
         setLayout(new BorderLayout());
 

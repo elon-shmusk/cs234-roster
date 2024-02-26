@@ -2,27 +2,45 @@ package src;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  * A Java Swing application to display the Moravian University Women's Basketball Roster
  * using JTabbedPane, JPanel, JTextArea, and JScrollPane.
- * /*
- *  * Code generated with assistance from ChatGPT.
- *
  */
 public class rosterTab extends JFrame {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs the Roster frame.
      * @author Fernando Peralta Castro
      */
-
-    private static final long serialVersionUID = 1L;
-
     public rosterTab() {
         setTitle("Moravian University Women's Basketball Roster");
         setSize(800, 600);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        // Create a panel for buttons
+        JPanel buttonPanel = new JPanel();
+        JButton addButton = new JButton("Add Player");
+
+        // Add action listener to the button to open the dialog
+        addButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Create an instance of the Add_Player dialog
+                JPanel panel = new JPanel(); // Create a JPanel
+                Add_Player addPlayerDialog = new Add_Player(panel);
+                addPlayerDialog.setVisible(true);
+            }
+        });
+
+        // Add the button to the panel
+        buttonPanel.add(addButton, BorderLayout.CENTER);
+
+        // Add the panel to the frame's south region
+        add(buttonPanel, BorderLayout.SOUTH);
 
         // Roster data
         String[][] rosterData = {
@@ -46,19 +64,17 @@ public class rosterTab extends JFrame {
 
         String[] columnNames = {"No.", "Name", "Cl.", "Pos.", "Ht.", "Hometown/High School"};
 
+        // Create a table with roster data
         JTable table = new JTable(rosterData, columnNames);
         JScrollPane scrollPane = new JScrollPane(table);
         table.setFillsViewportHeight(true);
 
-        JPanel panel = new JPanel(new BorderLayout());
-        panel.add(scrollPane, BorderLayout.CENTER);
-
-        // Create a tabbed pane
-        JTabbedPane tabbedPane = new JTabbedPane();
-
         // Create a panel for roster information
         JPanel rosterPanel = new JPanel(new BorderLayout());
         rosterPanel.add(scrollPane, BorderLayout.CENTER); // Add the JTable to the roster panel
+
+        // Create a tabbed pane
+        JTabbedPane tabbedPane = new JTabbedPane();
 
         // Add the roster panel to the tabbed pane
         tabbedPane.addTab("Roster", rosterPanel);
@@ -74,7 +90,5 @@ public class rosterTab extends JFrame {
         JPanel panel2 = new JPanel();
         panel2.add(new JLabel("This is tab 2"));
         tabbedPane.addTab("Team Stats", panel2);
-
-        //
     }
 }

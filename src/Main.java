@@ -35,12 +35,13 @@ public class Main {
          } catch (Exception e) {
              System.out.println(e.getMessage());
          }
-         new GUI();
 
+         new GUI();
          rosterTab roster = new rosterTab();
-         SwingUtilities.invokeLater(() -> {
-             rosterTab dashboard = new rosterTab();
-             dashboard.setVisible(true);
-         });
+
+//         SwingUtilities.invokeLater(() -> {
+//             rosterTab dashboard = new rosterTab();
+//             dashboard.setVisible(true);
+//         });
         }
      }

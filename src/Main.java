@@ -36,12 +36,12 @@ public class Main {
              System.out.println(e.getMessage());
          }
 
-         new GUI();
-         rosterTab roster = new rosterTab();
+//         new GUI();
+//         rosterTab roster = new rosterTab();
 
-//         SwingUtilities.invokeLater(() -> {
-//             rosterTab dashboard = new rosterTab();
+         SwingUtilities.invokeLater(() -> {
+             GUI dashboard = new GUI();
 //             dashboard.setVisible(true);
-//         });
+         });
         }
      }

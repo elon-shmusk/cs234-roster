@@ -9,62 +9,39 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GUI
+public class GUI extends JFrame
 {
-    public GUI(){
+    public GUI() {
         JFrame frame = new JFrame();
 
         // Create and add tabs
-        JPanel panel1 = new JPanel();
-        frame.setTitle("Player Information");
+
+        frame.setTitle("Moravian University Women's Basketball");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(700, 550);
-        frame.setLayout(new BorderLayout());
+        frame.setSize(800, 400);
 
         // JTabbedPane
         JTabbedPane tabbedPane = new JTabbedPane();
 
 //        // Table data and column names
-//        String[] columnNames = {"Number", "Name", "Position", "FTM %", "3FGM %"};
-//        Object[][] data = {{"", "", "", "", ""}};
-//
-//        // Create a table model
-//        DefaultTableModel model = new DefaultTableModel(data, columnNames);
-//
-//        // Create the table *TO BE REPLACED*
-//        JTable table = new JTable(model);
-//        JScrollPane scrollPane = new JScrollPane(table);
-//        panel1.add(scrollPane, BorderLayout.CENTER);
+        JPanel roster_Panel = new JPanel();
+        rosterTab roster = new rosterTab(roster_Panel); // Create a new rosterTab object
+        tabbedPane.addTab("Roster", roster_Panel);
 
-        //First tab will show the roster and possibly allow for adding and removing players
+        // Will show team stats and trends *NOT FOR SPRINT 1*
+        JPanel panel2 = new JPanel();
+        panel2.add(new JLabel("This is tab 2"));
+        tabbedPane.addTab("Team Stats", panel2);
 
-        // Add Player button
-        JButton add_button = new JButton("Add Player");
-        add_button.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
-                Add_Player add_window = new Add_Player(panel1);
-                add_window.setVisible(true);
-            }
-        });
 
-        // Remove Player button
-        JButton removeButton = new JButton("Remove Player");
-        removeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Create a JDialog to show as a popup window
-               Remove_Player remove_window = new Remove_Player(panel1);
-                remove_window.setVisible(true);
-            }
-        });
 
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(add_button);
-        buttonPanel.add(removeButton);
-        panel1.add(buttonPanel, BorderLayout.SOUTH);
 
-        //
+
+        // Add the tabbed pane to the frame
+        frame.add(tabbedPane);
+
+        // Display the frame
+        frame.setVisible(true);
 
 }
 }

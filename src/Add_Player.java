@@ -4,17 +4,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.*;
 
 
 public class Add_Player extends JDialog
 {
     private JTextField numberField, nameField, positionField, ftmField, threeFtgmField, yearField;
+    private Connection connection;
 
 
     public Add_Player(JPanel GUI)
     {
         super();
-        GUI.setSize(300, 300);
+        setSize(400, 400);
         setLocationRelativeTo(GUI);
         setLayout(new BorderLayout());
 
@@ -53,24 +57,13 @@ public class Add_Player extends JDialog
 
         JPanel buttonPanel = new JPanel();
         //TODO: add action listener to update the roster connected to the database
-        JButton okButton = new JButton("Update Roster");
-        okButton.addActionListener(new ActionListener() {
+        JButton updateButton = new JButton("Update Roster");
+
+
+        updateButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Retrieve input values
-                String number = numberField.getText();
-                String year = yearField.getText();
-                String name = nameField.getText();
-                String position = positionField.getText();
-                String ftm = ftmField.getText();
-                String threeFtgm = threeFtgmField.getText();
-
-                // Do something with the input (e.g., display or process)
-                System.out.println("Number: " + number);
-                System.out.println("Year: " + year);
-                System.out.println("Name: " + name);
-                System.out.println("Position: " + position);
-                System.out.println("FTM: " + ftm);
-                System.out.println("3FTGM: " + threeFtgm);
+                addPlayer();
 
                 // Close the dialog
                 dispose();
@@ -85,10 +78,39 @@ public class Add_Player extends JDialog
             }
         });
 
-        buttonPanel.add(okButton);
+        buttonPanel.add(updateButton);
         buttonPanel.add(cancelButton);
 
         add(inputPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
+    }
+
+    // Add a player to the database
+    private void addPlayer()
+    {
+        String number = numberField.getText();
+        String year = yearField.getText();
+        String firstName = nameField.getText();
+        String lastName = nameField.getText();
+        String position = positionField.getText();
+        String ftm = ftmField.getText();
+        String threeFtgm = threeFtgmField.getText();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO players (first_name, last_name, position) VALUES (?, ?, ?)");
+            statement.setString(1, number);
+            statement.setString(2, year);
+            statement.setString(3, firstName);
+            statement.setString(4, lastName);
+            statement.setString(5, position);
+            statement.setString(6, ftm);
+            statement.setString(7, threeFtgm);
+            statement.executeUpdate();
+
+            JOptionPane.showMessageDialog(this, "Player added successfully");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error adding player");
+        }
     }
 }

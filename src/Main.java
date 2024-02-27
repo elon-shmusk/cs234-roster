@@ -1,4 +1,4 @@
-/*
+package src;/*
 Purpose: Use GitHub and learn to fork, clone, modify, commit, push, pull request
          a project repository.
          Learn the sequential nature and necessary communication between team members
@@ -14,27 +14,34 @@ TODO: Modify this software so that your team will be added to the course with ea
  */
 
  import java.sql.Connection;
- import Project00.TeamCool;
- import Project00.Member;
  import database.Database;
- 
- public class Main {
- 
+
+ import javax.swing.*;
+
+public class Main {
+
      public static void main(String[] args) {
          // Connect to the SQLite database
          try (Connection conn = Database.connect()) {
              if (conn != null) {
                  System.out.println("Connected to the database.");
- 
+
                  // Creates Players table if it doesn't exist
                  Database.createTable(conn);
- 
+
              } else {
                  System.out.println("Failed to connect to the database.");
              }
          } catch (Exception e) {
              System.out.println(e.getMessage());
          }
- 
+
+         new GUI();
+         rosterTab roster = new rosterTab();
+
+//         SwingUtilities.invokeLater(() -> {
+//             rosterTab dashboard = new rosterTab();
+//             dashboard.setVisible(true);
+//         });
+        }
      }
- }

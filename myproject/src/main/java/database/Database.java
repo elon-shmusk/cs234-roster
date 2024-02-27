@@ -1,4 +1,4 @@
-package src;
+package database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -27,8 +27,6 @@ public class Database {
                 + " position VARCHAR(30) NOT NULL,\n"
                 + " player_Num INT NOT NULL\n"
                 + ");";
-
-
 
         try (Statement stmt = conn.createStatement()) {
             stmt.execute(sql);

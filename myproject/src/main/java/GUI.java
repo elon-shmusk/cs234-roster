@@ -1,10 +1,8 @@
-package src;
+package main.java;//package myproject.src.main.java;
 
-import src.Add_Player;
-import src.Remove_Player;
+//import myproject.src.main.java.Add_Player;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

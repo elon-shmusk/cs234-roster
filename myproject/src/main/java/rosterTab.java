@@ -1,4 +1,6 @@
-package src;
+package main.java;//package myproject.src.main.java;
+
+//import myproject.src.main.java.Add_Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -83,7 +85,7 @@ public class rosterTab extends JFrame {
         getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
         // Set frame size and make it visible
-        setSize(800, 600);
+        setSize(1500, 600);
         setVisible(true);
 
         // Add another tab for team stats

@@ -1,3 +1,5 @@
+package main.java;
+
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +13,7 @@ public class CreateSQLiteDatabase {
             Class.forName("org.sqlite.JDBC");
             
             // SQLite database file path
-            String dbFilePath = "path/to/your/database.db";
+            String dbFilePath = new File ("Database").getAbsolutePath();
             
             // Check if the database file already exists
             File dbFile = new File(dbFilePath);

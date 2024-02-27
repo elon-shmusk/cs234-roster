@@ -1,5 +1,6 @@
 package database;
 
+import myproject.src.main.java.database.Database;
 import java.sql.Connection;
 
 public class Main {

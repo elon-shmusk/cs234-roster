@@ -12,13 +12,12 @@ import java.awt.event.ActionListener;
 public class GUI extends JFrame
 {
     public GUI() {
-        JFrame frame = new JFrame();
 
         // Create and add tabs
 
-        frame.setTitle("Moravian University Women's Basketball");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 400);
+        setTitle("Moravian University Women's Basketball");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(800, 400);
 
         // JTabbedPane
         JTabbedPane tabbedPane = new JTabbedPane();
@@ -38,10 +37,10 @@ public class GUI extends JFrame
 
 
         // Add the tabbed pane to the frame
-        frame.add(tabbedPane);
+        add(tabbedPane);
 
         // Display the frame
-        frame.setVisible(true);
+        setVisible(true);
 
 }
 }

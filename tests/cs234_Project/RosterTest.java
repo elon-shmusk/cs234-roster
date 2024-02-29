@@ -1,6 +1,6 @@
 package tests.cs234_Project;
 
-import src.rosterTab; // Import the rosterTab class
+import src.rosterTab;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -8,9 +8,6 @@ import static org.junit.Assert.*;
 import javax.swing.*;
 import java.awt.*;
 
-/*
- * JUnit tests for the rosterTab class.
- */
 public class RosterTest {
 
     /*
@@ -18,11 +15,10 @@ public class RosterTest {
      */
     @Test
     public void testRosterTabTitle() {
-        JPanel rosterPanel = new JPanel(); // Create a JPanel object
+        JPanel rosterPanel = new JPanel();
         JTabbedPane tabbedPane = new JTabbedPane();
-        tabbedPane.addTab("Roster", rosterPanel); // Add rosterPanel as a tab to the tabbedPane
+        tabbedPane.addTab("Roster", rosterPanel);
 
-        // Assuming "Roster" is the expected title of the tab
         assertEquals("Roster", tabbedPane.getTitleAt(tabbedPane.indexOfComponent(rosterPanel)));
     }
 
@@ -32,8 +28,8 @@ public class RosterTest {
      */
     @Test
     public void testRosterTabVisibility() {
-        JPanel rosterPanel = new JPanel(); // Create a JPanel object
-        rosterTab rosterTab = new rosterTab(rosterPanel); // Instantiate rosterTab object with rosterPanel
+        JPanel rosterPanel = new JPanel();
+        rosterTab rosterTab = new rosterTab(rosterPanel);
         assertTrue(rosterTab.isVisible());
     }
 
@@ -42,10 +38,10 @@ public class RosterTest {
      */
     @Test
     public void testRosterTabPresence() {
-        JTabbedPane tabbedPane = new JTabbedPane(); // Create a JTabbedPane object
-        JPanel rosterPanel = new JPanel(); // Create a JPanel object
-        rosterTab rosterTab = new rosterTab(rosterPanel); // Instantiate rosterTab object with rosterPanel
-        tabbedPane.addTab("Roster", rosterPanel); // Add rosterPanel as a tab to the tabbedPane
+        JTabbedPane tabbedPane = new JTabbedPane();
+        JPanel rosterPanel = new JPanel();
+        rosterTab rosterTab = new rosterTab(rosterPanel);
+        tabbedPane.addTab("Roster", rosterPanel);
 
         boolean tabFound = false;
         for (int i = 0; i < tabbedPane.getTabCount(); i++) {
@@ -62,9 +58,9 @@ public class RosterTest {
      */
     @Test
     public void testRosterPanelLayoutManager() {
-        JPanel rosterPanel = new JPanel(); // Create a JPanel object
-        rosterTab rosterTab = new rosterTab(rosterPanel); // Instantiate rosterTab object with rosterPanel
-        LayoutManager layoutManager = rosterPanel.getLayout(); // Get the layout manager of the roster panel
+        JPanel rosterPanel = new JPanel();
+        rosterTab rosterTab = new rosterTab(rosterPanel);
+        LayoutManager layoutManager = rosterPanel.getLayout();
         assertTrue(layoutManager instanceof BorderLayout);
     }
 

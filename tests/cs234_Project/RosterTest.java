@@ -1,6 +1,6 @@
 package tests.cs234_Project;
 
-import src.rosterTab;
+import myproject.src.main.java.rosterTab;
 
 import org.junit.Test;
 import static org.junit.Assert.*;

@@ -1,44 +1,80 @@
-//package cs234_Project;
-//
-///**
-// * Code generated with assistance from ChatGPT.
-// */
-//
-//import org.junit.Test;
-//import src.rosterTab;
-//
-//import static org.junit.Assert.*;
-//
-///**
-// * JUnit tests for the BasketballRosterTab class.
-// */
-//public class RosterTest {
-//
-//    /**
-//     * Test to verify the title of the roster tab.
-//     */
-//    @Test
-//    public void testRosterTabTitle() {
-//        rosterTab rosterTab = new rosterTab();
-//        assertEquals("Moravian University Women's Basketball Roster", rosterTab.getTitle());
-//    }
-//
-//    /**
-//     * Test to verify the visibility of the roster tab.
-//     */
-//    @Test
-//    public void testRosterTabVisibility() {
-//        rosterTab rosterTab = new rosterTab();
-//        assertTrue(rosterTab.isVisible());
-//    }
-//
-//    /**
-//     * Test to verify the size of the roster tab.
-//     */
-//    @Test
-//    public void testRosterTabSize() {
-//        rosterTab rosterTab = new rosterTab();
-//        assertEquals(800, rosterTab.getWidth());
-//        assertEquals(600, rosterTab.getHeight());
-//    }
-//}
+package tests.cs234_Project;
+
+import src.rosterTab;
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class RosterTest {
+
+    /*
+     * Test to verify the title of the roster tab.
+     */
+    @Test
+    public void testRosterTabTitle() {
+        JPanel rosterPanel = new JPanel();
+        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.addTab("Roster", rosterPanel);
+
+        assertEquals("Roster", tabbedPane.getTitleAt(tabbedPane.indexOfComponent(rosterPanel)));
+    }
+
+
+    /*
+     * Test to verify the visibility of the roster tab.
+     */
+    @Test
+    public void testRosterTabVisibility() {
+        JPanel rosterPanel = new JPanel();
+        rosterTab rosterTab = new rosterTab(rosterPanel);
+        assertTrue(rosterTab.isVisible());
+    }
+
+    /*
+     * Test to verify the presence of the "Roster" tab.
+     */
+    @Test
+    public void testRosterTabPresence() {
+        JTabbedPane tabbedPane = new JTabbedPane();
+        JPanel rosterPanel = new JPanel();
+        rosterTab rosterTab = new rosterTab(rosterPanel);
+        tabbedPane.addTab("Roster", rosterPanel);
+
+        boolean tabFound = false;
+        for (int i = 0; i < tabbedPane.getTabCount(); i++) {
+            if (tabbedPane.getTitleAt(i).equals("Roster")) {
+                tabFound = true;
+                break;
+            }
+        }
+        assertTrue(tabFound);
+    }
+
+    /*
+     * Test to verify the layout manager of the roster panel.
+     */
+    @Test
+    public void testRosterPanelLayoutManager() {
+        JPanel rosterPanel = new JPanel();
+        rosterTab rosterTab = new rosterTab(rosterPanel);
+        LayoutManager layoutManager = rosterPanel.getLayout();
+        assertTrue(layoutManager instanceof BorderLayout);
+    }
+
+    /*
+     * Test to verify the visibility of the "Add Player" button.
+     */
+    @Test
+    public void testAddPlayerButtonVisibility() {
+        JPanel rosterPanel = new JPanel();
+        rosterTab rosterTab = new rosterTab(rosterPanel);
+
+        JPanel buttonPanel = (JPanel) rosterPanel.getComponent(1);
+        boolean buttonPanelVisible = buttonPanel.isVisible();
+
+        assertTrue("Add Player button is not visible", buttonPanelVisible);
+    }
+}

@@ -1,4 +1,4 @@
-package myproject.src.main.java.database;
+package src.main.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 public class Database {
     private static final String DB_URL = "jdbc:sqlite:data/sample.db";
-    public static myproject.src.main.java.database.Database Database;
+    public static src.main.database.Database Database;
 
     // Connect to SQLite Database
     public static Connection connect() {

@@ -1,4 +1,4 @@
-package myproject.src.main.java;
+package src.main;
 
 import java.io.File;
 import java.sql.Connection;

@@ -1,4 +1,4 @@
-package myproject.src.main.java;/*
+package src.main;/*
 Purpose: Use GitHub and learn to fork, clone, modify, commit, push, pull request
          a project repository.
          Learn the sequential nature and necessary communication between team members
@@ -13,8 +13,8 @@ TODO: Modify this software so that your team will be added to the course with ea
       Team names will be Team1, Team2, Team3, Team4 ... etc. as assigned in class.
  */
 
- import myproject.src.main.java.GUI;
- import myproject.src.main.java.database.Database;
+ import src.main.GUI;
+ import src.main.database.Database;
 
  import java.sql.Connection;
  //import myproject.src.main.java.database.Database;

@@ -1,7 +1,7 @@
-package myproject.src.main.java;
+package src.main;
 
-import myproject.src.main.java.Add_Player;
-import myproject.src.main.java.Remove_Player;
+import src.main.Add_Player;
+import src.main.Remove_Player;
 
 import javax.swing.*;
 import java.awt.*;

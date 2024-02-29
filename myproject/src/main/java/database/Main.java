@@ -1,4 +1,6 @@
-package database;
+package myproject.src.main.java.database;
+
+import src.Database;
 
 import java.sql.Connection;
 

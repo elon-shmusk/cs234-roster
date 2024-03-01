@@ -1,12 +1,13 @@
 package tests.cs234_Project;
 
-import src.rosterTab;
-
+import myproject.src.main.database.rosterTab;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 import javax.swing.*;
 import java.awt.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class RosterTest {
 

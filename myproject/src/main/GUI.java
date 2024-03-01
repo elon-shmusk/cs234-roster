@@ -1,4 +1,6 @@
-package src.main;
+package myproject.src.main;
+
+import myproject.src.main.rosterTab;
 
 import javax.swing.*;
 

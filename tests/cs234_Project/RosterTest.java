@@ -1,6 +1,6 @@
 package tests.cs234_Project;
 
-import myproject.src.main.database.rosterTab;
+import myproject.src.main.rosterTab;
 import org.junit.Test;
 
 import javax.swing.*;

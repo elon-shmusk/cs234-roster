@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20cecb8a-43f9-4373-98e7-6f229d8c7c38" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/cs234_Project/RemovePlayerTest" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Remove_Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Remove_Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/cs234_Project/RosterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/cs234_Project/RosterTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +57,7 @@
       <recent name="tests.cs234_Project" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.RemovePlayerTest.testDialogPresence">
+  <component name="RunManager" selected="JUnit.RosterTest">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="openjdk-20" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -168,10 +167,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.RemovePlayerTest.testDialogPresence" />
+        <item itemvalue="JUnit.RosterTest" />
         <item itemvalue="JUnit.RemovePlayerTest" />
         <item itemvalue="JUnit.RosterTest.testAddPlayerButtonVisibility" />
-        <item itemvalue="JUnit.RosterTest" />
+        <item itemvalue="JUnit.RemovePlayerTest.testDialogPresence" />
         <item itemvalue="JUnit.RosterTest.testRosterTabVisibility" />
       </list>
     </recent_temporary>

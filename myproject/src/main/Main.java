@@ -13,7 +13,7 @@ TODO: Modify this software so that your team will be added to the course with ea
       Team names will be Team1, Team2, Team3, Team4 ... etc. as assigned in class.
  */
 
- import src.main.GUI;
+ import myproject.src.main.GUI;
  import src.main.database.Database;
 
  import java.sql.Connection;

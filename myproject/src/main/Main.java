@@ -1,4 +1,4 @@
-package src.main;/*
+package myproject.src.main;/*
 Purpose: Use GitHub and learn to fork, clone, modify, commit, push, pull request
          a project repository.
          Learn the sequential nature and necessary communication between team members

@@ -5,6 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="20cecb8a-43f9-4373-98e7-6f229d8c7c38" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/src/main/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/main/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myproject/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/cs234_Project/RosterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/cs234_Project/RosterTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +60,7 @@
       <recent name="tests.cs234_Project" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.RosterTest">
+  <component name="RunManager" selected="Application.myproject.src.main.Main">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="openjdk-20" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -87,6 +90,32 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="myproject.src.main.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="myproject.src.main.Main" />
+      <module name="cs234-roster" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="myproject.src.main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="src.main.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="src.main.Main" />
+      <module name="cs234-roster" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="src.main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RemovePlayerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cs234-roster" />
       <extension name="coverage">
@@ -98,22 +127,6 @@
       <option name="PACKAGE_NAME" value="tests.cs234_Project" />
       <option name="MAIN_CLASS_NAME" value="tests.cs234_Project.RemovePlayerTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RemovePlayerTest.testDialogPresence" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="cs234-roster" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.cs234_Project.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.cs234_Project" />
-      <option name="MAIN_CLASS_NAME" value="tests.cs234_Project.RemovePlayerTest" />
-      <option name="METHOD_NAME" value="testDialogPresence" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -149,29 +162,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RosterTest.testRosterTabVisibility" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="cs234-roster" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.cs234_Project.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.cs234_Project" />
-      <option name="MAIN_CLASS_NAME" value="tests.cs234_Project.RosterTest" />
-      <option name="METHOD_NAME" value="testRosterTabVisibility" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.myproject.src.main.Main" />
+        <item itemvalue="Application.src.main.Main" />
         <item itemvalue="JUnit.RosterTest" />
         <item itemvalue="JUnit.RemovePlayerTest" />
         <item itemvalue="JUnit.RosterTest.testAddPlayerButtonVisibility" />
-        <item itemvalue="JUnit.RemovePlayerTest.testDialogPresence" />
-        <item itemvalue="JUnit.RosterTest.testRosterTabVisibility" />
       </list>
     </recent_temporary>
   </component>

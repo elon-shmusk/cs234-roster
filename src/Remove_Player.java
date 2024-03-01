@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Remove_Player extends JDialog{
-    private JCheckBox player1, player2, player3, player4, player5, player6, player7, player8, player9, player10,
+    public JCheckBox player1, player2, player3, player4, player5, player6, player7, player8, player9, player10,
             player11, player12, player13, player14, player15, player16;
     public Remove_Player(JPanel GUI) {
         super();

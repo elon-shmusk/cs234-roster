@@ -4,7 +4,7 @@ Purpose: Use GitHub and learn to fork, clone, modify, commit, push, pull request
          Learn the sequential nature and necessary communication between team members
          using GitHub as a shared software repository
 Author of initial code base: Greg Schaper
-Authors of modified code base: <Put Team Member Names Here>
+Authors of modified code base: <Deni Velasquez, Fernando Peralta Castro, Samuel Cadiz, Kaleb Missmer, Brian Demyan>
 
 TODO: Modify this software so that your team will be added to the course with each team member's
       name being output after the team name is output.

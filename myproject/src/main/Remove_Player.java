@@ -1,3 +1,13 @@
+/*
+Purpose: This class is a dialog that allows the user to remove a player from the roster. The user can select the player
+to remove from a list of checkboxes and then click the "Update Roster" button to remove the player from the roster.
+If the user decides not to remove a player, they can click the "Cancel" button to close the dialog without making any
+changes.
+Course: CS 234
+Instructor: Greg Schaper
+Contributors: Samuel Cadiz,
+Project: Term Team Project
+ */
 package src.main;
 
 import javax.swing.*;
@@ -8,10 +18,15 @@ import java.awt.event.ActionListener;
 public class Remove_Player extends JDialog{
     public JCheckBox player1, player2, player3, player4, player5, player6, player7, player8, player9, player10,
             player11, player12, player13, player14, player15, player16;
-    public Remove_Player(JPanel GUI) {
+
+    /**
+     * Constructor for the Remove_Player class
+     * @param Roster_Panel the JPanel that the dialog is connected to and will be displayed on
+     */
+    public Remove_Player(JPanel Roster_Panel) {
         super();
         setSize(400, 400);
-        setLocationRelativeTo(GUI);
+        setLocationRelativeTo(Roster_Panel);
         setLayout(new BorderLayout());
 
         JPanel checkPanel = new JPanel(new GridLayout(8, 2));
@@ -58,7 +73,17 @@ public class Remove_Player extends JDialog{
         JButton Update_Button = new JButton("Update Roster");
 
         JButton Cancel_Button = new JButton("Cancel");
+
+        /**
+         * Action listener for the Update_Button
+         */
         Cancel_Button.addActionListener(new ActionListener() {
+
+            /**
+             * Action performed method for the cancel button in the Remove_Player class that closes the dialog
+             * without making any changes
+             * @param e the action event
+             */
             public void actionPerformed(ActionEvent e) {
                 // Close the dialog without doing anything
                 dispose();
@@ -72,6 +97,7 @@ public class Remove_Player extends JDialog{
         add(Button_Panel, BorderLayout.SOUTH);
         setVisible(true);
     }
+
 
 //        private boolean player_to_be_removed()
 //        {

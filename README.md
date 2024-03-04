@@ -3,3 +3,5 @@
 ## Brian Demyan
 ## Fernando Peralta Castro
 ## Kaleb Missmer
+## Samuel Cadiz
+

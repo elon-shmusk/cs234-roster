@@ -1,3 +1,10 @@
+/*
+ * Purpose: Tests the title, visibility, presence, layout manager, and the visibility of the roster tab.
+ * Course: CS 234
+ * Instructor: Greg Schaper
+ * Contributors: Deni Velasquez
+ * Project: Term Team Project
+ */
 package tests.cs234_Project;
 
 import myproject.src.main.rosterTab;

@@ -1,3 +1,11 @@
+/*
+Purpose: This class is used to create the panel for the roster tab. It creates a JTable with the roster data and adds
+buttons to add and remove players from the roster.
+Course: CS 234
+Instructor: Greg Schaper
+Contributors: Samuel Cadiz, Fernando Peralta Castro
+Project: Term Team Project
+*/
 package myproject.src.main;
 
 import src.main.Add_Player;
@@ -29,9 +37,18 @@ public class rosterTab extends JPanel{
         JButton addButton = new JButton("Add Player");
         JButton removeButton = new JButton("Remove Player");
 
-        // Add action listener to the button to open the dialog
+        /**
+         * ActionListener for the Add Player button. When the button is clicked, a new Add_Player window is created.
+         * @author Samuel Cadiz
+         */
         addButton.addActionListener(new ActionListener()
         {
+            /**
+             * Action performed method for the Add Player button. When the button is clicked, a new Add_Player window is
+             * created Which allows the user to add a new player to the roster. The window is displayed as a dialog box.
+             * @param e the event to be processed
+             * @author Samuel Cadiz
+             */
             public void actionPerformed(ActionEvent e)
             {
                 Add_Player add_window = new Add_Player(rosterPanel);
@@ -39,8 +56,18 @@ public class rosterTab extends JPanel{
             }
         });
 
-        // Remove Player button
+        /**
+         * ActionListener for the Remove Player button. When the button is clicked, a new Remove_Player window is created.
+         * @author Samuel Cadiz
+         */
         removeButton.addActionListener(new ActionListener() {
+
+            /**
+             * Action performed method for the Remove Player button. When the button is clicked, a new Remove_Player window is
+             * created. Which allows the user to remove a player from the roster. The window is displayed as a dialog box.
+             * @param e the event to be processed
+             * @author Samuel Cadiz
+             */
             public void actionPerformed(ActionEvent e) {
                 // Create a JDialog to show as a popup window
                 Remove_Player remove_window = new Remove_Player(rosterPanel);
@@ -51,8 +78,6 @@ public class rosterTab extends JPanel{
         // Add the button to the panel
         buttonPanel.add(addButton, BorderLayout.CENTER);
         buttonPanel.add(removeButton, BorderLayout.CENTER);
-
-        // Add the panel to the frame's south region
 
         // Roster data
         String[][] rosterData = {

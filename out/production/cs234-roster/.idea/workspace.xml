@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="20cecb8a-43f9-4373-98e7-6f229d8c7c38" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/main/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/main/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myproject/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/myproject/src/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/cs234_Project/RosterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/tests/cs234_Project/RosterTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="503be7b6-0626-4be2-b5d9-875cf991866e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,138 +20,79 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;cadizsd&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="5ab07fdf-8781-452f-bf12-ce1ed0867f1f" />
+        <option name="url" value="https://github.com/elon-shmusk/cs234-roster.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 3
+  &quot;associatedIndex&quot;: 5
 }</component>
-  <component name="ProjectId" id="2cdaAh0bu4TMwFwXzwjBNVLPtJi" />
+  <component name="ProjectId" id="2cdZ6QeOGsQP9APS4gpW0nBmISI" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/velasquezd/Courses/234/cs234-roster",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "Errors"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Application.CreateSQLiteDatabase.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GUI.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Team2AddPlayer.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
+    &quot;JUnit.RosterTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RosterTest.testRosterTabTitle.executor&quot;: &quot;Run&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/samuelcadiz/Courses/234/cs234-roster&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;
   }
-}]]></component>
-  <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="tests.cs234_Project" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Application.myproject.src.main.Main">
-    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-20" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="src.Main" />
-      <module name="cs234-roster" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="src.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="database.Main" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-20" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="database.Main" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="database.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="myproject.src.main.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="myproject.src.main.Main" />
-      <module name="cs234-roster" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="myproject.src.main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="src.main.Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="src.main.Main" />
-      <module name="cs234-roster" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="src.main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RemovePlayerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="cs234-roster" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.cs234_Project.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="tests.cs234_Project" />
-      <option name="MAIN_CLASS_NAME" value="tests.cs234_Project.RemovePlayerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+}</component>
+  <component name="RunManager" selected="JUnit.RosterTest">
     <configuration name="RosterTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cs234-roster" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="tests.cs234_Project.*" />
+          <option name="PATTERN" value="cs234_Project.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="tests.cs234_Project" />
-      <option name="MAIN_CLASS_NAME" value="tests.cs234_Project.RosterTest" />
+      <option name="PACKAGE_NAME" value="cs234_Project" />
+      <option name="MAIN_CLASS_NAME" value="cs234_Project.RosterTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RosterTest.testAddPlayerButtonVisibility" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RosterTest.testRosterTabTitle" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cs234-roster" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="tests.cs234_Project.*" />
+          <option name="PATTERN" value="cs234_Project.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="tests.cs234_Project" />
-      <option name="MAIN_CLASS_NAME" value="tests.cs234_Project.RosterTest" />
-      <option name="METHOD_NAME" value="testAddPlayerButtonVisibility" />
+      <option name="PACKAGE_NAME" value="cs234_Project" />
+      <option name="MAIN_CLASS_NAME" value="cs234_Project.RosterTest" />
+      <option name="METHOD_NAME" value="testRosterTabTitle" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -164,22 +100,26 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.myproject.src.main.Main" />
-        <item itemvalue="Application.src.main.Main" />
         <item itemvalue="JUnit.RosterTest" />
-        <item itemvalue="JUnit.RemovePlayerTest" />
-        <item itemvalue="JUnit.RosterTest.testAddPlayerButtonVisibility" />
+        <item itemvalue="JUnit.RosterTest.testRosterTabTitle" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-20.0.2-corretto-20.0.2.1-4caba194b151-d89c1816" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="20cecb8a-43f9-4373-98e7-6f229d8c7c38" name="Changes" comment="" />
-      <created>1708443768979</created>
+      <changelist id="503be7b6-0626-4be2-b5d9-875cf991866e" name="Changes" comment="" />
+      <created>1708443239952</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1708443768979</updated>
+      <updated>1708443239952</updated>
     </task>
     <servers />
   </component>

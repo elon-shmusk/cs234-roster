@@ -1,3 +1,11 @@
+/*
+Purpose: This class is used as the main GUI for the project. It creates a tabbed pane with two tabs, one for the roster
+and one for the team stats.
+Course: CS 234
+Instructor: Greg Schaper
+contributors: Samuel Cadiz
+Project: Term Team Project
+ */
 package myproject.src.main;
 
 import myproject.src.main.rosterTab;
@@ -6,10 +14,11 @@ import javax.swing.*;
 
 public class GUI extends JFrame
 {
+    /**
+     * Constructor for the GUI class.
+     */
     public GUI() {
         JFrame frame = new JFrame();
-
-        // Create and add tabs
 
         frame.setTitle("Moravian University Women's Basketball");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

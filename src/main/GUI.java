@@ -8,6 +8,9 @@ public class GUI extends JFrame {
     private JButton addPlayerButton;
     private JButton removePlayerButton;
 
+    /**
+     * Constructor for the GUI class.
+     */
     public GUI() {
         initializeUI();
     }

@@ -17,6 +17,9 @@ public class RemovePlayerDialog extends JDialog {
     private List<Player> playerList;
     private List<JCheckBox> playerCheckboxes;
 
+    /**
+     * Constructor for the Remove_Player class
+     */
     public RemovePlayerDialog(RosterTab rosterTab) {
         super();
         this.rosterTab = rosterTab;
@@ -40,7 +43,15 @@ public class RemovePlayerDialog extends JDialog {
         JButton updateButton = new JButton("Update Roster");
         JButton cancelButton = new JButton("Cancel");
 
+         /**
+         * Action listener for the Update_Button
+         */
         cancelButton.addActionListener(new ActionListener() {
+            /**
+             * Action performed method for the cancel button in the Remove_Player class that closes the dialog
+             * without making any changes
+             * @param e the action event
+             */
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }

@@ -9,10 +9,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import src.main.database.Database;
 
+/**
+ * A Java Swing application to display the Moravian University Women's Basketball Roster
+ * using JTabbedPane, JPanel, JTextArea, and JScrollPane.
+ */
 public class RosterTab extends JPanel {
     private JTable table;
     private JScrollPane scrollPane;
 
+    /**
+     * Constructs the Roster frame.
+     * @author Fernando Peralta Castro
+     */
     public RosterTab() {
         setLayout(new BorderLayout());
 

@@ -5,10 +5,10 @@
  * Contributors: Deni Velasquez
  * Project: Term Team Project
  */
-package tests.cs234_Project;
+package src.test;
 
-import myproject.src.main.rosterTab;
 import org.junit.Test;
+import src.main.RosterTab;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,20 +24,19 @@ public class RosterTest {
     @Test
     public void testRosterTabTitle() {
         JPanel rosterPanel = new JPanel();
+        RosterTab rosterTab = new RosterTab();
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Roster", rosterPanel);
 
         assertEquals("Roster", tabbedPane.getTitleAt(tabbedPane.indexOfComponent(rosterPanel)));
     }
 
-
     /*
      * Test to verify the visibility of the roster tab.
      */
     @Test
     public void testRosterTabVisibility() {
-        JPanel rosterPanel = new JPanel();
-        rosterTab rosterTab = new rosterTab(rosterPanel);
+        RosterTab rosterTab = new RosterTab();
         assertTrue(rosterTab.isVisible());
     }
 
@@ -47,9 +46,8 @@ public class RosterTest {
     @Test
     public void testRosterTabPresence() {
         JTabbedPane tabbedPane = new JTabbedPane();
-        JPanel rosterPanel = new JPanel();
-        rosterTab rosterTab = new rosterTab(rosterPanel);
-        tabbedPane.addTab("Roster", rosterPanel);
+        RosterTab rosterTab = new RosterTab();
+        tabbedPane.addTab("Roster", rosterTab);
 
         boolean tabFound = false;
         for (int i = 0; i < tabbedPane.getTabCount(); i++) {
@@ -66,8 +64,9 @@ public class RosterTest {
      */
     @Test
     public void testRosterPanelLayoutManager() {
+        RosterTab rosterTab = new RosterTab();
         JPanel rosterPanel = new JPanel();
-        rosterTab rosterTab = new rosterTab(rosterPanel);
+        rosterPanel = (JPanel) rosterTab.getComponent(0);
         LayoutManager layoutManager = rosterPanel.getLayout();
         assertTrue(layoutManager instanceof BorderLayout);
     }
@@ -77,12 +76,9 @@ public class RosterTest {
      */
     @Test
     public void testAddPlayerButtonVisibility() {
-        JPanel rosterPanel = new JPanel();
-        rosterTab rosterTab = new rosterTab(rosterPanel);
-
-        JPanel buttonPanel = (JPanel) rosterPanel.getComponent(1);
+        RosterTab rosterTab = new RosterTab();
+        JPanel buttonPanel = (JPanel) rosterTab.getComponent(1);
         boolean buttonPanelVisible = buttonPanel.isVisible();
-
         assertTrue("Add Player button is not visible", buttonPanelVisible);
     }
 }

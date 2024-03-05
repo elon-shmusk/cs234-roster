@@ -6,11 +6,22 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Database {
-    private static final String DB_URL = "jdbc:sqlite:data/sample.db";
-    public static src.main.database.Database Database;
+    private static final String DB_URL = "jdbc:sqlite:data/players.db";
+    private static Database instance;
+
+    // Private constructor to prevent direct instantiation
+    private Database() {}
+
+    // Method to get the singleton instance of Database
+    public static Database getInstance() {
+        if (instance == null) {
+            instance = new Database();
+        }
+        return instance;
+    }
 
     // Connect to SQLite Database
-    public static Connection connect() {
+    public Connection connect() {
         try {
             return DriverManager.getConnection(DB_URL);
         } catch (SQLException e) {
@@ -20,7 +31,7 @@ public class Database {
     }
 
     // Creating Players Table
-    public static void createTable(Connection conn) {
+    public void createTable(Connection conn) {
         String sql = "CREATE TABLE IF NOT EXISTS Players (\n"
                 + " id INTEGER PRIMARY KEY,\n"
                 + " firstName VARCHAR(20) NOT NULL,\n"

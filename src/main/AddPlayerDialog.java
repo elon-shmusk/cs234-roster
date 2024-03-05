@@ -16,6 +16,9 @@ public class AddPlayerDialog extends JDialog {
     private JTextField numberField;
     private RosterTab rosterTab;
 
+    /**
+     * This is the constructor for the Add_Player class that creates the dialog box for adding a player to the roster.
+     */
     public AddPlayerDialog(RosterTab rosterTab) {
         super();
         setTitle("Add Player");

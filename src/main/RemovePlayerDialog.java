@@ -1,3 +1,5 @@
+//edited by Kaleb Missmer March 5th
+
 package src.main;
 
 import javax.swing.*;
@@ -69,7 +71,6 @@ public class RemovePlayerDialog extends JDialog {
 
         add(checkPanel, BorderLayout.CENTER);
         add(buttonPanel, BorderLayout.SOUTH);
-        setVisible(true);
     }
 
     private void fetchPlayersFromDatabase() {

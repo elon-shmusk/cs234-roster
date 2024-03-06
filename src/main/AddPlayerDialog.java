@@ -66,8 +66,6 @@ public class AddPlayerDialog extends JDialog {
 
         add(addButton);
         add(cancelButton);
-
-        setVisible(true);
     }
 
     private void addPlayer() {

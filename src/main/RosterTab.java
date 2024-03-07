@@ -2,6 +2,7 @@ package src.main;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,6 +21,7 @@ public class RosterTab extends JPanel {
     /**
      * Constructs the Roster frame.
      * @author Fernando Peralta Castro
+     * @author Kaleb Missmer
      */
     public RosterTab() {
         setLayout(new BorderLayout());
@@ -28,9 +30,18 @@ public class RosterTab extends JPanel {
         table = new JTable();
         scrollPane = new JScrollPane(table);
         table.setFillsViewportHeight(true);
+        table.setRowHeight(25);
+
+        //table header font size
+        Font headerFont = new Font("Arial", Font.BOLD, 25); // Font for table header
+        JTableHeader header = table.getTableHeader();
+        header.setFont(headerFont);
 
         // Add the table to the panel
         add(scrollPane, BorderLayout.CENTER);
+
+        Font tableFont = new Font("Arial", Font.PLAIN, 25); // Choose your font and size
+        table.setFont(tableFont);
 
         // Refresh the roster when the tab is first shown
         refreshRoster();

@@ -15,6 +15,10 @@ public class GUI extends JFrame {
         initializeUI();
     }
 
+    /**
+     * @author Kaleb Missmer 
+     * Initializes the UI for the application.
+     */
     private void initializeUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
@@ -26,6 +30,11 @@ public class GUI extends JFrame {
         // Create buttons
         addPlayerButton = new JButton("Add Player");
         removePlayerButton = new JButton("Remove Player");
+
+        // Set Font Size
+        Font buttonFont = new Font("Arial", Font.PLAIN, 30); // Choose your font and size
+        addPlayerButton.setFont(buttonFont);
+        removePlayerButton.setFont(buttonFont);
 
         // Add buttons to the frame
         JPanel buttonPanel = new JPanel();

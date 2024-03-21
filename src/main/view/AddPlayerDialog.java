@@ -1,13 +1,11 @@
-package src.main;
+package src.main.view;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import src.main.database.Database;
+import src.main.model.*;
+import src.main.controller.RosterController;
 
 public class AddPlayerDialog extends JDialog {
     private JTextField nameField;
@@ -15,11 +13,9 @@ public class AddPlayerDialog extends JDialog {
     private JTextField positionField;
     private JTextField numberField;
     private RosterTab rosterTab;
+    private RosterController rosterController;
 
-    /**
-     * This is the constructor for the Add_Player class that creates the dialog box for adding a player to the roster.
-     */
-    public AddPlayerDialog(RosterTab rosterTab) {
+    public AddPlayerDialog(RosterTab rosterTab, RosterController rosterController) {
         super();
         setTitle("Add Player");
         setSize(300, 200);
@@ -27,6 +23,7 @@ public class AddPlayerDialog extends JDialog {
         setLayout(new GridLayout(0, 2));
 
         this.rosterTab = rosterTab;
+        this.rosterController = rosterController;
 
         JLabel nameLabel = new JLabel("Name:");
         nameField = new JTextField();
@@ -73,41 +70,15 @@ public class AddPlayerDialog extends JDialog {
         String name = nameField.getText();
         String year = (String) yearComboBox.getSelectedItem();
         String position = positionField.getText();
-        String number = numberField.getText();
+        int number = Integer.parseInt(numberField.getText()); // Parse the number as an integer
 
-        // Get the database instance
-        Database database = Database.getInstance();
-
-        // Proceed with database operations
-        try (Connection conn = database.connect()) {
-            // Insert player data into the database
-            String sql = "INSERT INTO Players(firstName, lastName, position, player_Num) VALUES(?, ?, ?, ?)";
-            try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
-                pstmt.setString(1, name);
-                // For simplicity, splitting the full name into first name and last name
-                String[] names = name.split("\\s+");
-                if (names.length > 1) {
-                    pstmt.setString(1, names[0]); // First name
-                    pstmt.setString(2, names[1]); // Last name
-                } else {
-                    pstmt.setString(1, names[0]); // First name only
-                    pstmt.setString(2, ""); // Last name empty
-                }
-                pstmt.setString(3, position);
-                pstmt.setInt(4, Integer.parseInt(number));
-                pstmt.executeUpdate();
-                System.out.println("Player added to the database.");
-            } catch (SQLException ex) {
-                System.out.println("Error adding player to the database: " + ex.getMessage());
-            }
-        } catch (SQLException ex) {
-            System.out.println("Database connection error: " + ex.getMessage());
-        }
-
-        // Update the roster display
-        rosterTab.refreshRoster();
+        // Pass the data to the controller to handle
+        rosterController.addPlayer(name, year, position, number);
 
         // Close the dialog
         dispose();
+
+        // Refresh the roster after adding a player
+        rosterTab.refreshRoster();
     }
 }

@@ -4,17 +4,29 @@ import javax.swing.*;
 import java.awt.*;
 import src.main.controller.RosterController;
 
+/**
+ * Main frame of the application that holds all UI components.
+ * This class initializes and displays the main window of the basketball roster application.
+ */
 public class GUI extends JFrame {
     private RosterTab rosterTab;
     private JButton addPlayerButton;
     private JButton removePlayerButton;
     private RosterController rosterController;
 
+    /**
+     * Constructs the main GUI frame with the given roster controller.
+     * @param rosterController the controller that manages roster operations
+     */
     public GUI(RosterController rosterController) {
         this.rosterController = rosterController;
         initializeUI();
     }
 
+    /**
+     * Initializes the user interface components and layout.
+     * This method sets up the frame's properties, such as size and title, and adds the necessary UI components.
+     */
     private void initializeUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
@@ -38,14 +50,26 @@ public class GUI extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Retrieves the 'Add Player' button.
+     * @return the JButton that triggers the addition of a new player
+     */
     public JButton getAddPlayerButton() {
         return addPlayerButton;
     }
 
+    /**
+     * Retrieves the 'Remove Player' button.
+     * @return the JButton that triggers the removal of an existing player
+     */
     public JButton getRemovePlayerButton() {
         return removePlayerButton;
     }
 
+    /**
+     * Retrieves the RosterTab component.
+     * @return the RosterTab that displays the player roster
+     */
     public RosterTab getRosterTab() {
         return rosterTab;
     }

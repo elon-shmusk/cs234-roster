@@ -8,17 +8,29 @@ import java.util.List;
 import src.main.model.Player;
 import src.main.controller.RosterController;
 
+
+/**
+ * A panel that displays the roster in a table format.
+ * It allows for viewing and refreshing the list of players.
+ */
 public class RosterTab extends JPanel {
     private JTable table;
     private JScrollPane scrollPane;
     private RosterController rosterController;
 
+    /**
+     * Default constructor that initializes the panel layout.
+     */
     // Constructor without arguments
     public RosterTab() {
         setLayout(new BorderLayout());
         // Initialize other components as needed
     }
 
+    /**
+     * Constructor that accepts a RosterController and sets up the table.
+     * @param rosterController the controller responsible for managing the roster data
+     */
     // Constructor with RosterController argument
     public RosterTab(RosterController rosterController) {
         this(); // Call the constructor without arguments
@@ -47,6 +59,9 @@ public class RosterTab extends JPanel {
         refreshRoster();
     }
 
+    /**
+     * Refreshes the roster by fetching the latest list of players and updating the table.
+     */
     public void refreshRoster() {
         if (rosterController != null) {
             List<Player> players = rosterController.getAllPlayers();
@@ -57,6 +72,10 @@ public class RosterTab extends JPanel {
         }
     }
 
+    /**
+     * Populates the table with the provided list of players.
+     * @param players the list of players to display in the table
+     */
     private void populateTable(List<Player> players) {
         // Populate the JTable with player data
         DefaultTableModel model = new DefaultTableModel();
@@ -68,6 +87,10 @@ public class RosterTab extends JPanel {
         table.setModel(model);
     }
 
+    /**
+     * Retrieves the RosterController associated with this panel.
+     * @return the RosterController instance
+     */
     public RosterController getRosterController() {
         return rosterController;
     }

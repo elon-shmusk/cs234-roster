@@ -5,7 +5,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * This class is responsible for creating a new SQLite database file.
+ * It checks if the database file already exists and creates a new one if it does not.
+ * @author Kaleb
+ */
 public class CreateSQLiteDatabase {
+
+    /**
+     * The main method that creates the SQLite database.
+     * @param args Command line arguments (not used).
+     */
     public static void main(String[] args) {
         Connection connection = null;
         try {

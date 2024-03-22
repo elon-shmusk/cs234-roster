@@ -7,6 +7,10 @@ import java.awt.event.ActionListener;
 import src.main.model.*;
 import src.main.controller.RosterController;
 
+/**
+ * Dialog for adding a new player to the roster.
+ * This dialog provides a form for entering player details such as name, year, position, and number.
+ */
 public class AddPlayerDialog extends JDialog {
     private JTextField nameField;
     private JComboBox<String> yearComboBox;
@@ -15,6 +19,11 @@ public class AddPlayerDialog extends JDialog {
     private RosterTab rosterTab;
     private RosterController rosterController;
 
+    /**
+     * Constructs a new AddPlayerDialog.
+     * @param rosterTab the RosterTab associated with this dialog
+     * @param rosterController the RosterController to handle player addition
+     */
     public AddPlayerDialog(RosterTab rosterTab, RosterController rosterController) {
         super();
         setTitle("Add Player");
@@ -65,6 +74,10 @@ public class AddPlayerDialog extends JDialog {
         add(cancelButton);
     }
 
+
+    /**
+     * Invoked when the 'Add' button is pressed to collect player data and add the player.
+     */
     private void addPlayer() {
         // Get player information from the input fields
         String name = nameField.getText();

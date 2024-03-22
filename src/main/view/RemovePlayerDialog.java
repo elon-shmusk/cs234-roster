@@ -9,12 +9,21 @@ import java.util.List;
 import src.main.model.*;
 import src.main.controller.RosterController;
 
+/**
+ * Dialog for removing players from the roster.
+ * This dialog presents a list of players with checkboxes to select players for removal.
+ */
 public class RemovePlayerDialog extends JDialog {
     private RosterTab rosterTab;
     private List<Player> playerList;
     private List<JCheckBox> playerCheckboxes;
     private RosterController rosterController;
 
+    /**
+     * Constructs a new RemovePlayerDialog.
+     * @param rosterTab the RosterTab associated with this dialog
+     * @param rosterController the RosterController to handle player removal
+     */
     public RemovePlayerDialog(RosterTab rosterTab, RosterController rosterController) {
         super();
         this.rosterTab = rosterTab;
@@ -59,11 +68,17 @@ public class RemovePlayerDialog extends JDialog {
         add(buttonPanel, BorderLayout.SOUTH);
     }
 
+    /**
+     * Fetches the list of players from the database and populates the dialog with checkboxes.
+     */
     private void fetchPlayersFromDatabase() {
         // Fetch player data from the database and populate the playerList
         playerList = rosterController.getAllPlayers();
     }
 
+    /**
+     * Removes the selected players from the roster when the 'Update Roster' button is pressed.
+     */
     private void removeSelectedPlayers() {
         for (int i = 0; i < playerCheckboxes.size(); i++) {
             JCheckBox checkBox = playerCheckboxes.get(i);

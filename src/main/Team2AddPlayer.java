@@ -5,11 +5,19 @@ import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
 
+/**
+ * A JFrame-based application to add a new player to the basketball roster.
+ * @author Fernando
+ */
 public class Team2AddPlayer extends JFrame {
     private JTextField firstNameField, lastNameField, positionField;
     private JButton addButton;
     private Connection connection;
 
+
+    /**
+     * Constructor that initializes the Team2AddPlayer frame and its components.
+     */
     public Team2AddPlayer() {
         super("Basketball Roster");
 
@@ -51,6 +59,9 @@ public class Team2AddPlayer extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Adds a new player to the database when the 'Add Player' button is pressed.
+     */
     private void addPlayer() {
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
@@ -70,6 +81,10 @@ public class Team2AddPlayer extends JFrame {
         }
     }
 
+    /**
+     * The main method that creates and displays the Team2AddPlayer frame.
+     * @param args Command line arguments (not used).
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

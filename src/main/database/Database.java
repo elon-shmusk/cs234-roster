@@ -1,5 +1,4 @@
 
-// Created by Kaleb Missmer
 
 
 package src.main.database;
@@ -34,19 +33,37 @@ public class Database {
         }
     }
 
-    // Creating Players Table
-    public void createTable(Connection conn) {
-        String sql = "CREATE TABLE IF NOT EXISTS Players (\n"
+    /**
+     * Create the Players and Stats tables in the database if they do not exist.
+     * By Kaleb Missmer
+     */
+    public void createTables(Connection conn) {
+        String playerTableSQL = "CREATE TABLE IF NOT EXISTS Players (\n"
                 + " id INTEGER PRIMARY KEY,\n"
                 + " firstName VARCHAR(20) NOT NULL,\n"
                 + " lastName VARCHAR(20) NOT NULL,\n"
-                + " position VARCHAR(30) NOT NULL,\n"
-                + " player_Num INT NOT NULL\n"
+                + " year VARCHAR(10) NOT NULL,\n"
+                + " number INT NOT NULL\n"
+                + ");";
+
+        String statsTableSQL = "CREATE TABLE IF NOT EXISTS Stats (\n"
+                + " id INTEGER PRIMARY KEY,\n"
+                + " player_id INT NOT NULL,\n"
+                + " freeThrowsMade INT NOT NULL,\n"
+                + " freeThrowsPercentage REAL,\n"
+                + " threePointsMade INT NOT NULL,\n"
+                + " threePointsPercentage REAL,\n"
+                + " FOREIGN KEY (player_id) REFERENCES Players(id)\n"
                 + ");";
 
         try (Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
-            System.out.println("Table created successfully.");
+            // Execute the player table creation query
+            stmt.execute(playerTableSQL);
+
+            // Execute the stats table creation query
+            stmt.execute(statsTableSQL);
+
+            System.out.println("Tables created successfully.");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

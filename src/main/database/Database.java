@@ -1,3 +1,6 @@
+
+
+
 package src.main.database;
 
 import java.sql.Connection;
@@ -30,7 +33,10 @@ public class Database {
         }
     }
 
-    // Creating Players and Stats Tables
+    /**
+     * Create the Players and Stats tables in the database if they do not exist.
+     * By Kaleb Missmer
+     */
     public void createTables(Connection conn) {
         String playerTableSQL = "CREATE TABLE IF NOT EXISTS Players (\n"
                 + " id INTEGER PRIMARY KEY,\n"

@@ -17,6 +17,9 @@ public class PlayerDatabase {
         createTable();
     }
 
+    /**
+     * Creates the Players table in the database if it does not exist.
+     */
     private void createTable() {
         String sql = "CREATE TABLE IF NOT EXISTS Players (\n"
                 + " id INTEGER PRIMARY KEY,\n"
@@ -35,6 +38,10 @@ public class PlayerDatabase {
         }
     }
 
+    /**
+     * Adds a new player to the database.
+     * @param player the player object to be added
+     */
     public void addPlayer(Player player) {
         String sql = "INSERT INTO Players(firstName, lastName, position, player_Num) VALUES(?,?,?,?)";
 
@@ -51,6 +58,10 @@ public class PlayerDatabase {
         }
     }
 
+    /**
+     * Removes a player from the database based on player ID.
+     * @param playerId the unique ID of the player to be removed
+     */
     public void removePlayer(int playerId) {
         String sql = "DELETE FROM Players WHERE id = ?";
 
@@ -68,6 +79,10 @@ public class PlayerDatabase {
         }
     }
 
+    /**
+     * Fetches all players from the database.
+     * @return a list of all players in the database
+     */
     public List<Player> getAllPlayers() {
         List<Player> players = new ArrayList<>();
         String sql = "SELECT * FROM Players";
@@ -92,6 +107,11 @@ public class PlayerDatabase {
         return players;
     }
 
+    /**
+     * Updates the number of a player in the database.
+     * @param playerId the unique ID of the player to be updated
+     * @param number the new number of the player
+     */
     public void setPlayerNumber(int playerId, int number) {
         String sql = "UPDATE Players SET player_Num = ? WHERE id = ?";
 
@@ -110,6 +130,11 @@ public class PlayerDatabase {
         }
     }
 
+    /**
+     * Updates the position of a player in the database.
+     * @param playerId the unique ID of the player to be updated
+     * @param position the new position of the player
+     */
     public void setPlayerPosition(int playerId, String position) {
         String sql = "UPDATE Players SET position = ? WHERE id = ?";
 
@@ -128,6 +153,34 @@ public class PlayerDatabase {
         }
     }
 
+    /**
+     * Updates the year of a player in the database.
+     * @param playerId the unique ID of the player to be updated
+     * @param year the new year of the player
+     */
+    public void setPlayerYear(int playerId, String year) {
+        String sql = "UPDATE Players SET year = ? WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, year);
+            pstmt.setInt(2, playerId);
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Player year updated in the database.");
+            } else {
+                System.out.println("No player found with ID: " + playerId);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error updating player year: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Updates the first name of a player in the database.
+     * @param playerId the unique ID of the player to be updated
+     * @param firstName the new first name of the player
+     */
     public void setPlayerFirstName(int playerId, String firstName) {
         String sql = "UPDATE Players SET firstName = ? WHERE id = ?";
 
@@ -146,6 +199,11 @@ public class PlayerDatabase {
         }
     }
 
+    /**
+     * Updates the last name of a player in the database.
+     * @param playerId the unique ID of the player to be updated
+     * @param lastName the new last name of the player
+     */
     public void setPlayerLastName(int playerId, String lastName) {
         String sql = "UPDATE Players SET lastName = ? WHERE id = ?";
 
@@ -164,6 +222,12 @@ public class PlayerDatabase {
         }
     }
 
+    /**
+     * Fetches the player ID from the database based on the first and last name.
+     * @param firstName the first name of the player
+     * @param lastName the last name of the player
+     * @return the unique ID of the player
+     */
     public int getPlayerId(String firstName, String lastName) {
         String sql = "SELECT id FROM Players WHERE firstName = ? AND lastName = ?";
         int playerId = -1;
@@ -183,6 +247,11 @@ public class PlayerDatabase {
         return playerId;
     }
 
+    /**
+     * Fetches the player first name from the database based on the player ID.
+     * @param playerId the unique ID of the player
+     * @return the first name of the player
+     */
     public String getPlayerFirstName(int playerId) {
         String sql = "SELECT firstName, lastName FROM Players WHERE id = ?";
         String playerFirstName = "";
@@ -202,6 +271,11 @@ public class PlayerDatabase {
         return playerFirstName;
     }
 
+    /**
+     * Fetches the player last name from the database based on the player ID.
+     * @param playerId the unique ID of the player
+     * @return the last name of the player
+     */
     public String getPlayerLastName(int playerId) {
         String sql = "SELECT firstName, lastName FROM Players WHERE id = ?";
         String playerLastName = "";
@@ -221,6 +295,11 @@ public class PlayerDatabase {
         return playerLastName;
     }
 
+    /**
+     * Fetches the player number from the database based on the player ID.
+     * @param playerId the unique ID of the player
+     * @return the number of the player
+     */
     public String getPlayerPosition(int playerId) {
         String sql = "SELECT position FROM Players WHERE id = ?";
         String position = "";
@@ -238,4 +317,28 @@ public class PlayerDatabase {
 
         return position;
     }
+
+    /**
+     * Fetches the player year from the database based on the player ID.
+     * @param playerId the unique ID of the player
+     * @return the year of the player
+     */
+    public String getPlayerYear(int playerId) {
+        String sql = "SELECT year FROM Players WHERE id = ?";
+        String year = "";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, playerId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                year = rs.getString("year");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching player year: " + e.getMessage());
+        }
+
+        return year;
+    }
+
 }

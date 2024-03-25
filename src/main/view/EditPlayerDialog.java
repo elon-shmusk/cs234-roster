@@ -18,6 +18,7 @@ public class EditPlayerDialog extends JDialog {
     private RosterTab rosterTab;
     private RosterController rosterController;
     private List<Player> playerList;
+
     public EditPlayerDialog(RosterTab rosterTab, RosterController rosterController, Player chosenPlayer) {
         super();
         setTitle("Choose Player");
@@ -41,7 +42,7 @@ public class EditPlayerDialog extends JDialog {
         add(LastnameField);
 
         JLabel yearLabel = new JLabel("Year:");
-        String[] years = {"Fr.", "So.", "Jr.", "Sr."};
+        String[] years = {"","Fr.", "So.", "Jr.", "Sr."};
         yearComboBox = new JComboBox<>(years);
         add(yearLabel);
         add(yearComboBox);
@@ -77,7 +78,10 @@ public class EditPlayerDialog extends JDialog {
         add(cancelButton);
     }
 
-
+    /**
+     * Edits the player information in the roster.
+     * @param chosenPlayer the player to be edited
+     */
     private void editPlayer(Player chosenPlayer) {
 
         // Get player information from the input fields
@@ -108,6 +112,9 @@ public class EditPlayerDialog extends JDialog {
 
             if (!chosenPlayer.getPosition().equals(position) && !position.isEmpty())
                 rosterController.updatePlayerPosition(chosenPlayer.getId(), position);
+
+            if(!chosenPlayer.getYear().equals(year) && !year.isEmpty())
+                rosterController.updatePlayerYear(chosenPlayer.getId(), year);
 
             if (chosenPlayer.getNumber() != number && number != 0)
                 rosterController.updatePlayerNumber(chosenPlayer.getId(), number);

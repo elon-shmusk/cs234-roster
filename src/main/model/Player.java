@@ -6,6 +6,7 @@ public class Player {
     private String lastName;
     private String position;
     private int number;
+    private String year;
 
     public Player(int id, String firstName, String lastName, String position, int number) {
         this.id = id;
@@ -58,5 +59,9 @@ public class Player {
 
     public String getName() {
         return firstName + " " + lastName;
+    }
+
+    public String getYear() {
+        return year;
     }
 }

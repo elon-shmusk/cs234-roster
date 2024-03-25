@@ -62,6 +62,10 @@ public class playerToEdit extends JDialog {
 
     }
 
+    /**
+     * Adds an action listener to the radio button.
+     * @param radioButton the radio button to add the action listener to
+     */
     private void getRadioButtonActionListener(JRadioButton radioButton)
     {
         radioButton.addActionListener(new ActionListener()
@@ -77,6 +81,10 @@ public class playerToEdit extends JDialog {
         });
     }
 
+    /**
+     * Gets the selected player from the radio buttons.
+     * @return the selected player
+     */
     private Player getSelectedPlayer() {
         for (int i = 0; i < playerRadioButtons.size(); i++)
         {

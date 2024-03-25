@@ -11,7 +11,7 @@ public class Main {
                 System.out.println("Connected to the database.");
 
                 // Creates Players table if it doesn't exist
-                Database.getInstance().createTable(conn);
+                Database.getInstance().createTables(conn);
 
             } else {
                 System.out.println("Failed to connect to the database.");

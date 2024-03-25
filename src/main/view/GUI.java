@@ -8,6 +8,7 @@ public class GUI extends JFrame {
     private RosterTab rosterTab;
     private JButton addPlayerButton;
     private JButton removePlayerButton;
+    private JButton editPlayerButton;
     private RosterController rosterController;
 
     public GUI(RosterController rosterController) {
@@ -25,14 +26,17 @@ public class GUI extends JFrame {
 
         addPlayerButton = new JButton("Add Player");
         removePlayerButton = new JButton("Remove Player");
+        editPlayerButton = new JButton("Edit Player");
 
         Font buttonFont = new Font("Arial", Font.PLAIN, 30);
         addPlayerButton.setFont(buttonFont);
         removePlayerButton.setFont(buttonFont);
+        editPlayerButton.setFont(buttonFont);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(addPlayerButton);
         buttonPanel.add(removePlayerButton);
+        buttonPanel.add(editPlayerButton);
         getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 
         setVisible(true);
@@ -44,6 +48,9 @@ public class GUI extends JFrame {
 
     public JButton getRemovePlayerButton() {
         return removePlayerButton;
+    }
+    public JButton getEditPlayerButton() {
+        return editPlayerButton;
     }
 
     public RosterTab getRosterTab() {

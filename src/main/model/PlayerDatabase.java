@@ -91,4 +91,151 @@ public class PlayerDatabase {
 
         return players;
     }
+
+    public void setPlayerNumber(int playerId, int number) {
+        String sql = "UPDATE Players SET player_Num = ? WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, number);
+            pstmt.setInt(2, playerId);
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Player number updated in the database.");
+            } else {
+                System.out.println("No player found with ID: " + playerId);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error updating player number: " + e.getMessage());
+        }
+    }
+
+    public void setPlayerPosition(int playerId, String position) {
+        String sql = "UPDATE Players SET position = ? WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, position);
+            pstmt.setInt(2, playerId);
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Player position updated in the database.");
+            } else {
+                System.out.println("No player found with ID: " + playerId);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error updating player position: " + e.getMessage());
+        }
+    }
+
+    public void setPlayerFirstName(int playerId, String firstName) {
+        String sql = "UPDATE Players SET firstName = ? WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, firstName);
+            pstmt.setInt(2, playerId);
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Player's first name updated in the database.");
+            } else {
+                System.out.println("No player found with ID: " + playerId);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error updating player name: " + e.getMessage());
+        }
+    }
+
+    public void setPlayerLastName(int playerId, String lastName) {
+        String sql = "UPDATE Players SET lastName = ? WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, lastName);
+            pstmt.setInt(2, playerId);
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Player's last name updated in the database.");
+            } else {
+                System.out.println("No player found with ID: " + playerId);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error updating player name: " + e.getMessage());
+        }
+    }
+
+    public int getPlayerId(String firstName, String lastName) {
+        String sql = "SELECT id FROM Players WHERE firstName = ? AND lastName = ?";
+        int playerId = -1;
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, firstName);
+            pstmt.setString(2, lastName);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                playerId = rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching player ID: " + e.getMessage());
+        }
+
+        return playerId;
+    }
+
+    public String getPlayerFirstName(int playerId) {
+        String sql = "SELECT firstName, lastName FROM Players WHERE id = ?";
+        String playerFirstName = "";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, playerId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                String firstName = rs.getString("firstName");
+                playerFirstName = firstName;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching player name: " + e.getMessage());
+        }
+
+        return playerFirstName;
+    }
+
+    public String getPlayerLastName(int playerId) {
+        String sql = "SELECT firstName, lastName FROM Players WHERE id = ?";
+        String playerLastName = "";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, playerId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                String lastName = rs.getString("lastName");
+                playerLastName = lastName;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching player name: " + e.getMessage());
+        }
+
+        return playerLastName;
+    }
+
+    public String getPlayerPosition(int playerId) {
+        String sql = "SELECT position FROM Players WHERE id = ?";
+        String position = "";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, playerId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                position = rs.getString("position");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching player position: " + e.getMessage());
+        }
+
+        return position;
+    }
 }

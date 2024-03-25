@@ -24,6 +24,37 @@ public class RosterController {
         rosterTab.refreshRoster();
     }
 
+    public void updatePlayerFirstName(int playerId, String firstName)
+    {
+        playerDatabase.setPlayerFirstName(playerId, firstName);
+        rosterTab.refreshRoster();
+    }
+
+    public void updatePlayerLastName(int playerId, String lastName)
+    {
+        playerDatabase.setPlayerLastName(playerId, lastName);
+        rosterTab.refreshRoster();
+    }
+
+    public void updatePlayerFullName(int playerId, String firstName, String lastName)
+    {
+        playerDatabase.setPlayerFirstName(playerId, firstName);
+        playerDatabase.setPlayerLastName(playerId, lastName);
+        rosterTab.refreshRoster();
+    }
+
+    public void updatePlayerPosition(int playerId, String position)
+    {
+        playerDatabase.setPlayerPosition(playerId, position);
+        rosterTab.refreshRoster();
+    }
+
+    public void updatePlayerNumber(int playerId, int number)
+    {
+        playerDatabase.setPlayerNumber(playerId, number);
+        rosterTab.refreshRoster();
+    }
+
     public List<Player> getAllPlayers() {
         return playerDatabase.getAllPlayers();
     }

@@ -4,14 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="936f0353-62d4-4029-b63f-005d12ec5c98" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/model/EditPlayer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/view/EditPlayerDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
+    <list default="true" id="936f0353-62d4-4029-b63f-005d12ec5c98" name="Changes" comment="adding edit player feature">
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/controller/RosterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/controller/RosterController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/model/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/model/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/model/PlayerDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/model/PlayerDatabase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/AddPlayerDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/AddPlayerDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/RosterTab.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/RosterTab.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/controller/RosterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/controller/RosterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/model/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/model/PlayerDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/model/PlayerDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/view/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/view/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/view/AddPlayerDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/view/AddPlayerDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/view/RosterTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/view/RosterTab.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,12 +45,33 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Main.executor": "Run",
+    "Application.src.main.database.Main.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/samuelcadiz/Courses/234/cs234-roster"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="src.main.Main" />
+      <module name="cs234-roster" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="src.main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -64,6 +88,27 @@
       <option name="presentableId" value="Default" />
       <updated>1711027134095</updated>
     </task>
+    <task id="LOCAL-00001" summary="adding edit player feature">
+      <option name="closed" value="true" />
+      <created>1711408265080</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1711408265081</updated>
+    </task>
+    <task id="LOCAL-00002" summary="adding edit player feature">
+      <option name="closed" value="true" />
+      <created>1711410874833</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1711410874834</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="adding edit player feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding edit player feature" />
   </component>
 </project>

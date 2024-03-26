@@ -26,6 +26,7 @@ public class PlayerDatabase {
                 + " firstName VARCHAR(20) NOT NULL,\n"
                 + " lastName VARCHAR(20) NOT NULL,\n"
                 + " position VARCHAR(30) NOT NULL,\n"
+                + " year VARCHAR(10) NOT NULL,\n"
                 + " player_Num INT NOT NULL\n"
                 + ");";
 
@@ -43,7 +44,7 @@ public class PlayerDatabase {
      * @param player the player object to be added
      */
     public void addPlayer(Player player) {
-        String sql = "INSERT INTO Players(firstName, lastName, position, player_Num) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO Players(firstName, lastName, position, player_Num, year) VALUES(?,?,?,?,?)";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -51,6 +52,7 @@ public class PlayerDatabase {
             pstmt.setString(2, player.getLastName());
             pstmt.setString(3, player.getPosition());
             pstmt.setInt(4, player.getNumber());
+            pstmt.setString(5, player.getYear());
             pstmt.executeUpdate();
             System.out.println("Player added to the database.");
         } catch (SQLException e) {
@@ -97,7 +99,8 @@ public class PlayerDatabase {
                 String lastName = rs.getString("lastName");
                 String position = rs.getString("position");
                 int number = rs.getInt("player_Num");
-                Player player = new Player(id, firstName, lastName, position, number);
+                String year = rs.getString("year");
+                Player player = new Player(id, firstName, lastName, position, number, year);
                 players.add(player);
             }
         } catch (SQLException e) {

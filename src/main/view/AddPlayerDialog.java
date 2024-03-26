@@ -12,7 +12,8 @@ import src.main.controller.RosterController;
  * This dialog provides a form for entering player details such as name, year, position, and number.
  */
 public class AddPlayerDialog extends JDialog {
-    private JTextField nameField;
+    private JTextField FirstnameField;
+    private JTextField LastnameField;
     private JComboBox<String> yearComboBox;
     private JTextField positionField;
     private JTextField numberField;
@@ -34,13 +35,18 @@ public class AddPlayerDialog extends JDialog {
         this.rosterTab = rosterTab;
         this.rosterController = rosterController;
 
-        JLabel nameLabel = new JLabel("Name:");
-        nameField = new JTextField();
-        add(nameLabel);
-        add(nameField);
+        JLabel FirstnameLabel = new JLabel("First Name:");
+        FirstnameField = new JTextField();
+        add(FirstnameLabel);
+        add(FirstnameField);
+
+        JLabel LastnameLabel = new JLabel("Last Name:");
+        LastnameField = new JTextField();
+        add(LastnameLabel);
+        add(LastnameField);
 
         JLabel yearLabel = new JLabel("Year:");
-        String[] years = {"Fr.", "So.", "Jr.", "Sr."};
+        String[] years = {"","Fr.", "So.", "Jr.", "Sr."};
         yearComboBox = new JComboBox<>(years);
         add(yearLabel);
         add(yearComboBox);
@@ -80,13 +86,14 @@ public class AddPlayerDialog extends JDialog {
      */
     private void addPlayer() {
         // Get player information from the input fields
-        String name = nameField.getText();
+        String firstName = FirstnameField.getText();
+        String lastName = LastnameField.getText();
         String year = (String) yearComboBox.getSelectedItem();
         String position = positionField.getText();
         int number = Integer.parseInt(numberField.getText()); // Parse the number as an integer
 
         // Pass the data to the controller to handle
-        rosterController.addPlayer(name, year, position, number);
+        rosterController.addPlayer(firstName, lastName, position, number, year);
 
         // Close the dialog
         dispose();

@@ -66,6 +66,7 @@ public class RosterTab extends JPanel {
         if (rosterController != null) {
             List<Player> players = rosterController.getAllPlayers();
             populateTable(players);
+
         } else {
             // Handle case where rosterController is not set
             System.out.println("RosterController is not set");
@@ -79,10 +80,10 @@ public class RosterTab extends JPanel {
     private void populateTable(List<Player> players) {
         // Populate the JTable with player data
         DefaultTableModel model = new DefaultTableModel();
-        model.setColumnIdentifiers(new String[]{"ID", "First Name", "Last Name", "Position", "Number"});
+        model.setColumnIdentifiers(new String[]{"ID", "First Name", "Last Name","Year", "Position", "Number"});
         for (Player player : players) {
             model.addRow(new Object[]{player.getId(), player.getFirstName(),
-                    player.getLastName(), player.getPosition(), player.getNumber()});
+                    player.getLastName(),player.getYear(), player.getPosition(), player.getNumber()});
         }
         table.setModel(model);
     }

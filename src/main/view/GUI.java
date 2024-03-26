@@ -18,9 +18,11 @@ public class GUI extends JFrame {
     /**
      * Constructs the main GUI frame with the given roster controller.
      * @param rosterController the controller that manages roster operations
+     * @param rosterTab the tab component that displays the roster
      */
-    public GUI(RosterController rosterController) {
+    public GUI(RosterController rosterController, RosterTab rosterTab) {
         this.rosterController = rosterController;
+        this.rosterTab = rosterTab;
         initializeUI();
     }
 
@@ -33,7 +35,6 @@ public class GUI extends JFrame {
         setSize(800, 600);
         setTitle("Basketball Roster");
 
-        rosterTab = new RosterTab(rosterController);
         getContentPane().add(rosterTab, BorderLayout.CENTER);
 
         addPlayerButton = new JButton("Add Player");

@@ -8,12 +8,13 @@ public class Player {
     private int number;
     private String year;
 
-    public Player(int id, String firstName, String lastName, String position, int number) {
+    public Player(int id, String firstName, String lastName, String position, int number, String year) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.position = position;
         this.number = number;
+        this.year = year;
     }
 
     // Getters and setters

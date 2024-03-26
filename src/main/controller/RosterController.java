@@ -30,9 +30,10 @@ public class RosterController {
      * @param lastName the last name of the player
      * @param position the playing position of the player
      * @param number the jersey number of the player
+     * @param year the year of the player
      */
-    public void addPlayer(String firstName, String lastName, String position, int number) {
-        Player newPlayer = new Player(0, firstName, lastName, position, number);
+    public void addPlayer(String firstName, String lastName, String position, int number, String year) {
+        Player newPlayer = new Player(0, firstName, lastName, position, number, year);
         playerDatabase.addPlayer(newPlayer);
         rosterTab.refreshRoster();
     }

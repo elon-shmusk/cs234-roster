@@ -27,7 +27,7 @@ public class Main {
             // Set the rosterController for the RosterTab
             rosterController.setRosterTab(rosterTab);
 
-            GUI dashboard = new GUI(rosterController);
+            GUI dashboard = new GUI(rosterController, rosterTab); // Pass the rosterController and rosterTab
             AddPlayerDialog addPlayerDialog = new AddPlayerDialog(rosterTab, rosterController); // Pass the rosterController
             RemovePlayerDialog removePlayerDialog = new RemovePlayerDialog(rosterTab, rosterController); // Pass the rosterController
             playerToEdit playertoEdit = new playerToEdit(rosterTab, rosterController); // Pass the rosterController

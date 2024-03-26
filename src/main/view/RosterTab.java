@@ -3,11 +3,12 @@ package src.main.view;
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
+import java.sql.*;
 import java.util.List;
 import src.main.model.Player;
 import src.main.controller.RosterController;
-
 
 /**
  * A panel that displays the roster in a table format.
@@ -20,6 +21,9 @@ public class RosterTab extends JPanel {
     private JButton addPlayerButton;
     private JButton removePlayerButton;
     private JButton editPlayerButton;
+    private static final String DB_URL = "jdbc:sqlite:data/players.db";
+    private static final String SELECT_QUERY = "SELECT * FROM players";
+
 
     /**
      * Default constructor that initializes the panel layout.
@@ -92,6 +96,33 @@ public class RosterTab extends JPanel {
         refreshRoster();
     }
 
+    private static void fetchAndPopulateData(DefaultTableModel model) throws SQLException {
+    try (Connection conn = DriverManager.getConnection(DB_URL);
+         Statement stmt = conn.createStatement();
+         ResultSet rs = stmt.executeQuery(SELECT_QUERY)) {
+
+        ResultSetMetaData metaData = rs.getMetaData();
+        int columnCount = metaData.getColumnCount();
+
+        // Set column names in the table model
+        for (int i = 1; i <= columnCount; i++) {
+            model.addColumn(metaData.getColumnName(i));
+        }
+
+        // Populate data rows
+        while (rs.next()) {
+            Object[] rowData = new Object[columnCount];
+            for (int i = 0; i < columnCount; i++) {
+                rowData[i] = rs.getObject(i + 1);
+            }
+            model.addRow(rowData);
+        }
+
+    } catch (SQLException e) {
+        throw new SQLException("Error fetching data from database: " + e.getMessage(), e);
+    }
+}
+
     /**
      * Refreshes the roster by fetching the latest list of players and updating the table.
      */
@@ -113,6 +144,11 @@ public class RosterTab extends JPanel {
     private void populateTable(List<Player> players) {
         // Populate the JTable with player data
         DefaultTableModel model = new DefaultTableModel();
+
+        // Enable sorting on the JTable
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        table.setRowSorter(sorter);
+
         model.setColumnIdentifiers(new String[]{"ID", "First Name", "Last Name","Year", "Position", "Number"});
         for (Player player : players) {
             model.addRow(new Object[]{player.getId(), player.getFirstName(),
@@ -128,4 +164,7 @@ public class RosterTab extends JPanel {
     public RosterController getRosterController() {
         return rosterController;
     }
-}
+    }
+
+
+

@@ -3,6 +3,8 @@ package src.main.view;
 import javax.swing.*;
 import java.awt.*;
 import src.main.controller.RosterController;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  * Main frame of the application that holds all UI components.
@@ -14,7 +16,6 @@ public class GUI extends JFrame {
     private JButton removePlayerButton;
     private JButton editPlayerButton;
     private RosterController rosterController;
-
     /**
      * Constructs the main GUI frame with the given roster controller.
      * @param rosterController the controller that manages roster operations
@@ -82,3 +83,4 @@ public class GUI extends JFrame {
         return rosterTab;
     }
 }
+

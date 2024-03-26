@@ -9,10 +9,8 @@ import src.main.controller.RosterController;
  * This class initializes and displays the main window of the basketball roster application.
  */
 public class GUI extends JFrame {
+    private JTabbedPane tabbedPane;
     private RosterTab rosterTab;
-    private JButton addPlayerButton;
-    private JButton removePlayerButton;
-    private JButton editPlayerButton;
     private RosterController rosterController;
 
     /**
@@ -33,45 +31,17 @@ public class GUI extends JFrame {
     private void initializeUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
-        setTitle("Basketball Roster");
+        setTitle("Moravian Girls Basketball Team");
 
-        getContentPane().add(rosterTab, BorderLayout.CENTER);
+        tabbedPane = new JTabbedPane();
+        tabbedPane.addTab("Roster", rosterTab);
 
-        addPlayerButton = new JButton("Add Player");
-        removePlayerButton = new JButton("Remove Player");
-        editPlayerButton = new JButton("Edit Player");
 
-        Font buttonFont = new Font("Arial", Font.PLAIN, 30);
-        addPlayerButton.setFont(buttonFont);
-        removePlayerButton.setFont(buttonFont);
-        editPlayerButton.setFont(buttonFont);
+        tabbedPane.addTab("Team Stats", new JPanel());
 
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(addPlayerButton);
-        buttonPanel.add(removePlayerButton);
-        buttonPanel.add(editPlayerButton);
-        getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 
+        add(tabbedPane);
         setVisible(true);
-    }
-
-    /**
-     * Retrieves the 'Add Player' button.
-     * @return the JButton that triggers the addition of a new player
-     */
-    public JButton getAddPlayerButton() {
-        return addPlayerButton;
-    }
-
-    /**
-     * Retrieves the 'Remove Player' button.
-     * @return the JButton that triggers the removal of an existing player
-     */
-    public JButton getRemovePlayerButton() {
-        return removePlayerButton;
-    }
-    public JButton getEditPlayerButton() {
-        return editPlayerButton;
     }
 
     /**

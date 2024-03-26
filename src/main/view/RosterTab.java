@@ -17,6 +17,9 @@ public class RosterTab extends JPanel {
     private JTable table;
     private JScrollPane scrollPane;
     private RosterController rosterController;
+    private JButton addPlayerButton;
+    private JButton removePlayerButton;
+    private JButton editPlayerButton;
 
     /**
      * Default constructor that initializes the panel layout.
@@ -54,6 +57,36 @@ public class RosterTab extends JPanel {
         // Font for table content
         Font tableFont = new Font("Arial", Font.PLAIN, 25);
         table.setFont(tableFont);
+
+        addPlayerButton = new JButton("Add Player");
+        removePlayerButton = new JButton("Remove Player");
+        editPlayerButton = new JButton("Edit Player");
+
+        Font buttonFont = new Font("Arial", Font.PLAIN, 30);
+        addPlayerButton.setFont(buttonFont);
+        removePlayerButton.setFont(buttonFont);
+        editPlayerButton.setFont(buttonFont);
+
+        addPlayerButton.addActionListener(e -> {
+            AddPlayerDialog addPlayerDialog = new AddPlayerDialog(this, rosterController);
+            addPlayerDialog.setVisible(true);
+        });
+
+        removePlayerButton.addActionListener(e -> {
+            RemovePlayerDialog removePlayerDialog = new RemovePlayerDialog(this, rosterController);
+            removePlayerDialog.setVisible(true);
+        });
+
+        editPlayerButton.addActionListener(e -> {
+            playerToEdit playerToEdit = new playerToEdit(this, rosterController);
+            playerToEdit.setVisible(true);
+        });
+
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(addPlayerButton);
+        buttonPanel.add(removePlayerButton);
+        buttonPanel.add(editPlayerButton);
+        add(buttonPanel, BorderLayout.SOUTH);
 
         // Initialize the roster
         refreshRoster();

@@ -28,13 +28,6 @@ public class Main {
             rosterController.setRosterTab(rosterTab);
 
             GUI dashboard = new GUI(rosterController, rosterTab); // Pass the rosterController and rosterTab
-            AddPlayerDialog addPlayerDialog = new AddPlayerDialog(rosterTab, rosterController); // Pass the rosterController
-            RemovePlayerDialog removePlayerDialog = new RemovePlayerDialog(rosterTab, rosterController); // Pass the rosterController
-            playerToEdit playertoEdit = new playerToEdit(rosterTab, rosterController); // Pass the rosterController
-
-            dashboard.getAddPlayerButton().addActionListener(e -> addPlayerDialog.setVisible(true));
-            dashboard.getRemovePlayerButton().addActionListener(e -> removePlayerDialog.setVisible(true));
-            dashboard.getEditPlayerButton().addActionListener(e -> playertoEdit.setVisible(true));
         });
     }
 }

@@ -4,17 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="936f0353-62d4-4029-b63f-005d12ec5c98" name="Changes" comment="adding edit player feature">
-      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/controller/RosterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/controller/RosterController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/model/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/model/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/model/PlayerDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/model/PlayerDatabase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/AddPlayerDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/AddPlayerDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/RosterTab.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/RosterTab.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/controller/RosterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/controller/RosterController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/model/PlayerDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/model/PlayerDatabase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/view/AddPlayerDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/view/AddPlayerDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/view/RosterTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/view/RosterTab.java" afterDir="false" />
+    <list default="true" id="936f0353-62d4-4029-b63f-005d12ec5c98" name="Changes" comment="fixed refresh and year edit issue">
+      <change beforePath="$PROJECT_DIR$/data/players.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/players.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/data/players.db" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/data/players.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/GUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/view/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/view/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,24 +29,24 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="2e02NOIaxjsyYu4vph3TOgTFMzi" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Application.src.main.database.Main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/samuelcadiz/Courses/234/cs234-roster"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.src.main.database.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/samuelcadiz/Courses/234/cs234-roster&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.main.Main" />
@@ -104,11 +99,28 @@
       <option name="project" value="LOCAL" />
       <updated>1711410874834</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="fixed refresh and year edit issue">
+      <option name="closed" value="true" />
+      <created>1711418733192</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1711418733192</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fixed refresh and year edit issue">
+      <option name="closed" value="true" />
+      <created>1711418742528</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1711418742528</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="adding edit player feature" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding edit player feature" />
+    <MESSAGE value="fixed refresh and year edit issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed refresh and year edit issue" />
   </component>
 </project>

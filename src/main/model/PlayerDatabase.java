@@ -14,28 +14,39 @@ public class PlayerDatabase {
 
     public PlayerDatabase() {
         // Initialize database and create necessary tables
-        createTable();
+        createTables();
     }
 
     /**
-     * Creates the Players table in the database if it does not exist.
+     * Creates the Players and Stats tables in the database if they do not exist.
+     * Kaleb Missmer
      */
-    private void createTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS Players (\n"
+    private void createTables() {
+        String playerTableSQL = "CREATE TABLE IF NOT EXISTS Players (\n"
                 + " id INTEGER PRIMARY KEY,\n"
                 + " firstName VARCHAR(20) NOT NULL,\n"
                 + " lastName VARCHAR(20) NOT NULL,\n"
-                + " position VARCHAR(30) NOT NULL,\n"
                 + " year VARCHAR(10) NOT NULL,\n"
-                + " player_Num INT NOT NULL\n"
+                + " number INT NOT NULL\n"
+                + ");";
+
+        String statsTableSQL = "CREATE TABLE IF NOT EXISTS Stats (\n"
+                + " id INTEGER PRIMARY KEY,\n"
+                + " player_id INT NOT NULL,\n"
+                + " freeThrowsMade INT NOT NULL,\n"
+                + " freeThrowsPercentage REAL,\n"
+                + " threePointsMade INT NOT NULL,\n"
+                + " threePointsPercentage REAL,\n"
+                + " FOREIGN KEY (player_id) REFERENCES Players(id)\n"
                 + ");";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
-            System.out.println("Table created successfully.");
+            stmt.execute(playerTableSQL);
+            stmt.execute(statsTableSQL);
+            System.out.println("Tables created successfully.");
         } catch (SQLException e) {
-            System.out.println("Error creating table: " + e.getMessage());
+            System.out.println("Error creating tables: " + e.getMessage());
         }
     }
 
@@ -343,5 +354,214 @@ public class PlayerDatabase {
 
         return year;
     }
+
+    /**
+     * Fetches the player number from the database based on the player ID.
+     * @param playerId the unique ID of the player
+     * @return the number of the player
+     */
+
+    public int getPlayerNumber(int playerId) {
+        String sql = "SELECT player_Num FROM Players WHERE id = ?";
+        int number = -1;
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, playerId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                number = rs.getInt("player_Num");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching player number: " + e.getMessage());
+        }
+
+        return number;
+
+    }
+
+    public void addPlayerStats(int playerId, int freeThrowsMade, double freeThrowsPercentage, int threePointsMade, double threePointsPercentage) {
+        String sql = "INSERT INTO Stats(player_id, freeThrowsMade, freeThrowsPercentage, threePointsMade, threePointsPercentage) VALUES(?,?,?,?,?)";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, playerId);
+            pstmt.setInt(2, freeThrowsMade);
+            pstmt.setDouble(3, freeThrowsPercentage);
+            pstmt.setInt(4, threePointsMade);
+            pstmt.setDouble(5, threePointsPercentage);
+            pstmt.executeUpdate();
+            System.out.println("Player stats added to the database.");
+        } catch (SQLException e) {
+            System.out.println("Error adding player stats: " + e.getMessage());
+        }
+    }
+
+    public void updatePlayerStats(int playerId, int freeThrowsMade, double freeThrowsPercentage, int threePointsMade, double threePointsPercentage) {
+        String sql = "UPDATE Stats SET freeThrowsMade = ?, freeThrowsPercentage = ?, threePointsMade = ?, threePointsPercentage = ? WHERE player_id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, freeThrowsMade);
+            pstmt.setDouble(2, freeThrowsPercentage);
+            pstmt.setInt(3, threePointsMade);
+            pstmt.setDouble(4, threePointsPercentage);
+            pstmt.setInt(5, playerId);
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Player stats updated in the database.");
+            } else {
+                System.out.println("No player found with ID: " + playerId);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error updating player stats: " + e.getMessage());
+        }
+    }
+    public void setFreeThrowsMade(int playerId, int freeThrowsMade) {
+        String sql = "UPDATE Stats SET freeThrowsMade = ? WHERE player_id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, freeThrowsMade);
+            pstmt.setInt(2, playerId);
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Free throws made updated in the database.");
+            } else {
+                System.out.println("No player found with ID: " + playerId);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error updating free throws made: " + e.getMessage());
+        }
+    }
+
+    public void setFreeThrowsPercentage(int playerId, double freeThrowsPercentage) {
+        String sql = "UPDATE Stats SET freeThrowsPercentage = ? WHERE player_id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setDouble(1, freeThrowsPercentage);
+            pstmt.setInt(2, playerId);
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Free throws percentage updated in the database.");
+            } else {
+                System.out.println("No player found with ID: " + playerId);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error updating free throws percentage: " + e.getMessage());
+        }
+    }
+
+    public void setThreePointsMade(int playerId, int threePointsMade) {
+        String sql = "UPDATE Stats SET threePointsMade = ? WHERE player_id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, threePointsMade);
+            pstmt.setInt(2, playerId);
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Three points made updated in the database.");
+            } else {
+                System.out.println("No player found with ID: " + playerId);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error updating three points made: " + e.getMessage());
+        }
+    }
+
+    public void setThreePointsPercentage(int playerId, double threePointsPercentage) {
+        String sql = "UPDATE Stats SET threePointsPercentage = ? WHERE player_id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setDouble(1, threePointsPercentage);
+            pstmt.setInt(2, playerId);
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Three points percentage updated in the database.");
+            } else {
+                System.out.println("No player found with ID: " + playerId);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error updating three points percentage: " + e.getMessage());
+        }
+    }
+
+    public int getFreeThrowsMade(int playerId) {
+        String sql = "SELECT freeThrowsMade FROM Stats WHERE player_id = ?";
+        int freeThrowsMade = -1;
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, playerId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                freeThrowsMade = rs.getInt("freeThrowsMade");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching free throws made: " + e.getMessage());
+        }
+
+        return freeThrowsMade;
+    }
+
+    public double getFreeThrowsPercentage(int playerId) {
+        String sql = "SELECT freeThrowsPercentage FROM Stats WHERE player_id = ?";
+        double freeThrowsPercentage = -1;
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, playerId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                freeThrowsPercentage = rs.getDouble("freeThrowsPercentage");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching free throws percentage: " + e.getMessage());
+        }
+
+        return freeThrowsPercentage;
+    }
+
+
+    public int getThreePointsMade(int playerId) {
+        String sql = "SELECT threePointsMade FROM Stats WHERE player_id = ?";
+        int threePointsMade = -1;
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, playerId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                threePointsMade = rs.getInt("threePointsMade");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching three points made: " + e.getMessage());
+        }
+
+        return threePointsMade;
+    }
+
+
+    public double getThreePointsPercentage(int playerId) {
+        String sql = "SELECT threePointsPercentage FROM Stats WHERE player_id = ?";
+        double threePointsPercentage = -1;
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, playerId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                threePointsPercentage = rs.getDouble("threePointsPercentage");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching three points percentage: " + e.getMessage());
+        }
+
+        return threePointsPercentage;
+    }
+
 
 }

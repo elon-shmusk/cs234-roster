@@ -129,8 +129,75 @@ public class RosterController {
      * Sets the RosterTab for this controller.
      * @param rosterTab the RosterTab to set
      */
+
+
+
+    /**
+     * Adds player statistics to the database.
+     * @param playerId the unique ID of the player
+     * @param freeThrowsMade number of free throws made
+     * @param freeThrowsPercentage percentage of free throws made
+     * @param threePointsMade number of three points made
+     * @param threePointsPercentage percentage of three points made
+     */
+    public void addPlayerStats(int playerId, int freeThrowsMade, double freeThrowsPercentage, int threePointsMade, double threePointsPercentage) {
+        playerDatabase.addPlayerStats(playerId, freeThrowsMade, freeThrowsPercentage, threePointsMade, threePointsPercentage);
+    }
+
+    /**
+     * Updates player statistics in the database.
+     * @param playerId the unique ID of the player
+     * @param freeThrowsMade number of free throws made
+     * @param freeThrowsPercentage percentage of free throws made
+     * @param threePointsMade number of three points made
+     * @param threePointsPercentage percentage of three points made
+     */
+    public void updatePlayerStats(int playerId, int freeThrowsMade, double freeThrowsPercentage, int threePointsMade, double threePointsPercentage) {
+        playerDatabase.updatePlayerStats(playerId, freeThrowsMade, freeThrowsPercentage, threePointsMade, threePointsPercentage);
+    }
+
+    /**
+     * Retrieves the player's number of free throws made from the database.
+     * @param playerId the unique ID of the player
+     * @return the number of free throws made by the player
+     */
+    public int getFreeThrowsMade(int playerId) {
+        return playerDatabase.getFreeThrowsMade(playerId);
+    }
+
+    /**
+     * Retrieves the player's percentage of free throws made from the database.
+     * @param playerId the unique ID of the player
+     * @return the percentage of free throws made by the player
+     */
+    public double getFreeThrowsPercentage(int playerId) {
+        return playerDatabase.getFreeThrowsPercentage(playerId);
+    }
+
+    /**
+     * Retrieves the player's number of three points made from the database.
+     * @param playerId the unique ID of the player
+     * @return the number of three points made by the player
+     */
+    public int getThreePointsMade(int playerId) {
+        return playerDatabase.getThreePointsMade(playerId);
+    }
+
+    /**
+     * Retrieves the player's percentage of three points made from the database.
+     * @param playerId the unique ID of the player
+     * @return the percentage of three points made by the player
+     */
+    public double getThreePointsPercentage(int playerId) {
+        return playerDatabase.getThreePointsPercentage(playerId);
+    }
+
+    /**
+     * Sets the RosterTab for this controller.
+     * @param rosterTab the RosterTab to set
+     */
     public void setRosterTab(RosterTab rosterTab) {
         this.rosterTab = rosterTab;
     }
-
 }
+

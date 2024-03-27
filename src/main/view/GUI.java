@@ -13,15 +13,17 @@ import javax.swing.table.TableRowSorter;
 public class GUI extends JFrame {
     private JTabbedPane tabbedPane;
     private RosterTab rosterTab;
+    private StatsTab statsTab;
     private RosterController rosterController;
     /**
      * Constructs the main GUI frame with the given roster controller.
      * @param rosterController the controller that manages roster operations
      * @param rosterTab the tab component that displays the roster
      */
-    public GUI(RosterController rosterController, RosterTab rosterTab) {
+    public GUI(RosterController rosterController, RosterTab rosterTab, StatsTab statsTab) {
         this.rosterController = rosterController;
         this.rosterTab = rosterTab;
+        this.statsTab = statsTab;
         initializeUI();
     }
 
@@ -36,9 +38,7 @@ public class GUI extends JFrame {
 
         tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Roster", rosterTab);
-
-
-        tabbedPane.addTab("Team Stats", new JPanel());
+        tabbedPane.addTab("Team Stats", statsTab);
 
 
         add(tabbedPane);

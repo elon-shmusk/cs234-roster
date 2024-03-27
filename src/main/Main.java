@@ -23,11 +23,11 @@ public class Main {
             RosterController rosterController = new RosterController(playerDatabase, null); // Pass null for now
 
             RosterTab rosterTab = new RosterTab(rosterController); // Initialize RosterTab with the controller
-
+            StatsTab statsTab = new StatsTab(rosterController); // Initialize StatsTab with the controller
             // Set the rosterController for the RosterTab
             rosterController.setRosterTab(rosterTab);
 
-            GUI dashboard = new GUI(rosterController, rosterTab); // Pass the rosterController and rosterTab
+            GUI dashboard = new GUI(rosterController, rosterTab, statsTab); // Pass the rosterController and rosterTab
         });
     }
 }

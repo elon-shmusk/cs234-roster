@@ -79,16 +79,25 @@ public class RemovePlayerDialog extends JDialog {
     /**
      * Removes the selected players from the roster when the 'Update Roster' button is pressed.
      */
+    /**
+     * Removes the selected players from the roster when the 'Update Roster' button is pressed.
+     * Edited By Kaleb Missmer
+     */
     private void removeSelectedPlayers() {
         for (int i = 0; i < playerCheckboxes.size(); i++) {
             JCheckBox checkBox = playerCheckboxes.get(i);
             if (checkBox.isSelected()) {
                 Player playerToRemove = playerList.get(i);
+                // Remove player
                 rosterController.removePlayer(playerToRemove.getId());
             }
         }
         // Update the roster display
         rosterTab.refreshRoster();
+
+        // Refresh statistics tab
+        rosterTab.getStatsTab().refreshStats();
+
         // Close the dialog
         dispose();
     }

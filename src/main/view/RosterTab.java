@@ -13,6 +13,7 @@ import src.main.controller.RosterController;
 /**
  * A panel that displays the roster in a table format.
  * It allows for viewing and refreshing the list of players.
+ * Sam and Kaleb Missmer
  */
 public class RosterTab extends JPanel {
     private JTable table;
@@ -21,6 +22,8 @@ public class RosterTab extends JPanel {
     private JButton addPlayerButton;
     private JButton removePlayerButton;
     private JButton editPlayerButton;
+
+    private StatsTab statsTab;
     private static final String DB_URL = "jdbc:sqlite:data/players.db";
     private static final String SELECT_QUERY = "SELECT * FROM players";
 
@@ -32,6 +35,10 @@ public class RosterTab extends JPanel {
     public RosterTab() {
         setLayout(new BorderLayout());
         // Initialize other components as needed
+    }
+
+    public StatsTab getStatsTab() {
+        return statsTab;
     }
 
     /**
@@ -94,6 +101,9 @@ public class RosterTab extends JPanel {
 
         // Initialize the roster
         refreshRoster();
+
+        statsTab = new StatsTab(rosterController);
+
     }
 
     private static void fetchAndPopulateData(DefaultTableModel model) throws SQLException {

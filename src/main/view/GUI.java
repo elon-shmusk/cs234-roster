@@ -31,7 +31,7 @@ public class GUI extends JFrame {
      */
     private void initializeUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
+        setSize(900, 600);
         setTitle("Moravian Girls Basketball Team");
 
         tabbedPane = new JTabbedPane();

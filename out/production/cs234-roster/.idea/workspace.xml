@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="936f0353-62d4-4029-b63f-005d12ec5c98" name="Changes" comment="fixed refresh and year edit issue">
-      <change beforePath="$PROJECT_DIR$/data/players.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/players.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/data/players.db" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/data/players.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/GUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/view/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/view/GUI.java" afterDir="false" />
-    </list>
+    <list default="true" id="936f0353-62d4-4029-b63f-005d12ec5c98" name="Changes" comment="fixed refresh and year edit issue" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,16 +31,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Application.src.main.database.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/samuelcadiz/Courses/234/cs234-roster&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "Application.src.main.database.Main.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/samuelcadiz/Courses/234/cs234-roster",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.main.Main" />
@@ -71,6 +68,7 @@
     <attachedChunks>
       <set>
         <option value="jdk-20.0.2-corretto-20.0.2.1-4caba194b151-d89c1816" />
+        <option value="jdk-21.0.2-openjdk-21.0.2-4caba194b151-322ed176" />
       </set>
     </attachedChunks>
   </component>

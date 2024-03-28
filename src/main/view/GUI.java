@@ -14,15 +14,17 @@ public class GUI extends JFrame {
     private JTabbedPane tabbedPane;
     private RosterTab rosterTab;
     private StatsTab statsTab;
+    private ArchiveTab archiveTab;
     private RosterController rosterController;
     /**
      * Constructs the main GUI frame with the given roster controller.
      * @param rosterTab the tab component that displays the roster
      * @param statsTab the tab component that displays the player statistics
      */
-    public GUI( RosterTab rosterTab, StatsTab statsTab) {
+    public GUI( RosterTab rosterTab, StatsTab statsTab, ArchiveTab archiveTab) {
         this.rosterTab = rosterTab;
         this.statsTab = statsTab;
+        this.archiveTab = archiveTab;
         initializeUI();
     }
 
@@ -32,12 +34,13 @@ public class GUI extends JFrame {
      */
     private void initializeUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(900, 600);
+        setSize(1250, 600);
         setTitle("Moravian Girls Basketball Team");
 
         tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Roster", rosterTab);
         tabbedPane.addTab("Team Stats", statsTab);
+        tabbedPane.addTab("Archived Players", archiveTab);
 
 
         add(tabbedPane);

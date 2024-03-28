@@ -4,7 +4,48 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="936f0353-62d4-4029-b63f-005d12ec5c98" name="Changes" comment="GUI window slightly larger" />
+    <list default="true" id="936f0353-62d4-4029-b63f-005d12ec5c98" name="Changes" comment="stats edit">
+      <change beforePath="$PROJECT_DIR$/data/players.db" beforeDir="false" afterPath="$PROJECT_DIR$/data/players.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/data/players.db" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/data/players.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/controller/RosterController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/controller/RosterController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/model/PlayerDatabase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/model/PlayerDatabase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/AddPlayerDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/AddPlayerDialog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/AddPlayerDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/AddPlayerDialog$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/AddPlayerDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/AddPlayerDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/ArchivePlayerDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/ArchivePlayerDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/EditPlayerDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/EditPlayerDialog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/EditPlayerDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/EditPlayerDialog$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/EditPlayerDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/EditPlayerDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/EditStatDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/EditStatDialog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/EditStatDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/EditStatDialog$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/EditStatDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/EditStatDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/GUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/GUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/RemovePlayerDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/RemovePlayerDialog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/RemovePlayerDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/RemovePlayerDialog$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/RemovePlayerDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/RemovePlayerDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/StatsTab.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/StatsTab.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/playerToEdit$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/playerToEdit$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/playerToEdit$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/playerToEdit$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/playerToEdit$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/playerToEdit$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/playerToEdit$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/playerToEdit$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/playerToEdit$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/playerToEdit$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/playerToEdit.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/playerToEdit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/statToEdit$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/statToEdit$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/statToEdit$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/statToEdit$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/statToEdit$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/statToEdit$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/statToEdit.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cs234-roster/src/main/view/statToEdit.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/controller/RosterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/controller/RosterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/model/PlayerDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/model/PlayerDatabase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/view/AddPlayerDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/view/AddPlayerDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/view/EditPlayerDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/view/EditPlayerDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/view/EditStatDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/view/EditStatDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/view/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/view/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/view/RemovePlayerDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/view/RemovePlayerDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/view/RosterTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/view/RosterTab.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/view/StatsTab.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/view/StatsTab.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/view/playerToEdit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/view/playerToEdit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/view/statToEdit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/view/statToEdit.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,19 +72,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Main.executor": "Run",
-    "Application.src.main.database.Main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/samuelcadiz/Courses/234/cs234-roster",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.src.main.database.Main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/samuelcadiz/Courses/234/cs234-roster&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.main.Main" />
@@ -121,13 +162,46 @@
       <option name="project" value="LOCAL" />
       <updated>1711582664270</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="stats edit">
+      <option name="closed" value="true" />
+      <created>1711599005707</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1711599005707</updated>
+    </task>
+    <task id="LOCAL-00007" summary="stats edit">
+      <option name="closed" value="true" />
+      <created>1711599822801</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1711599822801</updated>
+    </task>
+    <task id="LOCAL-00008" summary="stats edit">
+      <option name="closed" value="true" />
+      <created>1711599900622</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1711599900622</updated>
+    </task>
+    <task id="LOCAL-00009" summary="stats edit">
+      <option name="closed" value="true" />
+      <created>1711599907847</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1711599907847</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="adding edit player feature" />
     <MESSAGE value="fixed refresh and year edit issue" />
     <MESSAGE value="GUI window slightly larger" />
-    <option name="LAST_COMMIT_MESSAGE" value="GUI window slightly larger" />
+    <MESSAGE value="stats edit" />
+    <option name="LAST_COMMIT_MESSAGE" value="stats edit" />
   </component>
 </project>

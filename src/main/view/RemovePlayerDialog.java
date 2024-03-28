@@ -28,11 +28,11 @@ public class RemovePlayerDialog extends JDialog {
         super();
         this.rosterTab = rosterTab;
         this.rosterController = rosterController;
-        setSize(400, 400);
+        setSize(500, 500);
         setLocationRelativeTo(rosterTab);
         setLayout(new BorderLayout());
 
-        JPanel checkPanel = new JPanel(new GridLayout(0, 1));
+        JPanel checkPanel = new JPanel(new GridLayout(0, 2));
         checkPanel.setBorder(BorderFactory.createTitledBorder("Select Player(s) to Remove"));
 
         // Fetch player data from the database and populate checkboxes
@@ -41,12 +41,16 @@ public class RemovePlayerDialog extends JDialog {
 
         for (Player player : playerList) {
             JCheckBox checkBox = new JCheckBox(player.getName()); // Ensure Player class has a getName() method
+            checkBox.setFont(new Font("Arial", Font.PLAIN, 25));
             playerCheckboxes.add(checkBox);
             checkPanel.add(checkBox);
         }
 
         JButton updateButton = new JButton("Update Roster");
         JButton cancelButton = new JButton("Cancel");
+
+        updateButton.setFont(new Font("Arial", Font.PLAIN, 25));
+        cancelButton.setFont(new Font("Arial", Font.PLAIN, 25));
 
         cancelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

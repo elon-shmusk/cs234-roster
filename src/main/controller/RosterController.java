@@ -1,6 +1,7 @@
 package src.main.controller;
 
 import src.main.model.*;
+import src.main.view.ArchiveTab;
 import src.main.view.GUI;
 import src.main.view.RosterTab;
 import src.main.view.StatsTab;
@@ -17,6 +18,7 @@ public class RosterController {
     private PlayerDatabase playerDatabase;
     private RosterTab rosterTab;
     private StatsTab statsTab;
+    private ArchiveTab archiveTab;
 
     /**
      * Constructs a new RosterController with the specified player database and roster tab.
@@ -158,7 +160,7 @@ public class RosterController {
      * @param threePointsMade number of three points made
      * @param threePointsPercentage percentage of three points made
      */
-    public void updatePlayerStats(int playerId, int freeThrowsMade, int freeThrowsPercentage, int threePointsMade, int threePointsPercentage) {
+    public void updatePlayerStats(int playerId, int freeThrowsMade, double freeThrowsPercentage, int threePointsMade, double threePointsPercentage) {
         playerDatabase.updatePlayerStats(playerId, freeThrowsMade, freeThrowsPercentage, threePointsMade, threePointsPercentage);
         statsTab.refreshStats();
     }
@@ -203,6 +205,7 @@ public class RosterController {
      * Sets the free throws made by the player in the database.
      * @param playerId the unique ID of the player
      * @param freeThrowsMade the number of free throws made by the player
+     * @author Samuel Cadiz
      */
     public void setFreeThrowsMade(int playerId, int freeThrowsMade) {
         playerDatabase.setFreeThrowsMade(playerId, freeThrowsMade);
@@ -213,6 +216,7 @@ public class RosterController {
      * Sets the free throws percentage of the player in the database.
      * @param playerId the unique ID of the player
      * @param freeThrowsPercentage the free throws percentage of the player
+     * @author Samuel Cadiz
      */
     public void setFreeThrowsPercentage(int playerId, double freeThrowsPercentage) {
         playerDatabase.setFreeThrowsPercentage(playerId, freeThrowsPercentage);
@@ -223,6 +227,7 @@ public class RosterController {
      * Sets the number of three points made by the player in the database.
      * @param playerId the unique ID of the player
      * @param threePointsMade the number of three points made by the player
+     * @author Samuel Cadiz
      */
     public void setThreePointsMade(int playerId, int threePointsMade) {
         playerDatabase.setThreePointsMade(playerId, threePointsMade);
@@ -233,10 +238,38 @@ public class RosterController {
      * Sets the number of three points made by the player in the database.
      * @param playerId the unique ID of the player
      * @param threePointsPercentage the number of three points made by the player
+     * @author Samuel Cadiz
      */
     public void setThreePointsPercentage(int playerId, double threePointsPercentage) {
         playerDatabase.setThreePointsPercentage(playerId, threePointsPercentage);
         statsTab.refreshStats();
+    }
+
+    /**
+     * Archives a player in the database.
+     * @param playerId the unique ID of the player to archive
+     */
+    public boolean isPlayerArchived(int playerId) {
+        return playerDatabase.isArchived(playerId);
+    }
+
+    /**
+     * Unarchives a player in the database.
+     * @param playerId the unique ID of the player to unarchive
+     */
+    public void unarchivePlayer(int playerId) {
+        playerDatabase.unarchivePlayer(playerId);
+        archiveTab.refreshArchive();
+    }
+
+    /**
+     * Gets the player ID of an archived player.
+     * @param firstName the first name of the player
+     * @param lastName the last name of the player
+     * @return the player ID of the archived player
+     */
+    public int getArchivedPlayerId(String firstName, String lastName) {
+        return playerDatabase.getArchivedPlayerId(firstName, lastName);
     }
 
 
@@ -251,9 +284,18 @@ public class RosterController {
     /**
      * Sets the StatsTab for this controller.
      * @param statsTab the StatsTab to set
+     * @author Samuel Cadiz
      */
     public void setStatsTab(StatsTab statsTab) {
         this.statsTab = statsTab;
+    }
+
+    /**
+     * Sets the ArchiveTab for this controller.
+     * @param archiveTab the ArchiveTab to set
+     */
+    public void setArchiveTab(ArchiveTab archiveTab) {
+        this.archiveTab = archiveTab;
     }
 }
 

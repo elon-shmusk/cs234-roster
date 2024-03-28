@@ -10,50 +10,67 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class EditStatDialog extends JDialog {
-    private PlayerDatabase playerDatabase;
+    private RosterController RosterController;
     private Player chosenPlayer;
     private JTextField freeThrowsField;
     private JTextField freeThrowsPercentageField;
     private JTextField threePointersField;
     private JTextField threePointersPercentageField;
+    private StatsTab statsTab;
     private Integer id;
     public EditStatDialog(StatsTab statsTab, RosterController RosterController, Player chosenPlayer) {
         super();
         setTitle("Edit Stats");
-        setSize(300, 200);
+        setSize(500, 400);
         setLocationRelativeTo(statsTab);
         setLayout(new BorderLayout());
 
         this.chosenPlayer = chosenPlayer;
+        this.RosterController = RosterController;
+        this.statsTab = statsTab;
         id = chosenPlayer.getId();
+
+        Font font = new Font("Arial", Font.PLAIN, 25);
+
 
         JPanel statsPanel = new JPanel();
         statsPanel.setBorder(BorderFactory.createTitledBorder("Stats"));
         statsPanel.setLayout(new GridLayout(0, 2));
 
         JLabel freeThrowsLabel = new JLabel("Free Throws:");
+        freeThrowsLabel.setFont(font);
         freeThrowsField = new JTextField();
+        freeThrowsField.setFont(font);
         statsPanel.add(freeThrowsLabel);
         statsPanel.add(freeThrowsField);
 
-        JLabel freeThrowsPercentageLabel = new JLabel("Free Throws Percentage:");
+        JLabel freeThrowsPercentageLabel = new JLabel("Free Throws %:");
+        freeThrowsPercentageLabel.setFont(font);
         freeThrowsPercentageField = new JTextField();
+        freeThrowsPercentageField.setFont(font);
         statsPanel.add(freeThrowsPercentageLabel);
         statsPanel.add(freeThrowsPercentageField);
 
         JLabel threePointersLabel = new JLabel("Three Pointers:");
+        threePointersLabel.setFont(font);
         threePointersField = new JTextField();
+        threePointersField.setFont(font);
         statsPanel.add(threePointersLabel);
         statsPanel.add(threePointersField);
 
-        JLabel threePointersPercentageLabel = new JLabel("Three Pointers Percentage:");
+        JLabel threePointersPercentageLabel = new JLabel("Three Pointers %:");
+        threePointersPercentageLabel.setFont(font);
         threePointersPercentageField = new JTextField();
+        threePointersPercentageField.setFont(font);
         statsPanel.add(threePointersPercentageLabel);
         statsPanel.add(threePointersPercentageField);
 
         JPanel buttonPanel = new JPanel();
         JButton updateButton = new JButton("Update Stats");
         JButton cancelButton = new JButton("Cancel");
+
+        updateButton.setFont(font);
+        cancelButton.setFont(font);
 
         buttonPanel.add(updateButton, BorderLayout.SOUTH);
         buttonPanel.add(cancelButton, BorderLayout.SOUTH);
@@ -67,7 +84,7 @@ public class EditStatDialog extends JDialog {
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                editPlayerStats(chosenPlayer, RosterController, statsTab);
+                editPlayerStats(chosenPlayer);
             }
         });
 
@@ -76,45 +93,52 @@ public class EditStatDialog extends JDialog {
 
     }
 
-        public void editPlayerStats(Player chosenPlayer,RosterController RosterController, StatsTab statsTab) {
+        public void editPlayerStats(Player chosenPlayer) {
             id = chosenPlayer.getId();
             int freeThrows;
             double freeThrowsPercentage;
             int threePointers;
             double threePointersPercentage;
 
-            try{
+            try {
                 freeThrows = Integer.parseInt(freeThrowsField.getText());
+            }
+            catch(NumberFormatException ex){
+                freeThrows = 0;}
+
+            try {
                 freeThrowsPercentage = Double.parseDouble(freeThrowsPercentageField.getText());
+            }
+            catch(NumberFormatException ex){
+                freeThrowsPercentage = 0;}
+
+            try {
                 threePointers = Integer.parseInt(threePointersField.getText());
-                threePointersPercentage = Double.parseDouble(threePointersPercentageField.getText());}
-            catch(NumberFormatException ex)
-            {
-                freeThrows = 0;
-                freeThrowsPercentage = 0;
+            }
+            catch(NumberFormatException ex){
                 threePointers = 0;
-                threePointersPercentage = 0;
             }
 
-            if(RosterController.getFreeThrowsMade(id) != freeThrows && playerDatabase.getFreeThrowsMade(id) != 0)
-            {
+            try {
+                threePointersPercentage = Double.parseDouble(threePointersPercentageField.getText());
+            }
+            catch(NumberFormatException ex){
+                threePointersPercentage = 0;}
+
+
+
+            if(RosterController.getFreeThrowsMade(id) != freeThrows && freeThrows != 0 && !freeThrowsField.getText().isEmpty())
                 RosterController.setFreeThrowsMade(id, freeThrows);
-            }
 
-            if(RosterController.getFreeThrowsPercentage(id) != freeThrowsPercentage && playerDatabase.getFreeThrowsPercentage(id) != 0)
-            {
+            if(RosterController.getFreeThrowsPercentage(id) != freeThrowsPercentage && freeThrowsPercentage != 0 && !freeThrowsPercentageField.getText().isEmpty())
                 RosterController.setFreeThrowsPercentage(id, freeThrowsPercentage);
-            }
 
-            if(RosterController.getThreePointsMade(id) != threePointers && playerDatabase.getThreePointsMade(id) != 0)
-            {
+            if(RosterController.getThreePointsMade(id) != threePointers && threePointers != 0 && !threePointersField.getText().isEmpty())
                 RosterController.setThreePointsMade(id, threePointers);
-            }
 
-            if(RosterController.getThreePointsPercentage(id) != threePointersPercentage && playerDatabase.getThreePointsPercentage(id) != 0)
-            {
+            if(RosterController.getThreePointsPercentage(id) != threePointersPercentage && threePointersPercentage != 0 && !threePointersPercentageField.getText().isEmpty())
                 RosterController.setThreePointsPercentage(id, threePointersPercentage);
-            }
+
 
             dispose();
 

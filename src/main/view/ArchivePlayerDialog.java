@@ -55,7 +55,7 @@ public class ArchivePlayerDialog {
         try (Statement statement = connection.createStatement()) {
             // Create 'archived' table if it does not exist
             String createTableSQL = "CREATE TABLE IF NOT EXISTS archived (" +
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "id INTEGER PRIMARY KEY," +
                     "firstName TEXT," +
                     "lastName TEXT," +
                     "position TEXT," +

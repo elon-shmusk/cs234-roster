@@ -16,12 +16,20 @@ public class playerToEdit extends JDialog {
     private List<JRadioButton> playerRadioButtons;
     private List<Player> playerList;
     private Connection connection;
+    private ArchiveTab ArchiveTab;
 
-    public playerToEdit(RosterTab rosterTab, RosterController rosterController)
+    /**
+     * Constructor for the playerToEdit dialog.
+     * @param rosterTab the roster tab
+     * @param rosterController the roster controller
+     * @author Samuel Cadiz
+     */
+    public playerToEdit(RosterTab rosterTab,ArchiveTab archiveTab, RosterController rosterController)
     {
         super();
+        this.ArchiveTab = archiveTab;
         setTitle("Choose Player");
-        setSize(400, 200);
+        setSize(600, 500);
         setLocationRelativeTo(rosterTab);
         BorderLayout layout = new BorderLayout();
         setLayout(layout);
@@ -34,6 +42,7 @@ public class playerToEdit extends JDialog {
 
         for (Player player : playerList) {
             JRadioButton radioButton = new JRadioButton(player.getFirstName() + " " + player.getLastName());
+            radioButton.setFont(new Font("Arial", Font.PLAIN, 25));
             getRadioButtonActionListener(radioButton);
             playerRadioButtons.add(radioButton);
             centerPanel.add(radioButton);
@@ -42,6 +51,7 @@ public class playerToEdit extends JDialog {
         add(centerPanel, BorderLayout.CENTER);
 
         JButton editButton = new JButton("Edit");
+        editButton.setFont(new Font("Arial", Font.PLAIN, 25));
 
         editButton.addActionListener(new ActionListener() {
             @Override
@@ -52,6 +62,7 @@ public class playerToEdit extends JDialog {
         });
 
         JButton cancelButton = new JButton("Cancel");
+        cancelButton.setFont(new Font("Arial", Font.PLAIN, 25));
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -61,6 +72,7 @@ public class playerToEdit extends JDialog {
 
 
         JButton archiveButton = new JButton ("Archive"); // Checkbox for archiving
+        archiveButton.setFont(new Font("Arial", Font.PLAIN, 25));
         archiveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -71,11 +83,12 @@ public class playerToEdit extends JDialog {
         });
 
         JButton unarchiveButton = new JButton ("Unarchive"); // Checkbox for archiving
+        unarchiveButton.setFont(new Font("Arial", Font.PLAIN, 25));
         unarchiveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                EditPlayerDialog editPlayerDialog = new EditPlayerDialog(rosterTab, rosterController, getSelectedPlayer());
-                editPlayerDialog.setVisible(true);
+                UnarchivePlayerDialog unarchivePlayerDialog = new UnarchivePlayerDialog(ArchiveTab, rosterController);
+                unarchivePlayerDialog.setVisible(true);
             }
         });
 
@@ -94,6 +107,7 @@ public class playerToEdit extends JDialog {
     /**
      * Adds an action listener to the radio button.
      * @param radioButton the radio button to add the action listener to
+     * @author Samuel Cadiz
      */
     private void getRadioButtonActionListener(JRadioButton radioButton)
     {
@@ -113,6 +127,7 @@ public class playerToEdit extends JDialog {
     /**
      * Gets the selected player from the radio buttons.
      * @return the selected player
+     * @author Samuel Cadiz
      */
     private Player getSelectedPlayer() {
         for (int i = 0; i < playerRadioButtons.size(); i++)

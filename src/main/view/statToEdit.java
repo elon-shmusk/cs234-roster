@@ -21,12 +21,13 @@ public class statToEdit extends JDialog{
     {
         super();
         setTitle("Choose Player");
-        setSize(300, 200);
+        setSize(500, 500);
         setLocationRelativeTo(rosterTab);
         BorderLayout layout = new BorderLayout();
         setLayout(layout);
 
         JPanel centerPanel = new JPanel();
+        centerPanel.setBorder(BorderFactory.createTitledBorder("Select Player"));
         centerPanel.setLayout(new GridLayout(0, 2));
 
         playerList = rosterController.getAllPlayers();
@@ -34,6 +35,7 @@ public class statToEdit extends JDialog{
 
         for (Player player : playerList) {
             JRadioButton radioButton = new JRadioButton(player.getFirstName() + " " + player.getLastName());
+            radioButton.setFont(new Font("Arial", Font.PLAIN, 25));
             getRadioButtonActionListener(radioButton);
             playerRadioButtons.add(radioButton);
             centerPanel.add(radioButton);
@@ -60,6 +62,9 @@ public class statToEdit extends JDialog{
         });
 
         JPanel buttonPanel = new JPanel();
+        editButton.setFont(new Font("Arial", Font.PLAIN, 25));
+        cancelButton.setFont(new Font("Arial", Font.PLAIN, 25));
+
         buttonPanel.add(editButton);
         buttonPanel.add(cancelButton);
         add(buttonPanel, BorderLayout.SOUTH);
@@ -69,6 +74,7 @@ public class statToEdit extends JDialog{
     /**
      * Adds an action listener to the radio button.
      * @param radioButton the radio button to add the action listener to
+     * @author Samuel Cadiz
      */
     private void getRadioButtonActionListener(JRadioButton radioButton)
     {
@@ -88,6 +94,7 @@ public class statToEdit extends JDialog{
     /**
      * Gets the selected player from the radio buttons.
      * @return the selected player
+     * @author Samuel Cadiz
      */
     private Player getSelectedPlayer() {
         for (int i = 0; i < playerRadioButtons.size(); i++)

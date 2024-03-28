@@ -310,6 +310,31 @@ public class PlayerDatabase {
     }
 
     /**
+     * Fetches the player full name from the database based on the player ID.
+     * @param playerId the unique ID of the player
+     * @return the full name of the player
+     */
+    public String getPlayerFullName(int playerId) {
+        String sql = "SELECT firstName, lastName FROM Players WHERE id = ?";
+        String playerFullName = "";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, playerId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                playerFullName = firstName + " " + lastName;
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching player name: " + e.getMessage());
+        }
+
+        return playerFullName;
+    }
+
+    /**
      * Fetches the player number from the database based on the player ID.
      * @param playerId the unique ID of the player
      * @return the number of the player
@@ -398,8 +423,7 @@ public class PlayerDatabase {
     }
 
     public void updatePlayerStats(int playerId, int freeThrowsMade, double freeThrowsPercentage, int threePointsMade, double threePointsPercentage) {
-        String sql = "UPDATE Stats SET freeThrowsMade = ?, freeThrowsPercentage = ?, threePointsMade = ?, threePointsPercentage = ? WHERE player_id = ?";
-
+        String sql = "SELECT * FROM Stats WHERE player_id = ? UPDATE Stats SET freeThrowsMade = ?, freeThrowsPercentage = ?, threePointsMade = ?, threePointsPercentage = ? WHERE player_id = ?";
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, freeThrowsMade);

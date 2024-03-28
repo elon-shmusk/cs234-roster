@@ -96,7 +96,7 @@ public class RemovePlayerDialog extends JDialog {
         rosterTab.refreshRoster();
 
         // Refresh statistics tab
-        rosterTab.getStatsTab().refreshStats();
+//        statsTab.refreshStats();
 
         // Close the dialog
         dispose();

@@ -50,9 +50,9 @@ public class Database {
                 + " id INTEGER PRIMARY KEY,\n"
                 + " player_id INT NOT NULL,\n"
                 + " freeThrowsMade INT NOT NULL,\n"
-                + " freeThrowsPercentage REAL,\n"
+                + " freeThrowsPercentage INT NOT NULL,\n"
                 + " threePointsMade INT NOT NULL,\n"
-                + " threePointsPercentage REAL,\n"
+                + " threePointsPercentage INT NOT NULL,\n"
                 + " FOREIGN KEY (player_id) REFERENCES Players(id)\n"
                 + ");";
 

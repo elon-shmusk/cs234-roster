@@ -15,19 +15,21 @@ public class EditPlayerDialog extends JDialog {
     private JComboBox<String> yearComboBox;
     private JTextField positionField;
     private JTextField numberField;
-    private RosterTab rosterTab;
     private RosterController rosterController;
     private List<Player> playerList;
+    private RosterTab rosterTab;
 
-    public EditPlayerDialog(RosterTab rosterTab, RosterController rosterController, Player chosenPlayer) {
+
+
+    public EditPlayerDialog(RosterTab rosterTab,RosterController rosterController, Player chosenPlayer) {
         super();
         setTitle("Choose Player");
         setSize(300, 200);
         setLocationRelativeTo(rosterTab);
         setLayout(new GridLayout(0, 2));
 
-        this.rosterTab = rosterTab;
         this.rosterController = rosterController;
+        this.rosterTab = rosterTab;
 
         playerList = rosterController.getAllPlayers();
 
@@ -57,9 +59,9 @@ public class EditPlayerDialog extends JDialog {
         add(numberLabel);
         add(numberField);
 
-        JButton editButton = new JButton("Update");
+        JButton updateButton = new JButton("Update");
 
-        editButton.addActionListener(new ActionListener() {
+        updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 editPlayer(chosenPlayer);
@@ -74,7 +76,7 @@ public class EditPlayerDialog extends JDialog {
             }
         });
 
-        add(editButton);
+        add(updateButton);
         add(cancelButton);
     }
 

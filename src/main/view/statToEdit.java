@@ -2,6 +2,7 @@ package src.main.view;
 
 import src.main.controller.RosterController;
 import src.main.model.Player;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,14 +10,14 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class playerToEdit extends JDialog {
+public class statToEdit extends JDialog{
     private List<JRadioButton> playerRadioButtons;
     private List<Player> playerList;
     private GUI GUI;
     private RosterTab rosterTab;
 
 
-    public playerToEdit(RosterTab rosterTab, RosterController rosterController)
+    public statToEdit(StatsTab statsTab, RosterController rosterController)
     {
         super();
         setTitle("Choose Player");
@@ -45,8 +46,9 @@ public class playerToEdit extends JDialog {
         editButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                EditPlayerDialog editPlayerDialog = new EditPlayerDialog(rosterTab, rosterController, getSelectedPlayer());
-                editPlayerDialog.setVisible(true);}
+                EditStatDialog editStatDialog = new EditStatDialog(statsTab, rosterController, getSelectedPlayer());
+                editStatDialog.setVisible(true);
+            }
         });
 
         JButton cancelButton = new JButton("Cancel");
@@ -95,7 +97,4 @@ public class playerToEdit extends JDialog {
         }
         return null;
     }
-
-
-
 }

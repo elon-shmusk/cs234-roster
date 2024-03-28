@@ -16,13 +16,15 @@ public class StatsTab extends JPanel {
     private JTable statsTable;
     private JScrollPane scrollPane;
     private RosterController rosterController;
+    private JButton editStatsButton;
+    private JPanel buttonPanel;
 
     /**
      * Constructor that accepts a RosterController and sets up the table.
      * @param rosterController the controller responsible for managing the roster data
      */
     public StatsTab(RosterController rosterController) {
-        this.rosterController = rosterController;
+        this.rosterController = rosterController;;
         setLayout(new BorderLayout());
 
         // Initialize the table
@@ -33,9 +35,22 @@ public class StatsTab extends JPanel {
         // Add the table to the panel
         add(scrollPane, BorderLayout.CENTER);
 
-        // Initialize the stats
+        buttonPanel = new JPanel();
+        editStatsButton = new JButton("Edit Stats");
+        editStatsButton.addActionListener(e -> {
+            // Open a dialog to edit player statistics
+            statToEdit statToEdit = new statToEdit(this, rosterController);
+            statToEdit.setVisible(true);
+        });
+        buttonPanel.add(editStatsButton);
+        add(buttonPanel, BorderLayout.SOUTH);
+
+
+
+
         refreshStats();
     }
+
 
     /**
      * Refreshes the statistics by fetching the latest list of players and updating the table.
@@ -58,19 +73,29 @@ public class StatsTab extends JPanel {
         DefaultTableModel model = new DefaultTableModel();
 
         // Define column names for statistics
-        model.setColumnIdentifiers(new String[]{"ID", "Free Throws Made", "Free Throws Percentage", "Three Points Made", "Three Points Percentage"});
+        model.setColumnIdentifiers(new String[]{"Name", "Free Throws Made", "Free Throws Percentage", "Three Points Made", "Three Points Percentage"});
 
-        // Populate statistics data rows
-        for (Player player : players) {
-            // Assuming you have methods to retrieve statistics from the database for each player
-            int playerId = player.getId();
-            int freeThrowsMade = rosterController.getFreeThrowsMade(playerId);
-            double freeThrowsPercentage = rosterController.getFreeThrowsPercentage(playerId);
-            int threePointsMade = rosterController.getThreePointsMade(playerId);
-            double threePointsPercentage = rosterController.getThreePointsPercentage(playerId);
+        try {
+            // Populate statistics data rows
+            for (Player player : players) {
+                // Assuming you have methods to retrieve statistics from the database for each player
+                int playerId = player.getId();
+                String playerName = rosterController.getPlayerFullName(playerId);
+                int freeThrowsMade = rosterController.getFreeThrowsMade(playerId);
+                double freeThrowsPercentage = rosterController.getFreeThrowsPercentage(playerId);
+                int threePointsMade = rosterController.getThreePointsMade(playerId);
+                double threePointsPercentage = rosterController.getThreePointsPercentage(playerId);
 
-            // Add a row with player statistics
-            model.addRow(new Object[]{playerId, freeThrowsMade, freeThrowsPercentage, threePointsMade, threePointsPercentage});
+                // Add a row with player statistics
+                model.addRow(new Object[]{playerName, freeThrowsMade, freeThrowsPercentage, threePointsMade, threePointsPercentage});
+            }
+        }
+        catch (Exception e) {
+            for (Player player : players) {
+                // Assuming you have methods to retrieve statistics from the database for each player
+                int playerId = player.getId();
+                rosterController.addPlayerStats(playerId, 0, 0, 0, 0);
+            }
         }
 
         // Set the model to the stats table

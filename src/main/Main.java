@@ -20,14 +20,15 @@ public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             PlayerDatabase playerDatabase = new PlayerDatabase();
-            RosterController rosterController = new RosterController(playerDatabase, null); // Pass null for now
+            RosterController rosterController = new RosterController(playerDatabase); // Pass null for now
 
             RosterTab rosterTab = new RosterTab(rosterController); // Initialize RosterTab with the controller
             StatsTab statsTab = new StatsTab(rosterController); // Initialize StatsTab with the controller
             // Set the rosterController for the RosterTab
             rosterController.setRosterTab(rosterTab);
+            rosterController.setStatsTab(statsTab);
 
-            GUI dashboard = new GUI(rosterController, rosterTab, statsTab); // Pass the rosterController and rosterTab
+            GUI dashboard = new GUI(rosterTab, statsTab); // Pass the rosterController and rosterTab
         });
     }
 }

@@ -1,7 +1,10 @@
 package src.main.controller;
 
 import src.main.model.*;
+import src.main.view.GUI;
 import src.main.view.RosterTab;
+import src.main.view.StatsTab;
+
 import java.util.List;
 
 
@@ -13,15 +16,14 @@ import java.util.List;
 public class RosterController {
     private PlayerDatabase playerDatabase;
     private RosterTab rosterTab;
+    private StatsTab statsTab;
 
     /**
      * Constructs a new RosterController with the specified player database and roster tab.
      * @param playerDatabase the database of player information
-     * @param rosterTab the tab component of the UI that displays the roster
      */
-    public RosterController(PlayerDatabase playerDatabase, RosterTab rosterTab) {
+    public RosterController(PlayerDatabase playerDatabase) {
         this.playerDatabase = playerDatabase;
-        this.rosterTab = rosterTab;
     }
 
     /**
@@ -115,6 +117,10 @@ public class RosterController {
         rosterTab.refreshRoster();
     }
 
+    public String getPlayerFullName(int playerId) {
+        return playerDatabase.getPlayerFullName(playerId);
+    }
+
 
     /**
      * Retrieves a list of all players in the roster.
@@ -124,11 +130,6 @@ public class RosterController {
     public List<Player> getAllPlayers() {
         return playerDatabase.getAllPlayers();
     }
-
-    /**
-     * Sets the RosterTab for this controller.
-     * @param rosterTab the RosterTab to set
-     */
 
 
 
@@ -152,8 +153,9 @@ public class RosterController {
      * @param threePointsMade number of three points made
      * @param threePointsPercentage percentage of three points made
      */
-    public void updatePlayerStats(int playerId, int freeThrowsMade, double freeThrowsPercentage, int threePointsMade, double threePointsPercentage) {
+    public void updatePlayerStats(int playerId, int freeThrowsMade, int freeThrowsPercentage, int threePointsMade, int threePointsPercentage) {
         playerDatabase.updatePlayerStats(playerId, freeThrowsMade, freeThrowsPercentage, threePointsMade, threePointsPercentage);
+        statsTab.refreshStats();
     }
 
     /**
@@ -193,11 +195,60 @@ public class RosterController {
     }
 
     /**
+     * Sets the free throws made by the player in the database.
+     * @param playerId the unique ID of the player
+     * @param freeThrowsMade the number of free throws made by the player
+     */
+    public void setFreeThrowsMade(int playerId, int freeThrowsMade) {
+        playerDatabase.setFreeThrowsMade(playerId, freeThrowsMade);
+        statsTab.refreshStats();
+    }
+
+    /**
+     * Sets the free throws percentage of the player in the database.
+     * @param playerId the unique ID of the player
+     * @param freeThrowsPercentage the free throws percentage of the player
+     */
+    public void setFreeThrowsPercentage(int playerId, double freeThrowsPercentage) {
+        playerDatabase.setFreeThrowsPercentage(playerId, freeThrowsPercentage);
+        statsTab.refreshStats();
+    }
+
+    /**
+     * Sets the number of three points made by the player in the database.
+     * @param playerId the unique ID of the player
+     * @param threePointsMade the number of three points made by the player
+     */
+    public void setThreePointsMade(int playerId, int threePointsMade) {
+        playerDatabase.setThreePointsMade(playerId, threePointsMade);
+        statsTab.refreshStats();
+    }
+
+    /**
+     * Sets the number of three points made by the player in the database.
+     * @param playerId the unique ID of the player
+     * @param threePointsPercentage the number of three points made by the player
+     */
+    public void setThreePointsPercentage(int playerId, double threePointsPercentage) {
+        playerDatabase.setThreePointsPercentage(playerId, threePointsPercentage);
+        statsTab.refreshStats();
+    }
+
+
+    /**
      * Sets the RosterTab for this controller.
      * @param rosterTab the RosterTab to set
      */
     public void setRosterTab(RosterTab rosterTab) {
         this.rosterTab = rosterTab;
+    }
+
+    /**
+     * Sets the StatsTab for this controller.
+     * @param statsTab the StatsTab to set
+     */
+    public void setStatsTab(StatsTab statsTab) {
+        this.statsTab = statsTab;
     }
 }
 

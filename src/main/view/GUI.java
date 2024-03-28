@@ -17,11 +17,10 @@ public class GUI extends JFrame {
     private RosterController rosterController;
     /**
      * Constructs the main GUI frame with the given roster controller.
-     * @param rosterController the controller that manages roster operations
      * @param rosterTab the tab component that displays the roster
+     * @param statsTab the tab component that displays the player statistics
      */
-    public GUI(RosterController rosterController, RosterTab rosterTab, StatsTab statsTab) {
-        this.rosterController = rosterController;
+    public GUI( RosterTab rosterTab, StatsTab statsTab) {
         this.rosterTab = rosterTab;
         this.statsTab = statsTab;
         initializeUI();
@@ -52,5 +51,12 @@ public class GUI extends JFrame {
     public RosterTab getRosterTab() {
         return rosterTab;
     }
+
+    /**
+     * Retrieves the StatsTab component.
+     * @return the StatsTab that displays the player statistics
+     */
+    public StatsTab getStatsTab() {
+        return statsTab;}
 }
 

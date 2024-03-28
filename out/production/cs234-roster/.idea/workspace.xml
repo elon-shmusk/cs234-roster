@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="936f0353-62d4-4029-b63f-005d12ec5c98" name="Changes" comment="fixed refresh and year edit issue" />
+    <list default="true" id="936f0353-62d4-4029-b63f-005d12ec5c98" name="Changes" comment="GUI window slightly larger" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -113,12 +113,21 @@
       <option name="project" value="LOCAL" />
       <updated>1711418742528</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="GUI window slightly larger">
+      <option name="closed" value="true" />
+      <created>1711582664270</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1711582664270</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="adding edit player feature" />
     <MESSAGE value="fixed refresh and year edit issue" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed refresh and year edit issue" />
+    <MESSAGE value="GUI window slightly larger" />
+    <option name="LAST_COMMIT_MESSAGE" value="GUI window slightly larger" />
   </component>
 </project>

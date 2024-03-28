@@ -20,7 +20,7 @@ public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             PlayerDatabase playerDatabase = new PlayerDatabase();
-            RosterController rosterController = new RosterController(playerDatabase, null); // Pass null for now
+            RosterController rosterController = new RosterController(playerDatabase, new RosterTab()); // Pass null for now
 
             RosterTab rosterTab = new RosterTab(rosterController); // Initialize RosterTab with the controller
             StatsTab statsTab = new StatsTab(rosterController); // Initialize StatsTab with the controller

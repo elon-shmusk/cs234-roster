@@ -6,18 +6,22 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class playerToEdit extends JDialog {
     private List<JRadioButton> playerRadioButtons;
     private List<Player> playerList;
+    private Connection connection;
 
     public playerToEdit(RosterTab rosterTab, RosterController rosterController)
     {
         super();
         setTitle("Choose Player");
-        setSize(300, 200);
+        setSize(400, 200);
         setLocationRelativeTo(rosterTab);
         BorderLayout layout = new BorderLayout();
         setLayout(layout);
@@ -55,12 +59,37 @@ public class playerToEdit extends JDialog {
             }
         });
 
+
+        JButton archiveButton = new JButton ("Archive"); // Checkbox for archiving
+        archiveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArchivePlayerDialog archivePlayerDialog = new ArchivePlayerDialog(rosterTab, rosterController);
+                rosterController.archivePlayer();
+                // archivePlayerDialog.setVisible(true);
+            }
+        });
+
+        JButton unarchiveButton = new JButton ("Unarchive"); // Checkbox for archiving
+        unarchiveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EditPlayerDialog editPlayerDialog = new EditPlayerDialog(rosterTab, rosterController, getSelectedPlayer());
+                editPlayerDialog.setVisible(true);
+            }
+        });
+
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(editButton);
         buttonPanel.add(cancelButton);
+        buttonPanel.add(archiveButton);
+        buttonPanel.add(unarchiveButton);
         add(buttonPanel, BorderLayout.SOUTH);
 
     }
+
+
+
 
     /**
      * Adds an action listener to the radio button.

@@ -11,11 +11,19 @@ import java.util.List;
 
 public class PlayerDatabase {
     private static final String DB_URL = "jdbc:sqlite:data/players.db";
+    String url = "jdbc:sqlite:data/players.db"; // Replace with your database path
+    String columnName = "archived"; // New column name
+    private Connection connection;
 
     public PlayerDatabase() {
         // Initialize database and create necessary tables
-        createTables();
-    }
+        try {
+            connection = DriverManager.getConnection(DB_URL);
+            createTables();
+        } catch (SQLException e) {
+            System.out.println("Error establishing connection: " + e.getMessage());
+        }
+}
 
     /**
      * Creates the Players and Stats tables in the database if they do not exist.
@@ -563,5 +571,52 @@ public class PlayerDatabase {
         return threePointsPercentage;
     }
 
+    private void createTablesIfNotExist() {
+        try (Statement statement = connection.createStatement()) {
+            // Create 'archived' table if it does not exist
+            String createTableSQL = "CREATE TABLE IF NOT EXISTS archived (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "firstName TEXT," +
+                    "lastName TEXT," +
+                    "position TEXT," +
+                    "year INTEGER," +
+                    "player_Num INTEGER" +
+                    ")";
+            statement.executeUpdate(createTableSQL);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle table creation error
+        }
+    }
+    public void archivePlayer() {
+        // Assume getSelectedPlayer() returns the player ID or unique identifier
+        int playerId = getSelectedPlayer();
 
+        try {
+            // Create a prepared statement to move the player to the archive table
+            String sql = "INSERT INTO archived(firstName, lastName, position, year, player_Num) " +
+                    "SELECT firstName, lastName, position, year, player_Num FROM players WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, playerId);
+
+            // Execute the insert statement
+            int rowsInserted = statement.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("Player archived successfully.");
+                // Optionally, you can also remove the player from the original table after archiving
+                // removePlayer(playerId);
+            } else {
+                System.out.println("Failed to archive player.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Handle SQL error
+        }
+    }
+
+    // Example method to simulate getting the selected player ID
+    private int getSelectedPlayer() {
+        // Replace this with your actual logic to get the selected player ID
+        return 1; // Just returning 1 for demonstration purposes
+    }
 }

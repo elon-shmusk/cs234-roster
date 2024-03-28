@@ -156,10 +156,10 @@ public class RosterTab extends JPanel {
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
         table.setRowSorter(sorter);
 
-        model.setColumnIdentifiers(new String[]{"ID", "First Name", "Last Name","Year", "Position", "Number"});
+        model.setColumnIdentifiers(new String[]{"First Name", "Last Name","Year", "Number"});
         for (Player player : players) {
-            model.addRow(new Object[]{player.getId(), player.getFirstName(),
-                    player.getLastName(),player.getYear(), player.getPosition(), player.getNumber()});
+            model.addRow(new Object[]{player.getFirstName(),
+                    player.getLastName(),player.getYear(), player.getNumber()});
         }
         table.setModel(model);
     }

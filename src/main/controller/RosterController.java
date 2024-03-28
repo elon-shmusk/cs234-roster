@@ -49,6 +49,11 @@ public class RosterController {
         rosterTab.refreshRoster();
     }
 
+    public void archivePlayer() {
+        playerDatabase.archivePlayer();
+        rosterTab.refreshRoster();
+    }
+
     /**
      * Updates the first name of a player in the roster.
      * @param playerId the unique ID of the player

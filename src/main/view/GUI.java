@@ -39,6 +39,14 @@ public class GUI extends JFrame {
         tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Roster", rosterTab);
         tabbedPane.addTab("Team Stats", statsTab);
+//Make color light blue
+        tabbedPane.setBackground(Color.lightGray);
+        getContentPane().setBackground(Color.cyan);
+        // makes backround of colums light blue
+        rosterTab.setBackground(Color.cyan);
+        // makes all buttons light blue
+
+
 
 
         add(tabbedPane);
@@ -52,5 +60,6 @@ public class GUI extends JFrame {
     public RosterTab getRosterTab() {
         return rosterTab;
     }
+
 }
 

@@ -58,19 +58,20 @@ public class StatsTab extends JPanel {
         DefaultTableModel model = new DefaultTableModel();
 
         // Define column names for statistics
-        model.setColumnIdentifiers(new String[]{"ID", "Free Throws Made", "Free Throws Percentage", "Three Points Made", "Three Points Percentage"});
+        model.setColumnIdentifiers(new String[]{"First Name", "Last Name", "Free Throws Made", "Free Throws Percentage", "Three Points Made", "Three Points Percentage"});
 
         // Populate statistics data rows
         for (Player player : players) {
-            // Assuming you have methods to retrieve statistics from the database for each player
             int playerId = player.getId();
+            String firstName = player.getFirstName();
+            String lastName = player.getLastName();
             int freeThrowsMade = rosterController.getFreeThrowsMade(playerId);
             double freeThrowsPercentage = rosterController.getFreeThrowsPercentage(playerId);
             int threePointsMade = rosterController.getThreePointsMade(playerId);
             double threePointsPercentage = rosterController.getThreePointsPercentage(playerId);
 
             // Add a row with player statistics
-            model.addRow(new Object[]{playerId, freeThrowsMade, freeThrowsPercentage, threePointsMade, threePointsPercentage});
+            model.addRow(new Object[]{firstName, lastName, freeThrowsMade, freeThrowsPercentage, threePointsMade, threePointsPercentage});
         }
 
         // Set the model to the stats table

@@ -68,6 +68,12 @@ public class EditPlayerDialog extends JDialog {
         playerInfoPanel.add(yearLabel);
         playerInfoPanel.add(yearComboBox);
 
+        JLabel positionLabel = new JLabel("Position:");
+        positionLabel.setFont(font);
+        positionField = new JTextField();
+        positionField.setFont(font);
+        playerInfoPanel.add(positionLabel);
+        playerInfoPanel.add(positionField);
 
         JLabel numberLabel = new JLabel("Number:");
         numberLabel.setFont(font);

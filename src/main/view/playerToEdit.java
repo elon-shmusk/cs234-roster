@@ -21,7 +21,7 @@ public class playerToEdit extends JDialog {
     {
         super();
         setTitle("Choose Player");
-        setSize(400, 200);
+        setSize(600, 200);
         setLocationRelativeTo(rosterTab);
         BorderLayout layout = new BorderLayout();
         setLayout(layout);
@@ -65,12 +65,20 @@ public class playerToEdit extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ArchivePlayerDialog archivePlayerDialog = new ArchivePlayerDialog(rosterTab, rosterController);
-                rosterController.archivePlayer();
+               int playerID = getSelectedPlayer().getId();
+                rosterController.archivePlayer(playerID);
+
+                // Close the dialog
+                dispose();
+
+                // Refresh the roster after adding a player
+                rosterTab.refreshRoster(); // Refresh the list of players in the GUI
+
                 // archivePlayerDialog.setVisible(true);
             }
         });
 
-        JButton unarchiveButton = new JButton ("Unarchive"); // Checkbox for archiving
+        JButton unarchiveButton = new JButton ("Unarchive-NOT FUNCTIONAL"); // Checkbox for archiving
         unarchiveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -113,6 +121,7 @@ public class playerToEdit extends JDialog {
     /**
      * Gets the selected player from the radio buttons.
      * @return the selected player
+     * @author Fernando Peralta Castro
      */
     private Player getSelectedPlayer() {
         for (int i = 0; i < playerRadioButtons.size(); i++)

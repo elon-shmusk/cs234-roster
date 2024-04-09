@@ -51,8 +51,13 @@ public class RosterController {
         rosterTab.refreshRoster();
     }
 
-    public void archivePlayer() {
-        playerDatabase.archivePlayer();
+    /**
+     * Archives a player in the roster based on player ID.
+     * @param playerId the unique ID of the player to be archived
+     * @author Fernando Peralta Castro
+     */
+    public void archivePlayer(int playerId) {
+        playerDatabase.archivePlayer(playerId);
         rosterTab.refreshRoster();
     }
 

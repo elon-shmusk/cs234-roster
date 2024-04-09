@@ -14,6 +14,7 @@ public class PlayerDatabase {
     String url = "jdbc:sqlite:data/players.db"; // Replace with your database path
     String columnName = "archived"; // New column name
     private Connection connection;
+    private int selectedPlayerId;
 
     public PlayerDatabase() {
         // Initialize database and create necessary tables
@@ -596,6 +597,10 @@ public class PlayerDatabase {
         return threePointsPercentage;
     }
 
+    /**
+     * Archives a player by moving them to the 'archived' table in the database.
+     * @author Fernando Peralta castro
+     */
     private void createTablesIfNotExist() {
         try (Statement statement = connection.createStatement()) {
             // Create 'archived' table if it does not exist
@@ -613,29 +618,69 @@ public class PlayerDatabase {
             // Handle table creation error
         }
     }
-    public void archivePlayer() {
-        // Assume getSelectedPlayer() returns the player ID or unique identifier
-        int playerId = getSelectedPlayer();
 
-        try {
-            // Create a prepared statement to move the player to the archive table
-            String sql = "INSERT INTO archived(id, firstName, lastName, position, year, player_Num) " +
-                    "SELECT firstName, lastName, position, year, player_Num FROM players WHERE id = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, playerId);
+    /**
+     * Archives a player by moving them to the 'archived' table in the database.
+     * @author Fernando Peralta castro
+     */
+    public List<Player> getPlayersNotInArchived() {
+        List<Player> players = new ArrayList<>();
+        String sql = "SELECT * FROM Players WHERE id NOT IN (SELECT id FROM archived)";
 
-            // Execute the insert statement
-            int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                String position = rs.getString("position");
+                int number = rs.getInt("player_Num");
+                String year = rs.getString("year");
+                Player player = new Player(id, firstName, lastName, position, number, year);
+                players.add(player);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching players: " + e.getMessage());
+        }
+
+        return players;
+    }
+
+/**
+     * Archives a player by moving them to the 'archived' table in the database.
+     * @param playerId the unique ID of the player to be archived
+     * @author Fernando Peralta castro
+     */
+    public void archivePlayer(int playerId) {
+        String sql = "INSERT INTO archived(firstName, lastName, position, year, player_Num) " +
+                "SELECT firstName, lastName, position, year, player_Num FROM players WHERE id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setInt(1, playerId);
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
                 System.out.println("Player archived successfully.");
-                // Optionally, you can also remove the player from the original table after archiving
-                // removePlayer(playerId);
+
+                // Delete the player from the Players table
+                sql = "DELETE FROM players WHERE id = ?";
+                try (PreparedStatement pstmtDelete = conn.prepareStatement(sql)) {
+                    pstmtDelete.setInt(1, playerId);
+                    pstmtDelete.executeUpdate();
+                } catch (SQLException e) {
+                    System.out.println("Error deleting player: " + e.getMessage());
+                }
+
             } else {
                 System.out.println("Failed to archive player.");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            // Handle SQL error
+            System.out.println("Error archiving player: " + e.getMessage());
         }
     }
 
@@ -709,4 +754,5 @@ public class PlayerDatabase {
         // Replace this with your actual logic to get the selected player ID
         return 1; // Just returning 1 for demonstration purposes
     }
+
 }

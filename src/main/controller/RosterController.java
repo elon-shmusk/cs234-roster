@@ -129,6 +129,18 @@ public class RosterController {
         rosterTab.refreshRoster();
     }
 
+    /**
+     * Retrieves the number of a player in the roster.
+     * @param playerId the unique ID of the player
+     * @return the number of the player
+     */
+    public int getPlayerNumber(int playerId) {
+        return playerDatabase.getPlayerNumber(playerId);}
+
+    /** Retrieves the full name of a player in the roster.
+     * @param playerId the unique ID of the player
+     * @return the full name of the player
+     */
     public String getPlayerFullName(int playerId) {
         return playerDatabase.getPlayerFullName(playerId);
     }
@@ -143,6 +155,13 @@ public class RosterController {
         return playerDatabase.getAllPlayers();
     }
 
+    /**
+     * Retrieves the number of players in the roster.
+     * @return the number of players
+     */
+    public int getNumberOfPlayers() {
+        return playerDatabase.getNumberOfPlayers();
+    }
 
 
     /**
@@ -155,6 +174,10 @@ public class RosterController {
      */
     public void addPlayerStats(int playerId, int freeThrowsMade, double freeThrowsPercentage, int threePointsMade, double threePointsPercentage) {
         playerDatabase.addPlayerStats(playerId, freeThrowsMade, freeThrowsPercentage, threePointsMade, threePointsPercentage);
+    }
+
+    public void addPracticeStats(int playerId, int freeThrowsMade, int freeThrowsAttempted, int threePointsMade, int threePointsAttempted) {
+        playerDatabase.addPracticeStats(playerId, freeThrowsMade, freeThrowsAttempted, threePointsMade, threePointsAttempted);
     }
 
     /**
@@ -180,6 +203,15 @@ public class RosterController {
     }
 
     /**
+     * Retrieves the player's number of free throws attempted from the database.
+     * @param playerId the unique ID of the player
+     * @return the number of free throws attempted by the player
+     */
+    public int getFreeThrowsAttempted(int playerId) {
+        return playerDatabase.getFreeThrowsAttempted(playerId);
+    }
+
+    /**
      * Retrieves the player's percentage of free throws made from the database.
      * @param playerId the unique ID of the player
      * @return the percentage of free throws made by the player
@@ -195,6 +227,15 @@ public class RosterController {
      */
     public int getThreePointsMade(int playerId) {
         return playerDatabase.getThreePointsMade(playerId);
+    }
+
+    /**
+     * Retrieves the player's number of three points attempted from the database.
+     * @param playerId the unique ID of the player
+     * @return the number of three points attempted by the player
+     */
+    public int getThreePointsAttempted(int playerId) {
+        return playerDatabase.getThreePointsAttempted(playerId);
     }
 
     /**

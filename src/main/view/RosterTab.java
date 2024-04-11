@@ -45,7 +45,7 @@ public class RosterTab extends JPanel {
     // Constructor with RosterController argument
     public RosterTab(RosterController rosterController) {
         this.rosterController = rosterController;
-        this.archiveTab = archiveTab;
+//        this.archiveTab = archiveTab;
         setLayout(new BorderLayout());
 
         // Initialize the table
@@ -161,12 +161,12 @@ public class RosterTab extends JPanel {
         {
             int id = player.getId();
 
-            if (rosterController.isPlayerArchived(id)) {
-                model.addRow(new Object[]{player.getFirstName(),
-                        player.getLastName(),player.getPosition(), player.getYear(), player.getNumber()});
-            }
-//            model.addRow(new Object[]{player.getFirstName(),
+//            if (rosterController.isPlayerArchived(id)) {
+//                model.addRow(new Object[]{player.getFirstName(),
 //                        player.getLastName(),player.getPosition(), player.getYear(), player.getNumber()});
+//            }
+            model.addRow(new Object[]{player.getFirstName(),
+                        player.getLastName(),player.getPosition(), player.getYear(), player.getNumber()});
         }
 
         table.setModel(model);

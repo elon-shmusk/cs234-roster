@@ -17,7 +17,7 @@ public class statToEdit extends JDialog{
     private RosterTab rosterTab;
 
 
-    public statToEdit(StatsTab statsTab, RosterController rosterController)
+    public statToEdit(PracticeStats practiceStats, RosterController rosterController)
     {
         super();
         setTitle("Choose Player");
@@ -48,7 +48,7 @@ public class statToEdit extends JDialog{
         editButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                EditStatDialog editStatDialog = new EditStatDialog(statsTab, rosterController, getSelectedPlayer());
+                EditStatDialog editStatDialog = new EditStatDialog(practiceStats, rosterController, getSelectedPlayer());
                 editStatDialog.setVisible(true);
             }
         });

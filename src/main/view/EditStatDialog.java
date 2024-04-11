@@ -18,7 +18,7 @@ public class EditStatDialog extends JDialog {
     private JTextField threePointersPercentageField;
     private StatsTab statsTab;
     private Integer id;
-    public EditStatDialog(StatsTab statsTab, RosterController RosterController, Player chosenPlayer) {
+    public EditStatDialog(PracticeStats practiceStats, RosterController RosterController, Player chosenPlayer) {
         super();
         setTitle("Edit Stats");
         setSize(500, 400);

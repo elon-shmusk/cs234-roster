@@ -14,6 +14,7 @@ public class GUI extends JFrame {
     private JTabbedPane tabbedPane;
     private RosterTab rosterTab;
     private StatsTab statsTab;
+    private PracticeStats practiceStats;
     private ArchiveTab archiveTab;
     private RosterController rosterController;
     /**
@@ -21,9 +22,10 @@ public class GUI extends JFrame {
      * @param rosterTab the tab component that displays the roster
      * @param statsTab the tab component that displays the player statistics
      */
-    public GUI( RosterTab rosterTab, StatsTab statsTab, ArchiveTab archiveTab) {
+    public GUI( RosterTab rosterTab, StatsTab statsTab,PracticeStats practiceStats, ArchiveTab archiveTab) {
         this.rosterTab = rosterTab;
         this.statsTab = statsTab;
+        this.practiceStats = practiceStats;
         this.archiveTab = archiveTab;
         initializeUI();
     }
@@ -39,11 +41,13 @@ public class GUI extends JFrame {
 
         tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Roster", rosterTab);
-        tabbedPane.addTab("Team Stats", statsTab);
+        tabbedPane.addTab("Stats Summary", statsTab);
+        tabbedPane.addTab("Practice Stats", practiceStats);
         tabbedPane.addTab("Archived Players", archiveTab);
 
 
         add(tabbedPane);
+
         setVisible(true);
     }
 

@@ -46,16 +46,16 @@ public class StatsTab extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
 
         buttonPanel = new JPanel();
-        Font buttonFont = new Font("Arial", Font.PLAIN, 30);
-        editStatsButton = new JButton("Edit Stats");
-        editStatsButton.setFont(buttonFont);
-        editStatsButton.addActionListener(e -> {
-            // Open a dialog to edit player statistics
-            statToEdit statToEdit = new statToEdit(this, rosterController);
-            statToEdit.setVisible(true);
-        });
-        buttonPanel.add(editStatsButton);
-        add(buttonPanel, BorderLayout.SOUTH);
+//        Font buttonFont = new Font("Arial", Font.PLAIN, 30);
+//        editStatsButton = new JButton("Edit Stats");
+//        editStatsButton.setFont(buttonFont);
+//        editStatsButton.addActionListener(e -> {
+//            // Open a dialog to edit player statistics
+//            statToEdit statToEdit = new statToEdit(this, rosterController);
+//            statToEdit.setVisible(true);
+//        });
+//        buttonPanel.add(editStatsButton);
+//        add(buttonPanel, BorderLayout.SOUTH);
 
 
 

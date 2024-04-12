@@ -22,8 +22,8 @@ public class RosterTab extends JPanel {
     private JButton addPlayerButton;
     private JButton removePlayerButton;
     private JButton editPlayerButton;
-
-    private StatsTab statsTab;
+    private playerToEdit playerToEdit;
+    private ArchiveTab archiveTab;
     private static final String DB_URL = "jdbc:sqlite:data/players.db";
     private static final String SELECT_QUERY = "SELECT * FROM players";
 
@@ -37,9 +37,6 @@ public class RosterTab extends JPanel {
         // Initialize other components as needed
     }
 
-    public StatsTab getStatsTab() {
-        return statsTab;
-    }
 
     /**
      * Constructor that accepts a RosterController and sets up the table.
@@ -47,8 +44,8 @@ public class RosterTab extends JPanel {
      */
     // Constructor with RosterController argument
     public RosterTab(RosterController rosterController) {
-        this(); // Call the constructor without arguments
         this.rosterController = rosterController;
+//        this.archiveTab = archiveTab;
         setLayout(new BorderLayout());
 
         // Initialize the table
@@ -89,9 +86,11 @@ public class RosterTab extends JPanel {
         });
 
         editPlayerButton.addActionListener(e -> {
-            playerToEdit playerToEdit = new playerToEdit(this, rosterController);
+            playerToEdit playerToEdit = new playerToEdit(this, archiveTab,rosterController);
+
             playerToEdit.setVisible(true);
         });
+
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(addPlayerButton);
@@ -101,8 +100,6 @@ public class RosterTab extends JPanel {
 
         // Initialize the roster
         refreshRoster();
-
-        statsTab = new StatsTab(rosterController);
 
     }
 
@@ -159,11 +156,19 @@ public class RosterTab extends JPanel {
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
         table.setRowSorter(sorter);
 
-        model.setColumnIdentifiers(new String[]{"First Name", "Last Name","Year", "Number"});
-        for (Player player : players) {
+        model.setColumnIdentifiers(new String[]{"First Name", "Last Name","Position", "Year", "Number"});
+        for (Player player : players)
+        {
+            int id = player.getId();
+
+//            if (rosterController.isPlayerArchived(id)) {
+//                model.addRow(new Object[]{player.getFirstName(),
+//                        player.getLastName(),player.getPosition(), player.getYear(), player.getNumber()});
+//            }
             model.addRow(new Object[]{player.getFirstName(),
-                    player.getLastName(),player.getYear(), player.getNumber()});
+                        player.getLastName(),player.getPosition(), player.getYear(), player.getNumber()});
         }
+
         table.setModel(model);
     }
 
@@ -172,8 +177,8 @@ public class RosterTab extends JPanel {
      * @return the RosterController instance
      */
     public RosterController getRosterController() {
-        return rosterController;
-    }
+        return rosterController;}
+
     }
 
 

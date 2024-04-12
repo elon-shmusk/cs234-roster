@@ -46,11 +46,12 @@ public class ArchivePlayerDialog {
 
 
     }
+
     private void createTablesIfNotExist() {
         try (Statement statement = connection.createStatement()) {
             // Create 'archived' table if it does not exist
             String createTableSQL = "CREATE TABLE IF NOT EXISTS archived (" +
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "id INTEGER PRIMARY KEY," +
                     "firstName TEXT," +
                     "lastName TEXT," +
                     "position TEXT," +
@@ -70,11 +71,13 @@ public class ArchivePlayerDialog {
     private void archivePlayer() {
         int playerId = getSelectedPlayer();
         rosterController.archivePlayer(playerId);
+
         rosterTab.refreshRoster();
     }
 
-/**
+    /**
      * Gets the ID of the selected player.
+     *
      * @return the ID of the selected player
      * @author Fernando Peralta Castro
      */
@@ -82,5 +85,4 @@ public class ArchivePlayerDialog {
         // Return the ID of the selected player
         return this.selectedPlayerId;
     }
-
-    }
+}

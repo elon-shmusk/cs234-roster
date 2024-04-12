@@ -14,16 +14,19 @@ public class GUI extends JFrame {
     private JTabbedPane tabbedPane;
     private RosterTab rosterTab;
     private StatsTab statsTab;
+    private PracticeStats practiceStats;
+    private ArchiveTab archiveTab;
     private RosterController rosterController;
     /**
      * Constructs the main GUI frame with the given roster controller.
-     * @param rosterController the controller that manages roster operations
      * @param rosterTab the tab component that displays the roster
+     * @param statsTab the tab component that displays the player statistics
      */
-    public GUI(RosterController rosterController, RosterTab rosterTab, StatsTab statsTab) {
-        this.rosterController = rosterController;
+    public GUI( RosterTab rosterTab, StatsTab statsTab,PracticeStats practiceStats, ArchiveTab archiveTab) {
         this.rosterTab = rosterTab;
         this.statsTab = statsTab;
+        this.practiceStats = practiceStats;
+        this.archiveTab = archiveTab;
         initializeUI();
     }
 
@@ -33,23 +36,18 @@ public class GUI extends JFrame {
      */
     private void initializeUI() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
+        setSize(1250, 600);
         setTitle("Moravian Girls Basketball Team");
 
         tabbedPane = new JTabbedPane();
         tabbedPane.addTab("Roster", rosterTab);
-        tabbedPane.addTab("Team Stats", statsTab);
-//Make color light blue
-        tabbedPane.setBackground(Color.lightGray);
-        getContentPane().setBackground(Color.cyan);
-        // makes backround of colums light blue
-        rosterTab.setBackground(Color.cyan);
-        // makes all buttons light blue
-
-
+        tabbedPane.addTab("Stats Summary", statsTab);
+        tabbedPane.addTab("Practice Stats", practiceStats);
+        tabbedPane.addTab("Archived Players", archiveTab);
 
 
         add(tabbedPane);
+
         setVisible(true);
     }
 
@@ -61,5 +59,11 @@ public class GUI extends JFrame {
         return rosterTab;
     }
 
+    /**
+     * Retrieves the StatsTab component.
+     * @return the StatsTab that displays the player statistics
+     */
+    public StatsTab getStatsTab() {
+        return statsTab;}
 }
 

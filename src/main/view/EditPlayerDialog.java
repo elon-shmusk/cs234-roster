@@ -1,3 +1,4 @@
+
 package src.main.view;
 
 import src.main.controller.RosterController;
@@ -15,51 +16,77 @@ public class EditPlayerDialog extends JDialog {
     private JComboBox<String> yearComboBox;
     private JTextField positionField;
     private JTextField numberField;
-    private RosterTab rosterTab;
     private RosterController rosterController;
     private List<Player> playerList;
+    private RosterTab rosterTab;
 
-    public EditPlayerDialog(RosterTab rosterTab, RosterController rosterController, Player chosenPlayer) {
+
+    /**
+     * Constructs a new EditPlayerDialog.
+     * @param rosterTab the RosterTab associated with this dialog
+     * @param rosterController the RosterController to handle player editing
+     * @param chosenPlayer the player to be edited
+     * @author Samuel Cadiz
+     */
+    public EditPlayerDialog(RosterTab rosterTab,RosterController rosterController, Player chosenPlayer) {
         super();
         setTitle("Choose Player");
-        setSize(300, 200);
+        setSize(400, 300);
         setLocationRelativeTo(rosterTab);
-        setLayout(new GridLayout(0, 2));
+        setLayout(new BorderLayout());
 
-        this.rosterTab = rosterTab;
         this.rosterController = rosterController;
+        this.rosterTab = rosterTab;
 
         playerList = rosterController.getAllPlayers();
+        Font font = new Font("Arial", Font.PLAIN, 25);
+
+        JPanel playerInfoPanel = new JPanel();
+        playerInfoPanel.setLayout(new GridLayout(0, 2));
+        playerInfoPanel.setBorder(BorderFactory.createTitledBorder("Enter Player Information"));
+
 
         JLabel FirstnameLabel = new JLabel("First Name:");
+        FirstnameLabel.setFont(font);
         FirstnameField = new JTextField();
-        add(FirstnameLabel);
-        add(FirstnameField);
+        FirstnameField.setFont(font);
+        playerInfoPanel.add(FirstnameLabel);
+        playerInfoPanel.add(FirstnameField);
 
         JLabel LastnameLabel = new JLabel("Last Name:");
+        LastnameLabel.setFont(font);
         LastnameField = new JTextField();
-        add(LastnameLabel);
-        add(LastnameField);
+        LastnameField.setFont(font);
+        playerInfoPanel.add(LastnameLabel);
+        playerInfoPanel.add(LastnameField);
 
         JLabel yearLabel = new JLabel("Year:");
+        yearLabel.setFont(font);
         String[] years = {"","Fr.", "So.", "Jr.", "Sr."};
         yearComboBox = new JComboBox<>(years);
-        add(yearLabel);
-        add(yearComboBox);
+        yearComboBox.setFont(font);
+        playerInfoPanel.add(yearLabel);
+        playerInfoPanel.add(yearComboBox);
 
         JLabel positionLabel = new JLabel("Position:");
+        positionLabel.setFont(font);
         positionField = new JTextField();
-        add(positionLabel);
-        add(positionField);
+        positionField.setFont(font);
+        playerInfoPanel.add(positionLabel);
+        playerInfoPanel.add(positionField);
 
         JLabel numberLabel = new JLabel("Number:");
+        numberLabel.setFont(font);
         numberField = new JTextField();
-        add(numberLabel);
-        add(numberField);
+        numberField.setFont(font);
+        playerInfoPanel.add(numberLabel);
+        playerInfoPanel.add(numberField);
 
-        JButton editButton = new JButton("Update");
+        JPanel buttonPanel = new JPanel();
 
-        editButton.addActionListener(new ActionListener() {
+        JButton updateButton = new JButton("Update");
+
+        updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 editPlayer(chosenPlayer);
@@ -74,13 +101,20 @@ public class EditPlayerDialog extends JDialog {
             }
         });
 
-        add(editButton);
-        add(cancelButton);
+        updateButton.setFont(font);
+        cancelButton.setFont(font);
+
+        buttonPanel.add(updateButton);
+        buttonPanel.add(cancelButton);
+
+        add(playerInfoPanel, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
     }
 
     /**
      * Edits the player information in the roster.
      * @param chosenPlayer the player to be edited
+     * @author Samuel Cadiz
      */
     private void editPlayer(Player chosenPlayer) {
 

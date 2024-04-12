@@ -1,7 +1,11 @@
 package src.main.controller;
 
 import src.main.model.*;
+import src.main.view.ArchiveTab;
+import src.main.view.GUI;
 import src.main.view.RosterTab;
+import src.main.view.StatsTab;
+
 import java.util.List;
 
 
@@ -13,15 +17,15 @@ import java.util.List;
 public class RosterController {
     private PlayerDatabase playerDatabase;
     private RosterTab rosterTab;
+    private StatsTab statsTab;
+    private ArchiveTab archiveTab;
 
     /**
      * Constructs a new RosterController with the specified player database and roster tab.
      * @param playerDatabase the database of player information
-     * @param rosterTab the tab component of the UI that displays the roster
      */
-    public RosterController(PlayerDatabase playerDatabase, RosterTab rosterTab) {
+    public RosterController(PlayerDatabase playerDatabase) {
         this.playerDatabase = playerDatabase;
-        this.rosterTab = rosterTab;
     }
 
     /**
@@ -125,6 +129,22 @@ public class RosterController {
         rosterTab.refreshRoster();
     }
 
+    /**
+     * Retrieves the number of a player in the roster.
+     * @param playerId the unique ID of the player
+     * @return the number of the player
+     */
+    public int getPlayerNumber(int playerId) {
+        return playerDatabase.getPlayerNumber(playerId);}
+
+    /** Retrieves the full name of a player in the roster.
+     * @param playerId the unique ID of the player
+     * @return the full name of the player
+     */
+    public String getPlayerFullName(int playerId) {
+        return playerDatabase.getPlayerFullName(playerId);
+    }
+
 
     /**
      * Retrieves a list of all players in the roster.
@@ -136,10 +156,12 @@ public class RosterController {
     }
 
     /**
-     * Sets the RosterTab for this controller.
-     * @param rosterTab the RosterTab to set
+     * Retrieves the number of players in the roster.
+     * @return the number of players
      */
-
+    public int getNumberOfPlayers() {
+        return playerDatabase.getNumberOfPlayers();
+    }
 
 
     /**
@@ -154,6 +176,10 @@ public class RosterController {
         playerDatabase.addPlayerStats(playerId, freeThrowsMade, freeThrowsPercentage, threePointsMade, threePointsPercentage);
     }
 
+    public void addPracticeStats(int playerId, int freeThrowsMade, int freeThrowsAttempted, int threePointsMade, int threePointsAttempted) {
+        playerDatabase.addPracticeStats(playerId, freeThrowsMade, freeThrowsAttempted, threePointsMade, threePointsAttempted);
+    }
+
     /**
      * Updates player statistics in the database.
      * @param playerId the unique ID of the player
@@ -164,6 +190,7 @@ public class RosterController {
      */
     public void updatePlayerStats(int playerId, int freeThrowsMade, double freeThrowsPercentage, int threePointsMade, double threePointsPercentage) {
         playerDatabase.updatePlayerStats(playerId, freeThrowsMade, freeThrowsPercentage, threePointsMade, threePointsPercentage);
+        statsTab.refreshStats();
     }
 
     /**
@@ -173,6 +200,15 @@ public class RosterController {
      */
     public int getFreeThrowsMade(int playerId) {
         return playerDatabase.getFreeThrowsMade(playerId);
+    }
+
+    /**
+     * Retrieves the player's number of free throws attempted from the database.
+     * @param playerId the unique ID of the player
+     * @return the number of free throws attempted by the player
+     */
+    public int getFreeThrowsAttempted(int playerId) {
+        return playerDatabase.getFreeThrowsAttempted(playerId);
     }
 
     /**
@@ -194,6 +230,15 @@ public class RosterController {
     }
 
     /**
+     * Retrieves the player's number of three points attempted from the database.
+     * @param playerId the unique ID of the player
+     * @return the number of three points attempted by the player
+     */
+    public int getThreePointsAttempted(int playerId) {
+        return playerDatabase.getThreePointsAttempted(playerId);
+    }
+
+    /**
      * Retrieves the player's percentage of three points made from the database.
      * @param playerId the unique ID of the player
      * @return the percentage of three points made by the player
@@ -203,11 +248,100 @@ public class RosterController {
     }
 
     /**
+     * Sets the free throws made by the player in the database.
+     * @param playerId the unique ID of the player
+     * @param freeThrowsMade the number of free throws made by the player
+     * @author Samuel Cadiz
+     */
+    public void setFreeThrowsMade(int playerId, int freeThrowsMade) {
+        playerDatabase.setFreeThrowsMade(playerId, freeThrowsMade);
+        statsTab.refreshStats();
+    }
+
+    /**
+     * Sets the free throws percentage of the player in the database.
+     * @param playerId the unique ID of the player
+     * @param freeThrowsPercentage the free throws percentage of the player
+     * @author Samuel Cadiz
+     */
+    public void setFreeThrowsPercentage(int playerId, double freeThrowsPercentage) {
+        playerDatabase.setFreeThrowsPercentage(playerId, freeThrowsPercentage);
+        statsTab.refreshStats();
+    }
+
+    /**
+     * Sets the number of three points made by the player in the database.
+     * @param playerId the unique ID of the player
+     * @param threePointsMade the number of three points made by the player
+     * @author Samuel Cadiz
+     */
+    public void setThreePointsMade(int playerId, int threePointsMade) {
+        playerDatabase.setThreePointsMade(playerId, threePointsMade);
+        statsTab.refreshStats();
+    }
+
+    /**
+     * Sets the number of three points made by the player in the database.
+     * @param playerId the unique ID of the player
+     * @param threePointsPercentage the number of three points made by the player
+     * @author Samuel Cadiz
+     */
+    public void setThreePointsPercentage(int playerId, double threePointsPercentage) {
+        playerDatabase.setThreePointsPercentage(playerId, threePointsPercentage);
+        statsTab.refreshStats();
+    }
+
+    /**
+     * Archives a player in the database.
+     * @param playerId the unique ID of the player to archive
+     */
+    public boolean isPlayerArchived(int playerId) {
+        return playerDatabase.isArchived(playerId);
+    }
+
+    /**
+     * Unarchives a player in the database.
+     * @param playerId the unique ID of the player to unarchive
+     */
+    public void unarchivePlayer(int playerId) {
+        playerDatabase.unarchivePlayer(playerId);
+        archiveTab.refreshArchive();
+    }
+
+    /**
+     * Gets the player ID of an archived player.
+     * @param firstName the first name of the player
+     * @param lastName the last name of the player
+     * @return the player ID of the archived player
+     */
+    public int getArchivedPlayerId(String firstName, String lastName) {
+        return playerDatabase.getArchivedPlayerId(firstName, lastName);
+    }
+
+
+    /**
      * Sets the RosterTab for this controller.
      * @param rosterTab the RosterTab to set
      */
     public void setRosterTab(RosterTab rosterTab) {
         this.rosterTab = rosterTab;
+    }
+
+    /**
+     * Sets the StatsTab for this controller.
+     * @param statsTab the StatsTab to set
+     * @author Samuel Cadiz
+     */
+    public void setStatsTab(StatsTab statsTab) {
+        this.statsTab = statsTab;
+    }
+
+    /**
+     * Sets the ArchiveTab for this controller.
+     * @param archiveTab the ArchiveTab to set
+     */
+    public void setArchiveTab(ArchiveTab archiveTab) {
+        this.archiveTab = archiveTab;
     }
 }
 

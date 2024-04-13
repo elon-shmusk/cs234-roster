@@ -1,5 +1,7 @@
 package src.main.model;
 
+import src.main.controller.RosterController;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,10 +14,7 @@ import java.util.List;
 
 public class PlayerDatabase {
     private static final String DB_URL = "jdbc:sqlite:data/players.db";
-    String url = "jdbc:sqlite:data/players.db"; // Replace with your database path
-    String columnName = "archived"; // New column name
     private Connection connection;
-    private int selectedPlayerId;
 
     public PlayerDatabase() {
         // Initialize database and create necessary tables
@@ -44,10 +43,12 @@ public class PlayerDatabase {
                 + " id INTEGER PRIMARY KEY,\n"
                 + " date String NOT NULL,\n"
                 + " player_id INT NOT NULL,\n"
+                + " freeThrowsMade INT,\n"
+                + " freeThrowsAttempted INT,\n"
                 + " freeThrowsPercentage REAL,\n"
                 + " threePointsPercentage REAL,\n"
-                + " threePointsMade INT,\n"  // Add this column
-                + " threePointsAttempted INT,\n"  // Add this column
+                + " threePointsMade INT,\n"
+                + " threePointsAttempted INT,\n"
                 + " FOREIGN KEY (player_id) REFERENCES Players(id)\n"
                 + ");";
 

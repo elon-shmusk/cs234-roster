@@ -88,19 +88,20 @@ public class StatsTab extends JPanel {
 
         // Define column names for statistics
         model.setColumnIdentifiers(new String[]{"Name", "Free Throws Made", "Free Throws %", "Three Points Made", "Three Points %"});
-            // Populate statistics data rows
-            for (Player player : players) {
-                // Assuming you have methods to retrieve statistics from the database for each player
-                int playerId = player.getId();
-                String playerName = rosterController.getPlayerFullName(playerId);
-                int freeThrowsMade = rosterController.getFreeThrowsMade(playerId);
-                double freeThrowsPercentage = rosterController.getFreeThrowsPercentage(playerId);
-                int threePointsMade = rosterController.getThreePointsMade(playerId);
-                double threePointsPercentage = rosterController.getThreePointsPercentage(playerId);
 
-                // Add a row with player statistics
-                model.addRow(new Object[]{playerName, freeThrowsMade, freeThrowsPercentage, threePointsMade, threePointsPercentage});
-            }
+        // Populate statistics data rows
+        for (Player player : players) {
+            // Assuming you have methods to retrieve statistics from the database for each player
+            int playerId = player.getId();
+            String playerName = rosterController.getPlayerFullName(playerId);
+            int freeThrowsMade = rosterController.getFreeThrowsMade(playerId);
+            double freeThrowsPercentage = rosterController.getFreeThrowsPercentage(playerId);
+            int threePointsMade = rosterController.getThreePointsMade(playerId);
+            double threePointsPercentage = rosterController.getThreePointsPercentage(playerId);
+
+            // Add a row with player statistics
+            model.addRow(new Object[]{playerName, freeThrowsMade, freeThrowsPercentage, threePointsMade, threePointsPercentage});
+        }
 
         // Set the model to the stats table
         statsTable.setModel(model);
@@ -109,6 +110,7 @@ public class StatsTab extends JPanel {
     private void addInitialStats(List<Player> players) {
         for (Player player : players) {
             int playerId = player.getId();
+            // Assuming you set initial values for three points made and attempted
             rosterController.addPlayerStats(playerId, 0, 0, 0, 0);
         }
     }

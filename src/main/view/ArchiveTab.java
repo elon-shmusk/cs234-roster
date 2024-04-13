@@ -86,7 +86,7 @@ public class ArchiveTab extends JPanel {
             {
                 int id = player.getId();
 
-                if (!rosterController.isPlayerArchived(id)) {
+                if (!rosterController.isArchived(id)) {
                     model.addRow(new Object[]{player.getFirstName(),
                             player.getLastName(), player.getYear(), player.getNumber()});
                 }

@@ -1,136 +1,177 @@
 package src.main.view;
-
 import src.main.controller.RosterController;
-import src.main.model.Player;
 
-import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
-import java.util.ArrayList;
+import src.main.model.Player;
 import java.util.List;
-
+import java.awt.event.ComponentAdapter;
+import java.sql.*;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.swing.*;
 
 public class PracticeStats extends JPanel {
-    private JTable statsTable;
-    private JScrollPane scrollPane;
-    private RosterController rosterController;
-    private JButton editStatsButton;
-    private JPanel buttonPanel;
 
-    /**
-     * Constructor that accepts a RosterController and sets up the table.
-     * @param rosterController the controller responsible for managing the roster data
-     * @author Samuel Cadiz and Kaleb Missmer
-     */
+    private JTable table;
+    private DefaultTableModel model;
+    private LocalDate currentMonday;
+    private RosterController rosterController;
+
     public PracticeStats(RosterController rosterController) {
-        this.rosterController = rosterController;;
+        super(new BorderLayout());
+        this.rosterController = rosterController;
         setLayout(new BorderLayout());
 
-        // Initialize the table
-        Font tableFont = new Font("Arial", Font.PLAIN, 25);
-        statsTable = new JTable();
-        statsTable.setRowHeight(25);
-        statsTable.setFont(tableFont);
+        model = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Allow editing only for FTM and FTA columns
+                return column >= 2 && column % 2 == 0;
+            }
+        };
+        table = new JTable(model) {
+            @Override
+            public boolean editCellAt(int row, int column, java.util.EventObject e) {
+                if (row == 0 || row % 3 == 0) {
+                    return false;
+                }
+                return super.editCellAt(row, column, e);
+            }
+        };
+        table.setFont(new Font("Arial", Font.PLAIN, 25));
+        table.setRowHeight(25);
 
-        Font headerFont = new Font("Arial", Font.BOLD, 25);
-        JTableHeader header = statsTable.getTableHeader();
+
+        Font headerFont = new Font("Arial", Font.BOLD, 20);
+        JTableHeader header = table.getTableHeader();
         header.setFont(headerFont);
 
-        scrollPane = new JScrollPane(statsTable);
-        statsTable.setFillsViewportHeight(true);
+        // Add columns to the model
+        model.addColumn("Number");
+        model.addColumn("Name");
 
-        // Add the table to the panel
+        // Set current Monday to today's Monday
+        currentMonday = LocalDate.now().with(DayOfWeek.MONDAY);
+
+        // Display current week in the table
+        displayWeek(currentMonday);
+
+        // Add the table to a scroll pane
+        JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane, BorderLayout.CENTER);
 
-        buttonPanel = new JPanel();
-        Font buttonFont = new Font("Arial", Font.PLAIN, 30);
-        editStatsButton = new JButton("Edit Stats");
-        editStatsButton.setFont(buttonFont);
-        editStatsButton.addActionListener(e -> {
-            // Open a dialog to edit player statistics
-            statToEdit statToEdit = new statToEdit(this, rosterController);
-            statToEdit.setVisible(true);
+        // Add navigation buttons
+        JPanel buttonPanel = new JPanel();
+        JButton prevWeekButton = new JButton("Previous Week");
+        prevWeekButton.addActionListener(e -> {
+            currentMonday = currentMonday.minusWeeks(1);
+            displayWeek(currentMonday);
         });
-        buttonPanel.add(editStatsButton);
-        add(buttonPanel, BorderLayout.SOUTH);
+        JButton nextWeekButton = new JButton("Next Week");
+        nextWeekButton.addActionListener(e -> {
+            currentMonday = currentMonday.plusWeeks(1);
+            displayWeek(currentMonday);
+        });
+        JButton updateButton = new JButton("Update");
+        updateButton.addActionListener(e -> updateDatabase());
+        buttonPanel.add(prevWeekButton);
+        buttonPanel.add(nextWeekButton);
+        buttonPanel.add(updateButton);
+        add(buttonPanel, BorderLayout.NORTH);
 
-
-
-        addInitialStats(rosterController.getAllPlayers());
-        refreshStats();
+        // Add component listener to set the width of the player number column
+        table.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                TableColumnModel columnModel = table.getColumnModel();
+                columnModel.getColumn(0).setPreferredWidth(5);
+            }
+        });
     }
 
+    private void displayWeek(LocalDate monday) {
+        // Clear existing table data
+        model.setRowCount(0);
+        model.setColumnCount(0); // Clear existing columns
 
-    /**
-     * Refreshes the statistics by fetching the latest list of players and updating the table.
-     * @author Kaleb Missmer
-     */
-    public void refreshStats() {
-        if (rosterController != null) {
-            java.util.List<Player> players = rosterController.getAllPlayers();
-            populateStatsTable(players);
-        } else {
-            // Handle case where rosterController is not set
-            System.out.println("RosterController is not set");
+        // Add columns for player number and player name
+        model.addColumn("Number");
+        model.addColumn("Name");
+
+        // Add dummy player data for demonstration
+        model.addRow(new Object[]{1, "John Doe"});
+        model.addRow(new Object[]{"FTM"});
+        model.addRow(new Object[]{"FTA"});
+
+        // Add columns for the days of the week
+        LocalDate date = monday;
+        for (int i = 0; i < 7; i++) {
+            model.addColumn(date.format(DateTimeFormatter.ofPattern("MMM/d/yyyy")));
+            date = date.plusDays(1);
+        }
+
+        // Populate table with data from the database
+        populateTable();
+    }
+
+    private void populateTable() {
+        List<Player> players = rosterController.getAllPlayers();
+        for(Player player : players) {
+            int id = player.getId();
+            String playerName = player.getName();
+            LocalDate date = rosterController.getDate(id).toLocalDate();
+            int ftm = rosterController.getFreeThrowsMade(id);
+            int fta = rosterController.getFreeThrowsAttempted(id);
+
+            // Find the row index for the player in the table
+            int rowIndex = -1;
+            for (int i = 0; i < model.getRowCount(); i += 2) {
+                if (model.getValueAt(i, 0).equals(player.getNumber())) {
+                    rowIndex = i;
+                    break;
+                }
+            }
+
+            // If player does not exist in the table, add a new row for the player
+            if (rowIndex == -1) {
+                model.addRow(new Object[]{player.getNumber(), playerName});
+                model.addRow(new Object[]{"FTM", 0, 0, 0, 0, 0, 0, 0}); // Add a row for FTM
+                model.addRow(new Object[]{"FTA", 0, 0, 0, 0, 0, 0, 0}); // Add a row for FTA
+                rowIndex = model.getRowCount() - 3; // Set the row index to the player's row
+            }
+
+            // Find the column index for the date in the table
+            int columnIndex = currentMonday.until(date).getDays();
+            // If date is out of the current week range, skip
+            if (columnIndex < 0 || columnIndex >= 7) {
+                continue;
+            }
+
+            // Update FTM and FTA values
+            model.setValueAt(ftm, rowIndex + 1, columnIndex + 2); // FTM row
+            model.setValueAt(fta, rowIndex + 2, columnIndex + 2); // FTA row
         }
     }
 
-    /**
-     * Populates the table with the provided list of players' statistics.
-     * @param players the list of players to display statistics for
-     * @author Kaleb Missmer
-     */
-    private void populateStatsTable(List<Player> players) {
-        DefaultTableModel model = new DefaultTableModel();
-        int playerId;
-        int playerNumber;
-        String playerName;
-        int freeThrowsMade;
-        int freeThrowsAttempted;
-        int threePointsMade;
-        int threePointsAttempted;
-        ArrayList<String> playerNames = new ArrayList<>();
-        ArrayList<Integer> playerNumbers = new ArrayList<>();
-        ArrayList<Integer> freeThrowsMades = new ArrayList<>();
-        ArrayList<Integer> freeThrowsAttempteds = new ArrayList<>();
-        ArrayList<Integer> threePointsMades = new ArrayList<>();
-        ArrayList<Integer> threePointsAttempteds = new ArrayList<>();
 
+    private void updateDatabase() {
+        List<Player> players = rosterController.getAllPlayers();
+        for(Player player : players) {
 
+            // Iterate through the table data and update the database
+            for (int i = 2; i < model.getRowCount(); i += 3) {
+                int playerNumber = (int) model.getValueAt(i - 2, 0); // Player number
+                int ftm = (int) model.getValueAt(i, 2); // FTM
+                int fta = (int) model.getValueAt(i + 1, 2); // FTA
 
-        // Define column names for statistics
-        model.setColumnIdentifiers(new String[]{"Number", "Name",});
-
-        // Populate statistics data rows
-        for (Player player : players)
-        {
-            // Assuming you have methods to retrieve statistics from the database for each player
-            playerId = player.getId();
-            playerNames.add(rosterController.getPlayerFullName(playerId));
-            playerNumbers.add(player.getNumber());
-//            freeThrowsMade = rosterController.getFreeThrowsMade(playerId);
-//            freeThrowsAttempted = rosterController.getFreeThrowsAttempted(playerId);
-//            threePointsMade = rosterController.getThreePointsMade(playerId);
-//            threePointsAttempted = rosterController.getThreePointsAttempted(playerId);
+                rosterController.setFreeThrowsMade(player.getId(), ftm);
+                rosterController.setFreeThrowsAttempted(player.getId(), fta);
+            }
         }
-
-        for (int row = 0; row < playerNames.size(); row++) {
-            model.addRow(new Object[]{playerNumbers.get(row)});
-            model.addRow(new Object[]{"",playerNames.get(row)});
-//            model.addRow(new Object[]{"","FMA", freeThrowsMades.get(row)});
-//            model.addRow(new Object[]{"","FTA", freeThrowsAttempteds.get(row)});
-//            model.addRow(new Object[]{"","TPM", threePointsMades.get(row)});
-//            model.addRow(new Object[]{"","TPA", threePointsAttempteds.get(row)});
-        }
-        // Set the model to the stats table
-        statsTable.setModel(model);
-    }
-
-    private void addInitialStats(List<Player> players) {
-//        for (Player player : players) {
-//            int playerId = player.getId();
-//            rosterController.addPracticeStats(playerId, 0, 0, 0, 0);
-//        }
+        JOptionPane.showMessageDialog(this, "Database updated successfully.");
     }
 }

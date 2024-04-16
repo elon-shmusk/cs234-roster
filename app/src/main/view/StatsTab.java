@@ -58,7 +58,6 @@ public class StatsTab extends JPanel {
 
 
 
-        addInitialStats(rosterController.getAllPlayers());
         refreshStats();
     }
 
@@ -106,11 +105,5 @@ public class StatsTab extends JPanel {
         statsTable.setModel(model);
     }
 
-    private void addInitialStats(List<Player> players) {
-        for (Player player : players) {
-            int playerId = player.getId();
-            // Assuming you set initial values for three points made and attempted
-            rosterController.addPlayerStats(playerId, 0, 0, 0, 0);
-        }
-    }
+
 }

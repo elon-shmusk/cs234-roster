@@ -10,6 +10,7 @@ import src.main.model.Player;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.awt.event.ComponentAdapter;
+import java.sql.*;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -95,18 +96,13 @@ public class PracticeStats extends JPanel {
     }
 
     private void displayWeek(LocalDate monday) {
-        // Clear existing table app.data
+        // Clear existing table data
         model.setRowCount(0);
         model.setColumnCount(0); // Clear existing columns
 
         // Add columns for player number and player name
         model.addColumn("Number");
         model.addColumn("Name");
-
-        // Add dummy player app.data for demonstration
-        model.addRow(new Object[]{1, "John Doe"});
-        model.addRow(new Object[]{"FTM"});
-        model.addRow(new Object[]{"FTA"});
 
         // Add columns for the days of the week
         LocalDate date = monday;
@@ -115,54 +111,32 @@ public class PracticeStats extends JPanel {
             date = date.plusDays(1);
         }
 
-        // Populate table with app.data from the database
+        // Populate table with data from the database
         populateTable();
     }
 
     private void populateTable() {
         List<Player> players = rosterController.getAllPlayers();
-        for(Player player : players) {
-            int id = player.getId();
-            String playerName = player.getName();
-            java.sql.Date dateSQL = rosterController.getDate(id);
+        List<Player> playerStats = rosterController.getAllStats();
 
-            // Check if the date is null
-            if (dateSQL == null) {
-                // Handle null date (skip or provide default behavior)
-                continue; // For example, skip processing for this player
-            }
+        for (int i = 0; i < players.size(); i++) {
+            Player player = players.get(i);
+            model.addRow(new Object[]{player.getNumber(), player.getName()});
+            model.addRow(new Object[]{"","FTM"});
+            model.addRow(new Object[]{"","FTA"});
+            for (int j = 0; j < playerStats.size(); j++) {
+                Player playerStat = playerStats.get(j);
+                if (playerStat.getId() == player.getId()) {
+                    model.setValueAt(playerStat.getFreeThrowsMade(), i * 3 + 1, j + 2);
+                    model.setValueAt(playerStat.getFreeThrowsAttempted(), i * 3 + 2, j + 2);
+                }
+                else
+                {
+                    model.setValueAt(0, i * 3 + 1, j + 2);
+                    model.setValueAt(0, i * 3 + 2, j + 2);
 
-            LocalDate date = dateSQL.toLocalDate();
-            int ftm = rosterController.getFreeThrowsMade(id);
-            int fta = rosterController.getFreeThrowsAttempted(id);
-
-            // Find the row index for the player in the table
-            int rowIndex = -1;
-            for (int i = 0; i < model.getRowCount(); i += 3) {
-                if (model.getValueAt(i, 0).equals(player.getId())) {
-                    rowIndex = i;
-                    break;
                 }
             }
-
-            // If player does not exist in the table, add a new row for the player
-            if (rowIndex == -1) {
-                model.addRow(new Object[]{player.getId(), playerName});
-                model.addRow(new Object[]{"FTM", 0, 0, 0, 0, 0, 0, 0}); // Add a row for FTM
-                model.addRow(new Object[]{"FTA", 0, 0, 0, 0, 0, 0, 0}); // Add a row for FTA
-                rowIndex = model.getRowCount() - 3; // Set the row index to the player's row
-            }
-
-            // Find the column index for the date in the table
-            int columnIndex = (int) ChronoUnit.DAYS.between(currentMonday, date);
-            // If date is out of the current week range, skip
-            if (columnIndex < 0 || columnIndex >= 7) {
-                continue;
-            }
-
-            // Update FTM and FTA values
-            model.setValueAt(ftm, rowIndex + 1, columnIndex + 2); // FTM row
-            model.setValueAt(fta, rowIndex + 2, columnIndex + 2); // FTA row
         }
     }
 
@@ -171,7 +145,7 @@ public class PracticeStats extends JPanel {
         List<Player> players = rosterController.getAllPlayers();
         for(Player player : players) {
 
-            // Iterate through the table app.data and update the database
+            // Iterate through the table data and update the database
             for (int i = 2; i < model.getRowCount(); i += 3) {
                 int playerNumber = (int) model.getValueAt(i - 2, 0); // Player number
                 int ftm = (int) model.getValueAt(i, 2); // FTM

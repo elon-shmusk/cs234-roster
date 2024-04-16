@@ -59,14 +59,13 @@ public class PlayerDatabase {
         String statsTableSQL = "CREATE TABLE IF NOT EXISTS Stats (\n"
                 + " id INTEGER PRIMARY KEY,\n"
                 + " date DATE NOT NULL,\n"
-                + " player_id INT NOT NULL,\n"
                 + " freeThrowsMade INT,\n"
                 + " freeThrowsAttempted INT,\n"
                 + " freeThrowsPercentage REAL,\n"
                 + " threePointsPercentage REAL,\n"
                 + " threePointsMade INT,\n"
                 + " threePointsAttempted INT,\n"
-                + " FOREIGN KEY (player_id) REFERENCES Players(id)\n"
+                + " FOREIGN KEY (id) REFERENCES Players(id)\n"
                 + ");";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
@@ -180,7 +179,7 @@ public class PlayerDatabase {
 
     public List<Player> getPlayersNotInArchived() {
         List<Player> players = new ArrayList<>();
-        String sql = "SELECT * FROM Players WHERE id NOT IN (SELECT player_id FROM archived)";
+        String sql = "SELECT * FROM Players WHERE id NOT IN (SELECT id FROM archived)";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql);

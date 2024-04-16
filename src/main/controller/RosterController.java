@@ -48,31 +48,31 @@ public class RosterController {
 
     /**
      * Removes a player from the roster based on player ID.
-     * @param playerId the unique ID of the player to be removed
+     * @param id the unique ID of the player to be removed
      */
-    public void removePlayer(int playerId) {
-        playerDatabase.removePlayer(playerId);
+    public void removePlayer(int id) {
+        playerDatabase.removePlayer(id);
         rosterTab.refreshRoster();
     }
 
     /**
      * Archives a player in the roster based on player ID.
-     * @param playerId the unique ID of the player to be archived
+     * @param id the unique ID of the player to be archived
      * @author Fernando Peralta Castro
      */
     /**
      * Archives a player by moving them to the 'archived' table in the database.
-     * @param playerId the unique ID of the player to be archived
+     * @param id the unique ID of the player to be archived
      * @author Fernando Peralta castro
      */
-    public void archivePlayer(int playerId) {
+    public void archivePlayer(int id) {
         String sql = "INSERT INTO archived(firstName, lastName, position, year, player_Num) " +
                 "SELECT firstName, lastName, position, year, player_Num FROM players WHERE id = ?";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-            pstmt.setInt(1, playerId);
+            pstmt.setInt(1, id);
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {
@@ -81,7 +81,7 @@ public class RosterController {
                 // Delete the player from the Players table
                 sql = "DELETE FROM players WHERE id = ?";
                 try (PreparedStatement pstmtDelete = conn.prepareStatement(sql)) {
-                    pstmtDelete.setInt(1, playerId);
+                    pstmtDelete.setInt(1, id);
                     pstmtDelete.executeUpdate();
                 } catch (SQLException e) {
                     System.out.println("Error deleting player: " + e.getMessage());
@@ -99,21 +99,21 @@ public class RosterController {
 
     /**
      * Updates the first name of a player in the database.
-     * @param playerId the unique ID of the player to be updated
+     * @param id the unique ID of the player to be updated
      * @param firstName the new first name of the player
      */
-    public void setPlayerFirstName(int playerId, String firstName) {
+    public void setPlayerFirstName(int id, String firstName) {
         String sql = "UPDATE Players SET firstName = ? WHERE id = ?";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, firstName);
-            pstmt.setInt(2, playerId);
+            pstmt.setInt(2, id);
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Player's first name updated in the database.");
             } else {
-                System.out.println("No player found with ID: " + playerId);
+                System.out.println("No player found with ID: " + id);
             }
         } catch (SQLException e) {
             System.out.println("Error updating player name: " + e.getMessage());
@@ -122,12 +122,12 @@ public class RosterController {
 
     /**
      * Updates the first name of a player in the roster.
-     * @param playerId the unique ID of the player
+     * @param id the unique ID of the player
      * @param firstName the new first name of the player
      */
-    public void updatePlayerFirstName(int playerId, String firstName)
+    public void updatePlayerFirstName(int id, String firstName)
     {
-        setPlayerFirstName(playerId, firstName);
+        setPlayerFirstName(id, firstName);
         rosterTab.refreshRoster();
     }
 
@@ -140,43 +140,43 @@ public class RosterController {
 
     /**
      * Updates the last name of a player in the database.
-     * @param playerId the unique ID of the player to be updated
+     * @param id the unique ID of the player to be updated
      * @param lastName the new last name of the player
      */
-    public void setPlayerLastName(int playerId, String lastName) {
+    public void setPlayerLastName(int id, String lastName) {
         String sql = "UPDATE Players SET lastName = ? WHERE id = ?";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, lastName);
-            pstmt.setInt(2, playerId);
+            pstmt.setInt(2, id);
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Player's last name updated in the database.");
             } else {
-                System.out.println("No player found with ID: " + playerId);
+                System.out.println("No player found with ID: " + id);
             }
         } catch (SQLException e) {
             System.out.println("Error updating player name: " + e.getMessage());
         }
     }
 
-    public void updatePlayerLastName(int playerId, String lastName)
+    public void updatePlayerLastName(int id, String lastName)
     {
-        setPlayerLastName(playerId, lastName);
+        setPlayerLastName(id, lastName);
         rosterTab.refreshRoster();
     }
 
     /**
      * Updates the full name of a player in the roster.
-     * @param playerId the unique ID of the player
+     * @param id the unique ID of the player
      * @param firstName the new first name of the player
      * @param lastName the new last name of the player
      */
-    public void updatePlayerFullName(int playerId, String firstName, String lastName)
+    public void updatePlayerFullName(int id, String firstName, String lastName)
     {
-        setPlayerFirstName(playerId, firstName);
-        setPlayerLastName(playerId, lastName);
+        setPlayerFirstName(id, firstName);
+        setPlayerLastName(id, lastName);
         rosterTab.refreshRoster();
     }
 
@@ -189,51 +189,51 @@ public class RosterController {
 
     /**
      * Updates the position of a player in the database.
-     * @param playerId the unique ID of the player to be updated
+     * @param id the unique ID of the player to be updated
      * @param position the new position of the player
      */
-    public void setPlayerPosition(int playerId, String position) {
+    public void setPlayerPosition(int id, String position) {
         String sql = "UPDATE Players SET position = ? WHERE id = ?";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, position);
-            pstmt.setInt(2, playerId);
+            pstmt.setInt(2, id);
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Player position updated in the database.");
             } else {
-                System.out.println("No player found with ID: " + playerId);
+                System.out.println("No player found with ID: " + id);
             }
         } catch (SQLException e) {
             System.out.println("Error updating player position: " + e.getMessage());
         }
     }
 
-    public void updatePlayerPosition(int playerId, String position)
+    public void updatePlayerPosition(int id, String position)
     {
-        setPlayerPosition(playerId, position);
+        setPlayerPosition(id, position);
         rosterTab.refreshRoster();
     }
 
 
     /**
      * Updates the year of a player in the database.
-     * @param playerId the unique ID of the player to be updated
+     * @param id the unique ID of the player to be updated
      * @param year the new year of the player
      */
-    public void setPlayerYear(int playerId, String year) {
+    public void setPlayerYear(int id, String year) {
         String sql = "UPDATE Players SET year = ? WHERE id = ?";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, year);
-            pstmt.setInt(2, playerId);
+            pstmt.setInt(2, id);
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Player year updated in the database.");
             } else {
-                System.out.println("No player found with ID: " + playerId);
+                System.out.println("No player found with ID: " + id);
             }
         } catch (SQLException e) {
             System.out.println("Error updating player year: " + e.getMessage());
@@ -242,12 +242,12 @@ public class RosterController {
 
     /**
      * Updates the year of a player in the roster.
-     * @param playerId the unique ID of the player
+     * @param id the unique ID of the player
      * @param year the new year of the player
      */
-    public void updatePlayerYear(int playerId, String year)
+    public void updatePlayerYear(int id, String year)
     {
-        setPlayerYear(playerId, year);
+        setPlayerYear(id, year);
         rosterTab.refreshRoster();
     }
 
@@ -255,21 +255,21 @@ public class RosterController {
 
     /**
      * Updates the number of a player in the database.
-     * @param playerId the unique ID of the player to be updated
+     * @param id the unique ID of the player to be updated
      * @param number the new number of the player
      */
-    public void setPlayerNumber(int playerId, int number) {
+    public void setPlayerNumber(int id, int number) {
         String sql = "UPDATE Players SET player_Num = ? WHERE id = ?";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, number);
-            pstmt.setInt(2, playerId);
+            pstmt.setInt(2, id);
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Player number updated in the database.");
             } else {
-                System.out.println("No player found with ID: " + playerId);
+                System.out.println("No player found with ID: " + id);
             }
         } catch (SQLException e) {
             System.out.println("Error updating player number: " + e.getMessage());
@@ -277,12 +277,12 @@ public class RosterController {
     }
     /**
      * Updates the number of a player in the roster.
-     * @param playerId the unique ID of the player
+     * @param id the unique ID of the player
      * @param number the new number of the player
      */
-    public void updatePlayerNumber(int playerId, int number)
+    public void updatePlayerNumber(int id, int number)
     {
-        setPlayerNumber(playerId, number);
+        setPlayerNumber(id, number);
         rosterTab.refreshRoster();
     }
 
@@ -316,16 +316,16 @@ public class RosterController {
 
     /**
      * Fetches the player full name from the database based on the player ID.
-     * @param playerId the unique ID of the player
+     * @param id the unique ID of the player
      * @return the full name of the player
      */
-    public String getPlayerFullName(int playerId) {
+    public String getPlayerFullName(int id) {
         String sql = "SELECT firstName, lastName FROM Players WHERE id = ?";
         String playerFullName = "";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, playerId);
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 String firstName = rs.getString("firstName");
@@ -340,25 +340,20 @@ public class RosterController {
     }
 
 
-    /**
-     * Retrieves the number of a player in the roster.
-     * @param playerId the unique ID of the player
-     * @return the number of the player
-     */
 
     /**
      * Fetches the player number from the database based on the player ID.
-     * @param playerId the unique ID of the player
+     * @param id the unique ID of the player
      * @return the number of the player
      */
 
-    public int getPlayerNumber(int playerId) {
+    public int getPlayerNumber(int id) {
         String sql = "SELECT player_Num FROM Players WHERE id = ?";
         int number = -1;
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, playerId);
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 number = rs.getInt("player_Num");
@@ -376,16 +371,16 @@ public class RosterController {
 
     /**
      * Fetches the player number from the database based on the player ID.
-     * @param playerId the unique ID of the player
+     * @param id the unique ID of the player
      * @return the number of the player
      */
-    public String getPlayerPosition(int playerId) {
+    public String getPlayerPosition(int id) {
         String sql = "SELECT position FROM Players WHERE id = ?";
         String position = "";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, playerId);
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 position = rs.getString("position");
@@ -399,16 +394,16 @@ public class RosterController {
 
     /**
      * Fetches the player year from the database based on the player ID.
-     * @param playerId the unique ID of the player
+     * @param id the unique ID of the player
      * @return the year of the player
      */
-    public String getPlayerYear(int playerId) {
+    public String getPlayerYear(int id) {
         String sql = "SELECT year FROM Players WHERE id = ?";
         String year = "";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, playerId);
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 year = rs.getString("year");
@@ -452,6 +447,30 @@ public class RosterController {
         return players;
     }
 
+    public List<Player> getAllStats() {
+        List<Player> players = new ArrayList<>();
+        String sql = "SELECT * FROM Stats";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                int freeThrowsMade = rs.getInt("freeThrowsMade");
+                int freeThrowsAttempted = rs.getInt("freeThrowsAttempted");
+                Player player = new Player(id, freeThrowsMade, freeThrowsAttempted);
+                players.add(player);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching players: " + e.getMessage());
+        }
+
+        return players;
+    }
+
+
+
     /**
      * Retrieves the number of players in the roster.
      * @return the number of players
@@ -478,22 +497,25 @@ public class RosterController {
 
     /**
      * Adds player statistics to the database.
-     * @param playerId the unique ID of the player
+     * @param id the unique ID of the player
      * @param freeThrowsMade number of free throws made
      * @param freeThrowsPercentage percentage of free throws made
      * @param threePointsMade number of three points made
      * @param threePointsPercentage percentage of three points made
      */
-    public void addPlayerStats(int playerId, int freeThrowsMade, double freeThrowsPercentage, int threePointsMade, double threePointsPercentage) {
-        String sql = "INSERT INTO Stats(player_id, freeThrowsMade, freeThrowsPercentage, threePointsMade, threePointsPercentage) VALUES(?,?,?,?,?)";
+    public void addPlayerStats(int id, Date date, int freeThrowsMade, int freeThrowsAttempted, double freeThrowsPercentage, int threePointsMade, int threePointsAttempted, double threePointsPercentage) {
+        String sql = "INSERT INTO Stats(date, id, freeThrowsMade, freeThrowsAttempted, freeThrowsPercentage, threePointsMade, threePointsAttempted, threePointsPercentage) VALUES(?,?,?,?,?,?,?,?)";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, playerId);
-            pstmt.setInt(2, freeThrowsMade);
-            pstmt.setDouble(3, freeThrowsPercentage);
-            pstmt.setInt(4, threePointsMade);
-            pstmt.setDouble(5, threePointsPercentage);
+            pstmt.setInt(1, id);
+            pstmt.setDate(2, date);
+            pstmt.setInt(3, freeThrowsMade);
+            pstmt.setInt(4, freeThrowsAttempted);
+            pstmt.setDouble(5, freeThrowsPercentage);
+            pstmt.setInt(6, threePointsMade);
+            pstmt.setInt(7, threePointsAttempted);
+            pstmt.setDouble(8, threePointsPercentage);
             pstmt.executeUpdate();
             System.out.println("Player stats added to the database.");
         } catch (SQLException e) {
@@ -503,18 +525,18 @@ public class RosterController {
 
     /**
      * Adds practice statistics for a player to the database.
-     * @param playerId the unique ID of the player
+     * @param id the unique ID of the player
      * @param freeThrowsMade the number of free throws made
      * @param freeThrowsAttempted the number of free throws attempted
      * @param threePointsMade the number of three points made
      * @param threePointsAttempted the number of three points attempted
      */
-    public void addPracticeStats(int playerId, int freeThrowsMade, int freeThrowsAttempted, int threePointsMade, int threePointsAttempted) {
-        String sql = "INSERT INTO Stats(player_id, freeThrowsMade, freeThrowsAttempted, threePointsMade, threePointsAttempted) VALUES(?,?,?,?,?)";
+    public void addPracticeStats(int id, int freeThrowsMade, int freeThrowsAttempted, int threePointsMade, int threePointsAttempted) {
+        String sql = "INSERT INTO Stats(id, date freeThrowsMade, freeThrowsAttempted, threePointsMade, threePointsAttempted) VALUES(?,?,?,?,?)";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, playerId);
+            pstmt.setInt(1, id);
             pstmt.setInt(2, freeThrowsMade);
             pstmt.setInt(3, freeThrowsAttempted);
             pstmt.setInt(4, threePointsMade);
@@ -528,7 +550,7 @@ public class RosterController {
 
     public void addDefaultPracticeStats(int playerId, int freeThrowsMade,int FreeThrowsAttempted)
     {
-        String sql = "INSERT INTO Stats(player_id, freeThrowsMade, freeThrowsAttempted) VALUES(?,?,?)";
+        String sql = "INSERT INTO Stats(id, freeThrowsMade, freeThrowsAttempted) VALUES(?,?,?)";
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, playerId);
@@ -542,33 +564,33 @@ public class RosterController {
     }
 
 
-    public void updatePlayerStats(int playerId, int freeThrowsMade, double freeThrowsPercentage, int threePointsMade, double threePointsPercentage) {
-        String sql = "SELECT * FROM Stats WHERE player_id = ? UPDATE Stats SET freeThrowsMade = ?, freeThrowsPercentage = ?, threePointsMade = ?, threePointsPercentage = ? WHERE player_id = ?";
+    public void updatePlayerStats(int id, int freeThrowsMade, double freeThrowsPercentage, int threePointsMade, double threePointsPercentage) {
+        String sql = "SELECT * FROM Stats WHERE id = ? UPDATE Stats SET freeThrowsMade = ?, freeThrowsPercentage = ?, threePointsMade = ?, threePointsPercentage = ? WHERE id = ?";
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, freeThrowsMade);
             pstmt.setDouble(2, freeThrowsPercentage);
             pstmt.setInt(3, threePointsMade);
             pstmt.setDouble(4, threePointsPercentage);
-            pstmt.setInt(5, playerId);
+            pstmt.setInt(5, id);
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Player stats updated in the database.");
             } else {
-                System.out.println("No player found with ID: " + playerId);
+                System.out.println("No player found with ID: " + id);
             }
         } catch (SQLException e) {
             System.out.println("Error updating player stats: " + e.getMessage());
         }
     }
 
-    public int getFreeThrowsMade(int playerId) {
-        String sql = "SELECT freeThrowsMade FROM Stats WHERE player_id = ?";
+    public int getFreeThrowsMade(int id) {
+        String sql = "SELECT freeThrowsMade FROM Stats WHERE id = ?";
         int freeThrowsMade = 0;
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, playerId);
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 freeThrowsMade = rs.getInt("freeThrowsMade");
@@ -582,16 +604,16 @@ public class RosterController {
 
     /**
      * Fetches the number of free throws attempted by a player based on the player ID.
-     * @param playerId the unique ID of the player
+     * @param id the unique ID of the player
      * @return the number of free throws attempted by the player
      */
-    public int getFreeThrowsAttempted(int playerId) {
-        String sql = "SELECT freeThrowsAttempted FROM Stats WHERE player_id = ?";
+    public int getFreeThrowsAttempted(int id) {
+        String sql = "SELECT freeThrowsAttempted FROM Stats WHERE id = ?";
         int freeThrowsAttempted = 0;
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, playerId);
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 freeThrowsAttempted = rs.getInt("freeThrowsAttempted");
@@ -604,13 +626,13 @@ public class RosterController {
     }
 
 
-    public double getFreeThrowsPercentage(int playerId) {
-        String sql = "SELECT freeThrowsPercentage FROM Stats WHERE player_id = ?";
+    public double getFreeThrowsPercentage(int id) {
+        String sql = "SELECT freeThrowsPercentage FROM Stats WHERE id = ?";
         double freeThrowsPercentage = 0;
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, playerId);
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 freeThrowsPercentage = rs.getDouble("freeThrowsPercentage");
@@ -623,13 +645,13 @@ public class RosterController {
     }
 
 
-    public int getThreePointsMade(int playerId) {
-        String sql = "SELECT threePointsMade FROM Stats WHERE player_id = ?";
+    public int getThreePointsMade(int id) {
+        String sql = "SELECT threePointsMade FROM Stats WHERE id = ?";
         int threePointsMade = 0;
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, playerId);
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 threePointsMade = rs.getInt("threePointsMade");
@@ -643,16 +665,16 @@ public class RosterController {
 
     /**
      * Fetches the number of three point throws attempted by a player based on the player ID.
-     * @param playerId the unique ID of the player
+     * @param id the unique ID of the player
      * @return the number of three point throws attempted by the player
      */
-    public int getThreePointsAttempted(int playerId) {
-        String sql = "SELECT threePointsAttempted FROM Stats WHERE player_id = ?";
+    public int getThreePointsAttempted(int id) {
+        String sql = "SELECT threePointsAttempted FROM Stats WHERE id = ?";
         int threePointsAttempted = 0;
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, playerId);
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 threePointsAttempted = rs.getInt("threePointsAttempted");
@@ -666,13 +688,13 @@ public class RosterController {
 
 
 
-    public double getThreePointsPercentage(int playerId) {
-        String sql = "SELECT threePointsPercentage FROM Stats WHERE player_id = ?";
+    public double getThreePointsPercentage(int id) {
+        String sql = "SELECT threePointsPercentage FROM Stats WHERE id = ?";
         double threePointsPercentage = 0;
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, playerId);
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 threePointsPercentage = rs.getDouble("threePointsPercentage");
@@ -683,54 +705,54 @@ public class RosterController {
 
         return threePointsPercentage;
     }
-    public void setFreeThrowsMade(int playerId, int freeThrowsMade) {
-        String sql = "UPDATE Stats SET freeThrowsMade = ? WHERE player_id = ?";
+    public void setFreeThrowsMade(int id, int freeThrowsMade) {
+        String sql = "UPDATE Stats SET freeThrowsMade = ? WHERE id = ?";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, freeThrowsMade);
-            pstmt.setInt(2, playerId);
+            pstmt.setInt(2, id);
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Free throws made updated in the database.");
             } else {
-                System.out.println("No player found with ID: " + playerId);
+                System.out.println("No player found with ID: " + id);
             }
         } catch (SQLException e) {
             System.out.println("Error updating free throws made: " + e.getMessage());
         }
     }
 
-    public void setFreeThrowsAttempted(int playerId, int freeThrowsAttempted) {
-        String sql = "UPDATE Stats SET freeThrowsAttempted = ? WHERE player_id = ?";
+    public void setFreeThrowsAttempted(int id, int freeThrowsAttempted) {
+        String sql = "UPDATE Stats SET freeThrowsAttempted = ? WHERE id = ?";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, freeThrowsAttempted);
-            pstmt.setInt(2, playerId);
+            pstmt.setInt(2, id);
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Free throws attempted updated in the database.");
             } else {
-                System.out.println("No player found with ID: " + playerId);
+                System.out.println("No player found with ID: " + id);
             }
         } catch (SQLException e) {
             System.out.println("Error updating free throws attempted: " + e.getMessage());
         }
     }
 
-    public void setFreeThrowsPercentage(int playerId, double freeThrowsPercentage) {
-        String sql = "UPDATE Stats SET freeThrowsPercentage = ? WHERE player_id = ?";
+    public void setFreeThrowsPercentage(int id, double freeThrowsPercentage) {
+        String sql = "UPDATE Stats SET freeThrowsPercentage = ? WHERE id = ?";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setDouble(1, freeThrowsPercentage);
-            pstmt.setInt(2, playerId);
+            pstmt.setInt(2, id);
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Free throws percentage updated in the database.");
             } else {
-                System.out.println("No player found with ID: " + playerId);
+                System.out.println("No player found with ID: " + id);
             }
         } catch (SQLException e) {
             System.out.println("Error updating free throws percentage: " + e.getMessage());
@@ -739,22 +761,22 @@ public class RosterController {
 
     /**
      * Sets the number of three points made by the player in the database.
-     * @param playerId the unique ID of the player
+     * @param id the unique ID of the player
      * @param threePointsMade the number of three points made by the player
      * @author Samuel Cadiz
      */
-    public void setThreePointsMade(int playerId, int threePointsMade) {
-        String sql = "UPDATE Stats SET threePointsMade = ? WHERE player_id = ?";
+    public void setThreePointsMade(int id, int threePointsMade) {
+        String sql = "UPDATE Stats SET threePointsMade = ? WHERE id = ?";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, threePointsMade);
-            pstmt.setInt(2, playerId);
+            pstmt.setInt(2, id);
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Three points made updated in the database.");
             } else {
-                System.out.println("No player found with ID: " + playerId);
+                System.out.println("No player found with ID: " + id);
             }
         } catch (SQLException e) {
             System.out.println("Error updating three points made: " + e.getMessage());
@@ -763,22 +785,22 @@ public class RosterController {
 
     /**
      * Sets the number of three points made by the player in the database.
-     * @param playerId the unique ID of the player
+     * @param id the unique ID of the player
      * @param threePointsPercentage the number of three points made by the player
      * @author Samuel Cadiz, Kaleb Missmer
      */
-    public void setThreePointsPercentage(int playerId, double threePointsPercentage) {
-        String sql = "UPDATE Stats SET threePointsPercentage = ? WHERE player_id = ?";
+    public void setThreePointsPercentage(int id, double threePointsPercentage) {
+        String sql = "UPDATE Stats SET threePointsPercentage = ? WHERE id = ?";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setDouble(1, threePointsPercentage);
-            pstmt.setInt(2, playerId);
+            pstmt.setInt(2, id);
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Three points percentage updated in the database.");
             } else {
-                System.out.println("No player found with ID: " + playerId);
+                System.out.println("No player found with ID: " + id);
             }
         } catch (SQLException e) {
             System.out.println("Error updating three points percentage: " + e.getMessage());
@@ -787,17 +809,17 @@ public class RosterController {
 
     /**
      * Fetches the date of the player's stats based on the player ID.
-     * @param playerId the unique ID of the player
+     * @param id the unique ID of the player
      * @return the date of the player's stats
      */
-    public Date getDate(int playerId)
+    public Date getDate(int id)
     {
-        String sql = "SELECT date FROM Stats WHERE player_id = ?";
+        String sql = "SELECT date FROM Stats WHERE id = ?";
         Date date = null;
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, playerId);
+            pstmt.setInt(1, id);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                 date = rs.getDate("date"); // Retrieve the date as a java.sql.Date object
@@ -811,21 +833,21 @@ public class RosterController {
 
     /**
      * Updates the number of three point throws attempted by a player based on the player ID.
-     * @param playerId the unique ID of the player
+     * @param id the unique ID of the player
      * @param threePointsAttempted the number of three point throws attempted
      */
-    public void setThreePointsAttempted(int playerId, int threePointsAttempted) {
-        String sql = "UPDATE Stats SET threePointsAttempted = ? WHERE player_id = ?";
+    public void setThreePointsAttempted(int id, int threePointsAttempted) {
+        String sql = "UPDATE Stats SET threePointsAttempted = ? WHERE id = ?";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setInt(1, threePointsAttempted);
-            pstmt.setInt(2, playerId);
+            pstmt.setInt(2, id);
             int rowsAffected = pstmt.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Three points attempted updated in the database.");
             } else {
-                System.out.println("No player found with ID: " + playerId);
+                System.out.println("No player found with ID: " + id);
             }
         } catch (SQLException e) {
             System.out.println("Error updating three points attempted: " + e.getMessage());
@@ -835,7 +857,7 @@ public class RosterController {
 
     /**
      * Archives a player in the database.
-     * @param playerId the unique ID of the player to archive
+     * @param id the unique ID of the player to archive
      */
     /**
      * Checks if a player is archived based on the player ID.

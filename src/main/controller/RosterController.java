@@ -940,5 +940,17 @@ public class RosterController {
 
         return (double) threePointsMade / threePointsAttempted * 100.0;
     }
+
+    public List<Player> getActivePlayers() {
+        return playerDatabase.getPlayersNotInArchived();
+    }
+
+    /**
+     * Retrieves a list of all archived players.
+     * @return a list of all archived players
+     */
+    public List<Player> getArchivedPlayers() {
+        return playerDatabase.getArchivedPlayers();
+    }
 }
 

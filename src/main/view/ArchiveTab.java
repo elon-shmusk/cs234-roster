@@ -1,7 +1,6 @@
 package src.main.view;
 
 import javax.swing.*;
-import javax.swing.table.JTableHeader;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
@@ -14,18 +13,28 @@ public class ArchiveTab extends JPanel {
     private JTable archiveTable;
     private JScrollPane scrollPane;
     private JButton restoreButton;
-
-
+    private JButton filterButton;
+    private JComboBox<String> filterComboBox;
 
     public ArchiveTab(RosterController rosterController) {
         super();
+        this.rosterController = rosterController;
+
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createTitledBorder("Archive"));
         setPreferredSize(new Dimension(500, 400));
 
-        this.rosterController = rosterController;
+        // Initialize components
+        initializeComponents();
 
+        // Populate the archive table with all players initially
+        populateArchiveTable(rosterController.getAllPlayers());
+    }
 
+    /**
+     * Initializes GUI components.
+     */
+    private void initializeComponents() {
         archiveTable = new JTable();
         archiveTable.setFont(new Font("Arial", Font.PLAIN, 25));
         scrollPane = new JScrollPane(archiveTable);
@@ -34,65 +43,89 @@ public class ArchiveTab extends JPanel {
 
         // Table header font size
         Font headerFont = new Font("Arial", Font.BOLD, 25);
-        JTableHeader header = archiveTable.getTableHeader();
-        header.setFont(headerFont);
+        archiveTable.getTableHeader().setFont(headerFont);
 
         add(scrollPane, BorderLayout.CENTER);
 
-        populateArchiveTable(rosterController.getAllPlayers());
-
+        // Restore button
         restoreButton = new JButton("Restore");
         restoreButton.setFont(new Font("Arial", Font.PLAIN, 25));
         restoreButton.addActionListener(e -> {
-            UnarchivePlayerDialog unarchivePlayerDialog = new UnarchivePlayerDialog(this,rosterController);
-            unarchivePlayerDialog.setVisible(true);
-            }
-        );
+            // Call the method to restore archived player
+            restoreArchivedPlayer();
+        });
 
-        JPanel buttonPanel = new JPanel();
+        // Filter combo box
+        filterComboBox = new JComboBox<>(new String[]{"All", "Active", "Archived"});
+        filterComboBox.setFont(new Font("Arial", Font.PLAIN, 20));
+        filterComboBox.addActionListener(e -> {
+            // Filter players based on selected option
+            filterPlayers((String) filterComboBox.getSelectedItem());
+        });
+
+        // Panel for buttons and filter combo box
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.add(restoreButton);
-        add(buttonPanel, BorderLayout.SOUTH);
+        buttonPanel.add(new JLabel("Filter:"));
+        buttonPanel.add(filterComboBox);
 
+        add(buttonPanel, BorderLayout.SOUTH);
     }
 
     /**
-     * Refreshes the roster by fetching the latest list of players and updating the table.
+     * Refreshes the archive tab by fetching the latest list of players and updating the table.
      */
     public void refreshArchive() {
-        if (rosterController != null) {
-            List<Player> players = rosterController.getAllPlayers();
-            populateArchiveTable(players);
-
-        } else {
-            // Handle case where rosterController is not set
-            System.out.println("RosterController is not set");
-        }
+        List<Player> players = rosterController.getAllPlayers();
+        populateArchiveTable(players);
     }
 
-        /**
-         * Populates the table with the provided list of players.
-         * @param players the list of players to display in the table
-         */
-        private void populateArchiveTable(List<Player> players) {
-            // Populate the JTable with player data
-            DefaultTableModel model = new DefaultTableModel();
+    /**
+     * Populates the archive table with the provided list of players.
+     * @param players the list of players to display in the table
+     */
+    private void populateArchiveTable(List<Player> players) {
+        DefaultTableModel model = new DefaultTableModel();
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        archiveTable.setRowSorter(sorter);
 
-            // Enable sorting on the JTable
-            TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-            archiveTable.setRowSorter(sorter);
+        model.setColumnIdentifiers(new String[]{"First Name", "Last Name", "Year", "Number", "Status"});
 
-            model.setColumnIdentifiers(new String[]{"First Name", "Last Name","Year", "Number"});
-            for (Player player : players)
-            {
-                int id = player.getId();
-
-                if (!rosterController.isArchived(id)) {
-                    model.addRow(new Object[]{player.getFirstName(),
-                            player.getLastName(), player.getYear(), player.getNumber()});
-                }
-            }
-
-            archiveTable.setModel(model);
+        for (Player player : players) {
+            int id = player.getId();
+            String status = rosterController.isArchived(id) ? "Archived" : "Active";
+            model.addRow(new Object[]{player.getFirstName(), player.getLastName(), player.getYear(), player.getNumber(), status});
         }
+
+        archiveTable.setModel(model);
     }
 
+    /**
+     * Restores the selected archived player.
+     */
+    private void restoreArchivedPlayer() {
+        // Implement the restoration logic here
+    }
+
+    /**
+     * Filters the players based on the selected filter option.
+     * @param filterOption the selected filter option (All, Active, or Archived)
+     */
+    private void filterPlayers(String filterOption) {
+        List<Player> filteredPlayers;
+
+        switch (filterOption) {
+            case "Active":
+                filteredPlayers = rosterController.getActivePlayers();
+                break;
+            case "Archived":
+                filteredPlayers = rosterController.getArchivedPlayers();
+                break;
+            default:
+                filteredPlayers = rosterController.getAllPlayers();
+                break;
+        }
+
+        populateArchiveTable(filteredPlayers);
+    }
+}

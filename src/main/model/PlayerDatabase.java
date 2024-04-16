@@ -131,4 +131,89 @@ public class PlayerDatabase {
         }
     }
 
+    /**
+     * Retrieves a list of all players in the database, including both archived and active players.
+     * @return a list of all players
+     */
+    public List<Player> getAllPlayers() {
+        List<Player> players = new ArrayList<>();
+        String sql = "SELECT * FROM Players";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                String position = rs.getString("position");
+                int number = rs.getInt("player_Num");
+                String year = rs.getString("year");
+                boolean archived = rs.getBoolean("archived"); // Assuming there's a column named 'archived'
+                Player player = new Player(id, firstName, lastName, position, number, year);
+                players.add(player);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching players: " + e.getMessage());
+        }
+
+        return players;
+    }
+
+    public List<Player> getPlayersNotInArchived() {
+        List<Player> players = new ArrayList<>();
+        String sql = "SELECT * FROM Players WHERE id NOT IN (SELECT player_id FROM archived)";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                String position = rs.getString("position");
+                int number = rs.getInt("player_Num");
+                String year = rs.getString("year");
+                Player player = new Player(id, firstName, lastName, position, number, year);
+                players.add(player);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching players: " + e.getMessage());
+        }
+
+        return players;
+    }
+
+    /**
+     * Retrieves a list of archived players from the database.
+     * @return a list of archived players
+     */
+    public List<Player> getArchivedPlayers() {
+        List<Player> archivedPlayers = new ArrayList<>();
+        String sql = "SELECT * FROM archived";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String firstName = rs.getString("firstName");
+                String lastName = rs.getString("lastName");
+                String position = rs.getString("position");
+                String year = rs.getString("year");
+                int number = rs.getInt("player_Num");
+
+                // Assuming Player class constructor doesn't include the 'archived' parameter
+                Player player = new Player(id, firstName, lastName, position, number, year);
+                archivedPlayers.add(player);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error retrieving archived players: " + e.getMessage());
+        }
+
+        return archivedPlayers;
+    }
+
 }

@@ -6,6 +6,8 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import src.main.model.Player;
+
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.awt.event.ComponentAdapter;
 import java.sql.*;
@@ -123,14 +125,22 @@ public class PracticeStats extends JPanel {
         for(Player player : players) {
             int id = player.getId();
             String playerName = player.getName();
-            LocalDate date = rosterController.getDate(id).toLocalDate();
+            java.sql.Date dateSQL = rosterController.getDate(id);
+
+            // Check if the date is null
+            if (dateSQL == null) {
+                // Handle null date (skip or provide default behavior)
+                continue; // For example, skip processing for this player
+            }
+
+            LocalDate date = dateSQL.toLocalDate();
             int ftm = rosterController.getFreeThrowsMade(id);
             int fta = rosterController.getFreeThrowsAttempted(id);
 
             // Find the row index for the player in the table
             int rowIndex = -1;
-            for (int i = 0; i < model.getRowCount(); i += 2) {
-                if (model.getValueAt(i, 0).equals(player.getNumber())) {
+            for (int i = 0; i < model.getRowCount(); i += 3) {
+                if (model.getValueAt(i, 0).equals(player.getId())) {
                     rowIndex = i;
                     break;
                 }
@@ -138,14 +148,14 @@ public class PracticeStats extends JPanel {
 
             // If player does not exist in the table, add a new row for the player
             if (rowIndex == -1) {
-                model.addRow(new Object[]{player.getNumber(), playerName});
+                model.addRow(new Object[]{player.getId(), playerName});
                 model.addRow(new Object[]{"FTM", 0, 0, 0, 0, 0, 0, 0}); // Add a row for FTM
                 model.addRow(new Object[]{"FTA", 0, 0, 0, 0, 0, 0, 0}); // Add a row for FTA
                 rowIndex = model.getRowCount() - 3; // Set the row index to the player's row
             }
 
             // Find the column index for the date in the table
-            int columnIndex = currentMonday.until(date).getDays();
+            int columnIndex = (int) ChronoUnit.DAYS.between(currentMonday, date);
             // If date is out of the current week range, skip
             if (columnIndex < 0 || columnIndex >= 7) {
                 continue;

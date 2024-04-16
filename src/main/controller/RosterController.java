@@ -785,29 +785,29 @@ public class RosterController {
         }
     }
 
-//    /**
-//     * Fetches the date of the player's stats based on the player ID.
-//     * @param playerId the unique ID of the player
-//     * @return the date of the player's stats
-//     */
-//    public Date getDate(int playerId)
-//    {
-//        String sql = "SELECT date FROM Stats WHERE player_id = ?";
-//        String date = "";
-//
-//        try (Connection conn = DriverManager.getConnection(DB_URL);
-//             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-//            pstmt.setInt(1, playerId);
-//            ResultSet rs = pstmt.executeQuery();
-//            if (rs.next()) {
-//                date = rs.getDate("date");
-//            }
-//        } catch (SQLException e) {
-//            System.out.println("Error fetching date: " + e.getMessage());
-//        }
-//
-//        return date;
-//    }
+    /**
+     * Fetches the date of the player's stats based on the player ID.
+     * @param playerId the unique ID of the player
+     * @return the date of the player's stats
+     */
+    public Date getDate(int playerId)
+    {
+        String sql = "SELECT date FROM Stats WHERE player_id = ?";
+        Date date = null;
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, playerId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                date = rs.getDate("date"); // Retrieve the date as a java.sql.Date object
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching date: " + e.getMessage());
+        }
+
+        return date;
+    }
 
     /**
      * Updates the number of three point throws attempted by a player based on the player ID.

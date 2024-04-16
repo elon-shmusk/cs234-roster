@@ -26,6 +26,25 @@ public class PlayerDatabase {
         }
 }
 
+
+    public void dropTables() {
+        String dropPlayersTableSQL = "DROP TABLE IF EXISTS Players;";
+        String dropStatsTableSQL = "DROP TABLE IF EXISTS Stats;";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             Statement stmt = conn.createStatement()) {
+            // Drop the Players table
+            stmt.execute(dropPlayersTableSQL);
+            System.out.println("Players table dropped successfully.");
+
+            // Drop the Stats table
+            stmt.execute(dropStatsTableSQL);
+            System.out.println("Stats table dropped successfully.");
+        } catch (SQLException e) {
+            System.out.println("Error dropping tables: " + e.getMessage());
+        }
+    }
+
     /**
      * Creates the Players and Stats tables in the database if they do not exist.
      * Kaleb Missmer
@@ -33,15 +52,16 @@ public class PlayerDatabase {
     private void createTables() {
         String playerTableSQL = "CREATE TABLE IF NOT EXISTS Players (\n"
                 + " id INTEGER PRIMARY KEY,\n"
+                + " player_Num INT NOT NULL,\n"
                 + " firstName VARCHAR(20) NOT NULL,\n"
                 + " lastName VARCHAR(20) NOT NULL,\n"
                 + " position VARCHAR(20) NOT NULL,\n"
-                + " year VARCHAR(10) NOT NULL,\n"
+                + " year VARCHAR(10) NOT NULL\n"
                 + ");";
 
         String statsTableSQL = "CREATE TABLE IF NOT EXISTS Stats (\n"
                 + " id INTEGER PRIMARY KEY,\n"
-                + " date String NOT NULL,\n"
+                + " date DATE NOT NULL,\n"
                 + " player_id INT NOT NULL,\n"
                 + " freeThrowsMade INT,\n"
                 + " freeThrowsAttempted INT,\n"

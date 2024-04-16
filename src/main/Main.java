@@ -32,6 +32,8 @@ public class Main {
             rosterController.setRosterTab(rosterTab);
             rosterController.setStatsTab(statsTab);
 
+           
+
             GUI dashboard = new GUI(rosterTab, statsTab,practiceStats, archiveTab); // Pass the rosterController and rosterTab
         });
     }

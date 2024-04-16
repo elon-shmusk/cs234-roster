@@ -701,6 +701,24 @@ public class RosterController {
         }
     }
 
+    public void setFreeThrowsAttempted(int playerId, int freeThrowsAttempted) {
+        String sql = "UPDATE Stats SET freeThrowsAttempted = ? WHERE player_id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, freeThrowsAttempted);
+            pstmt.setInt(2, playerId);
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Free throws attempted updated in the database.");
+            } else {
+                System.out.println("No player found with ID: " + playerId);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error updating free throws attempted: " + e.getMessage());
+        }
+    }
+
     public void setFreeThrowsPercentage(int playerId, double freeThrowsPercentage) {
         String sql = "UPDATE Stats SET freeThrowsPercentage = ? WHERE player_id = ?";
 
@@ -767,6 +785,29 @@ public class RosterController {
         }
     }
 
+    /**
+     * Fetches the date of the player's stats based on the player ID.
+     * @param playerId the unique ID of the player
+     * @return the date of the player's stats
+     */
+    public Date getDate(int playerId)
+    {
+        String sql = "SELECT date FROM Stats WHERE player_id = ?";
+        Date date = null;
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, playerId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                date = rs.getDate("date"); // Retrieve the date as a java.sql.Date object
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching date: " + e.getMessage());
+        }
+
+        return date;
+    }
 
     /**
      * Updates the number of three point throws attempted by a player based on the player ID.

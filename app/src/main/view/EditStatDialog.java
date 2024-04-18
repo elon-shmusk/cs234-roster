@@ -17,7 +17,7 @@ public class EditStatDialog extends JDialog {
     private JTextField threePointersPercentageField;
     private StatsTab statsTab;
     private Integer id;
-    public EditStatDialog(PracticeStats practiceStats, RosterController RosterController, Player chosenPlayer) {
+    public EditStatDialog(StatsTab statsTab, RosterController RosterController, Player chosenPlayer) {
         super();
         setTitle("Edit Stats");
         setSize(500, 400);
@@ -126,7 +126,7 @@ public class EditStatDialog extends JDialog {
 
 
 
-            if(RosterController.getFreeThrowsMade(id) != freeThrows && freeThrows != 0 && !freeThrowsField.getText().isEmpty())
+            if(RosterController.getFreeThrowsMade(id) != freeThrows && freeThrows < 0 && !freeThrowsField.getText().isEmpty())
                 RosterController.setFreeThrowsMade(id, freeThrows);
 
             if(RosterController.getFreeThrowsPercentage(id) != freeThrowsPercentage && freeThrowsPercentage != 0 && !freeThrowsPercentageField.getText().isEmpty())

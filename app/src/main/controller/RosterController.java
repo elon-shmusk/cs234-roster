@@ -2,6 +2,7 @@ package src.main.controller;
 
 import src.main.model.*;
 import src.main.view.ArchiveTab;
+import src.main.view.PracticeStats;
 import src.main.view.RosterTab;
 import src.main.view.StatsTab;
 
@@ -21,6 +22,7 @@ public class RosterController {
     private PlayerDatabase playerDatabase;
     private RosterTab rosterTab;
     private StatsTab statsTab;
+    private PracticeStats practiceStats;
     private ArchiveTab archiveTab;
 
     /**
@@ -68,6 +70,9 @@ public class RosterController {
         } catch (SQLException e) {
             System.out.println("Error adding player and default stats: " + e.getMessage());
         }
+        statsTab.refreshStats();
+        practiceStats.refreshStats();
+        archiveTab.refreshArchive();
     }
 
     /**
@@ -77,6 +82,9 @@ public class RosterController {
     public void removePlayer(int id) {
         playerDatabase.removePlayer(id);
         rosterTab.refreshRoster();
+        statsTab.refreshStats();
+        practiceStats.refreshStats();
+        archiveTab.refreshArchive();
     }
 
     /**
@@ -153,6 +161,9 @@ public class RosterController {
     {
         setPlayerFirstName(id, firstName);
         rosterTab.refreshRoster();
+        statsTab.refreshStats();
+        practiceStats.refreshStats();
+        archiveTab.refreshArchive();
     }
 
     /**
@@ -189,6 +200,9 @@ public class RosterController {
     {
         setPlayerLastName(id, lastName);
         rosterTab.refreshRoster();
+        statsTab.refreshStats();
+        practiceStats.refreshStats();
+        archiveTab.refreshArchive();
     }
 
     /**
@@ -202,6 +216,9 @@ public class RosterController {
         setPlayerFirstName(id, firstName);
         setPlayerLastName(id, lastName);
         rosterTab.refreshRoster();
+        statsTab.refreshStats();
+        practiceStats.refreshStats();
+        archiveTab.refreshArchive();
     }
 
     /**
@@ -238,6 +255,8 @@ public class RosterController {
     {
         setPlayerPosition(id, position);
         rosterTab.refreshRoster();
+        archiveTab.refreshArchive();
+
     }
 
 
@@ -273,6 +292,7 @@ public class RosterController {
     {
         setPlayerYear(id, year);
         rosterTab.refreshRoster();
+        statsTab.refreshStats();
     }
 
 
@@ -308,6 +328,9 @@ public class RosterController {
     {
         setPlayerNumber(id, number);
         rosterTab.refreshRoster();
+        statsTab.refreshStats();
+        practiceStats.refreshStats();
+        archiveTab.refreshArchive();
     }
 
 
@@ -981,6 +1004,18 @@ public class RosterController {
         return playerId;
     }
 
+    public void eraseAllStats(int playerId) {
+        String sql = "DELETE FROM Stats WHERE player_id = ?";
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, playerId);
+            pstmt.executeUpdate();
+            System.out.println("Player stats erased from the database.");
+        } catch (SQLException e) {
+            System.out.println("Error erasing player stats: " + e.getMessage());
+        }
+    }
 
     /**
      * Sets the RosterTab for this controller.
@@ -997,6 +1032,14 @@ public class RosterController {
      */
     public void setStatsTab(StatsTab statsTab) {
         this.statsTab = statsTab;
+    }
+
+    /**
+     * Sets the PracticeStats for this controller.
+     * @param practiceStats the PracticeStats to set
+     */
+    public void setPracticeStats(PracticeStats practiceStats) {
+        this.practiceStats = practiceStats;
     }
 
     /**

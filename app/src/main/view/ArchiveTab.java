@@ -5,6 +5,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.util.List;
+import java.util.Objects;
+
 import src.main.model.Player;
 import src.main.controller.RosterController;
 
@@ -13,6 +15,7 @@ public class ArchiveTab extends JPanel {
     private JTable archiveTable;
     private JScrollPane scrollPane;
     private JButton restoreButton;
+    private JButton updateButton;
     private JButton filterButton;
     private JComboBox<String> filterComboBox;
 
@@ -55,17 +58,28 @@ public class ArchiveTab extends JPanel {
             restoreArchivedPlayer();
         });
 
+        updateButton = new JButton("Update");
+        updateButton.setFont(new Font("Arial", Font.PLAIN, 25));
+        updateButton.addActionListener(e -> {
+            // Call the method to update the player
+            List<Player> ArchivedPlayers = rosterController.getArchivedPlayers();
+            List<Player> allPlayers = rosterController.getActivePlayers();
+            allPlayers.addAll(ArchivedPlayers);
+            populateArchiveTable(allPlayers);
+        });
+
         // Filter combo box
         filterComboBox = new JComboBox<>(new String[]{"All", "Active", "Archived"});
         filterComboBox.setFont(new Font("Arial", Font.PLAIN, 20));
         filterComboBox.addActionListener(e -> {
             // Filter players based on selected option
-            filterPlayers((String) filterComboBox.getSelectedItem());
+            filterPlayers((String) Objects.requireNonNull(filterComboBox.getSelectedItem()));
         });
 
         // Panel for buttons and filter combo box
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.add(restoreButton);
+        buttonPanel.add(updateButton);
         buttonPanel.add(new JLabel("Filter:"));
         buttonPanel.add(filterComboBox);
 
@@ -86,6 +100,9 @@ public class ArchiveTab extends JPanel {
      */
     private void populateArchiveTable(List<Player> players) {
         DefaultTableModel model = new DefaultTableModel();
+        List<Player> activePlayers = rosterController.getActivePlayers();
+        List<Player> archivedPlayers = rosterController.getArchivedPlayers();
+
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
         archiveTable.setRowSorter(sorter);
 
@@ -93,8 +110,14 @@ public class ArchiveTab extends JPanel {
 
         for (Player player : players) {
             int id = player.getId();
-            String status = rosterController.isArchived(id) ? "Archived" : "Active";
-            model.addRow(new Object[]{player.getFirstName(), player.getLastName(), player.getYear(), player.getNumber(), status});
+            if(players.size() == activePlayers.size() + archivedPlayers.size()){
+                String status = rosterController.isArchived(id) ? "Archived" : "Active";
+                model.addRow(new Object[]{player.getFirstName(), player.getLastName(), player.getYear(), player.getNumber(), status});
+            }
+            else {
+                String status = rosterController.isArchived(id) ? "Archived" : "Active";
+                model.addRow(new Object[]{player.getFirstName(), player.getLastName(), player.getYear(), player.getNumber(), status});
+            }
         }
 
         archiveTable.setModel(model);
@@ -122,7 +145,9 @@ public class ArchiveTab extends JPanel {
                 filteredPlayers = rosterController.getArchivedPlayers();
                 break;
             default:
-                filteredPlayers = rosterController.getAllPlayers();
+                List<Player> activePlayers = rosterController.getActivePlayers();
+                filteredPlayers = activePlayers;
+                filteredPlayers.addAll(rosterController.getArchivedPlayers());
                 break;
         }
 

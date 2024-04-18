@@ -31,6 +31,8 @@ public class Main {
             // Set the rosterController for the RosterTab
             rosterController.setRosterTab(rosterTab);
             rosterController.setStatsTab(statsTab);
+            rosterController.setPracticeStats(practiceStats);
+            rosterController.setArchiveTab(archiveTab);
 
             // remove tables
 

@@ -27,6 +27,7 @@ public class PlayerDatabase {
     public void dropTables() {
         String dropPlayersTableSQL = "DROP TABLE IF EXISTS Players;";
         String dropStatsTableSQL = "DROP TABLE IF EXISTS Stats;";
+        String dropDatesTableSQL = "DROP TABLE IF EXISTS Dates;";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              Statement stmt = conn.createStatement()) {
@@ -37,6 +38,10 @@ public class PlayerDatabase {
             // Drop the Stats table
             stmt.execute(dropStatsTableSQL);
             System.out.println("Stats table dropped successfully.");
+
+            // Drop the Dates table
+            stmt.execute(dropDatesTableSQL);
+            System.out.println("Dates table dropped successfully.");
         } catch (SQLException e) {
             System.out.println("Error dropping tables: " + e.getMessage());
         }
@@ -56,29 +61,40 @@ public class PlayerDatabase {
                 + " year VARCHAR(10) NOT NULL\n"
                 + ");";
 
+        String datesTableSQL = "CREATE TABLE IF NOT EXISTS Dates (\n"
+                + " date_id INTEGER PRIMARY KEY,\n"
+                + " date DATE NOT NULL\n"
+                + ");";
+
         String statsTableSQL = "CREATE TABLE IF NOT EXISTS Stats (\n"
-                + " id INTEGER PRIMARY KEY,\n"
-                + " date DATE NOT NULL,\n"
+                + " stat_id INTEGER PRIMARY KEY,\n"
+                + " player_id INTEGER,\n"
+                + " date_id INTEGER,\n"
                 + " freeThrowsMade INT,\n"
                 + " freeThrowsAttempted INT,\n"
                 + " freeThrowsPercentage REAL,\n"
                 + " threePointsPercentage REAL,\n"
                 + " threePointsMade INT,\n"
                 + " threePointsAttempted INT,\n"
-                + " FOREIGN KEY (id) REFERENCES Players(id)\n"
+                + " FOREIGN KEY (player_id) REFERENCES Players(id),\n"
+                + " FOREIGN KEY (date_id) REFERENCES Dates(date_id)\n"
                 + ");";
 
         try (Connection conn = DriverManager.getConnection(DB_URL);
              Statement stmt = conn.createStatement()) {
             stmt.execute(playerTableSQL);
             stmt.execute(statsTableSQL);
+            stmt.execute(datesTableSQL);
             System.out.println("Tables created successfully.");
         } catch (SQLException e) {
             System.out.println("Error creating tables: " + e.getMessage());
         }
     }
 
+
+
     /**
+     *
      * Adds a new player to the database.
      * @param player the player object to be added
      */

@@ -99,19 +99,13 @@ public class playerToEdit extends JDialog {
                 // UnarchivePlayerDialog unarchivePlayerDialog = new UnarchivePlayerDialog(ArchiveTab, rosterController);
                 // unarchivePlayerDialog.setVisible(true);
 
-                ArchivedPlayersPanel archivedPlayersPanel = new ArchivedPlayersPanel(rosterController, rosterTab);
-                archivedPlayersPanel.populatePanel();
+                ArchivedPlayersPanel archivedPlayersPanel = new ArchivedPlayersPanel(rosterController, rosterTab, ArchiveTab);
+                archivedPlayersPanel.setVisible(true);
 
                 // int playerID = getSelectedPlayer().getId();
                 // rosterController.unarchivePlayer(playerID);
 
                 // Create a new JFrame to hold the panel
-                JFrame frame = new JFrame("Archived Players");
-                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                frame.getContentPane().add(archivedPlayersPanel);
-                frame.pack();
-                frame.setLocationRelativeTo(null); // Center the frame
-                frame.setVisible(true);
 
                 // Close the dialog
                 dispose();

@@ -58,7 +58,7 @@ public class PracticeStats extends JPanel {
         }
 
 
-        Font headerFont = new Font("Arial", Font.BOLD, 20);
+        Font headerFont = new Font("Arial", Font.BOLD, 25);
         JTableHeader header = table.getTableHeader();
         header.setFont(headerFont);
 
@@ -80,17 +80,21 @@ public class PracticeStats extends JPanel {
         // Add navigation buttons
         JPanel buttonPanel = new JPanel();
         JButton prevWeekButton = new JButton("Previous Week");
+        prevWeekButton.setFont(new Font("Arial", Font.PLAIN, 25));
         prevWeekButton.addActionListener(e -> {
             currentMonday = currentMonday.minusWeeks(1);
             displayWeek(currentMonday);
         });
         JButton nextWeekButton = new JButton("Next Week");
+        nextWeekButton.setFont(new Font("Arial", Font.PLAIN, 25));
         nextWeekButton.addActionListener(e -> {
             currentMonday = currentMonday.plusWeeks(1);
             displayWeek(currentMonday);
         });
         JButton updateButton = new JButton("Update");
+        updateButton.setFont(new Font("Arial", Font.PLAIN, 25));
         JButton addButton = new JButton("Add Stat");
+        addButton.setFont(new Font("Arial", Font.PLAIN, 25));
 
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -144,9 +148,13 @@ public class PracticeStats extends JPanel {
 
         JComboBox<String> playerComboBox = new JComboBox<>(playerName.toArray(new String[0]));
         JTextField dateField = new JTextField();
+        dateField.setFont(new Font("Arial", Font.PLAIN, 25));
         JTextField ftmField = new JTextField();
+        ftmField.setFont(new Font("Arial", Font.PLAIN, 25));
         JTextField ftaField = new JTextField();
+        ftaField.setFont(new Font("Arial", Font.PLAIN, 25));
         JButton okButton = new JButton("OK");
+        okButton.setFont(new Font("Arial", Font.PLAIN, 25));
 
         okButton.addActionListener(new ActionListener() {
             @Override
@@ -167,17 +175,41 @@ public class PracticeStats extends JPanel {
             }
         });
         JPanel dialogPanel = new JPanel();
+        dialogPanel.setFont(new Font("Arial", Font.PLAIN, 25));
         dialogPanel.setLayout(new GridLayout(0, 2));
-        dialogPanel.add(new JLabel("Player:"));
+
+        JLabel playerLabel = new JLabel("Player:");
+        playerLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+        dialogPanel.add(playerLabel);
+
+        playerComboBox.setFont(new Font("Arial", Font.PLAIN, 25));
         dialogPanel.add(playerComboBox);
-        dialogPanel.add(new JLabel("Date (MM/dd/yyyy):"));
+
+        JLabel dateLabel = new JLabel("Date (MM/dd/yyyy):");
+        dateLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+        dialogPanel.add(dateLabel);
+
+        dateField.setFont(new Font("Arial", Font.PLAIN, 25));
         dialogPanel.add(dateField);
-        dialogPanel.add(new JLabel("FTM:"));
+
+        JLabel ftmLabel = new JLabel("FTM:");
+        ftmLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+        dialogPanel.add(ftmLabel);
+
+        ftmField.setFont(new Font("Arial", Font.PLAIN, 25));
         dialogPanel.add(ftmField);
-        dialogPanel.add(new JLabel("FTA:"));
+
+        JLabel ftaLabel = new JLabel("FTA:");
+        ftaLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+        dialogPanel.add(ftaLabel);
+
+        ftaField.setFont(new Font("Arial", Font.PLAIN, 25));
         dialogPanel.add(ftaField);
+
+
         dialogPanel.add(new JLabel()); // Empty label for layout
         JPanel buttonPanel = new JPanel();
+        okButton.setFont(new Font("Arial", Font.PLAIN, 25));
         buttonPanel.add(okButton);
         dialog.add(buttonPanel, BorderLayout.SOUTH);
         dialog.add(dialogPanel, BorderLayout.CENTER);

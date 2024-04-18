@@ -143,7 +143,7 @@ public class PracticeStats extends JPanel {
 
     private void updateDatabase() {
         List<Player> players = rosterController.getAllPlayers();
-        for(Player player : players) {
+        for (Player player : players) {
 
             // Iterate through the table data and update the database
             for (int i = 2; i < model.getRowCount(); i += 3) {
@@ -155,6 +155,7 @@ public class PracticeStats extends JPanel {
                 rosterController.setFreeThrowsAttempted(player.getId(), fta);
             }
         }
-        JOptionPane.showMessageDialog(this, "Database updated successfully.");
     }
+
+
 }

@@ -87,23 +87,36 @@ public class StatsTab extends JPanel {
         // Define column names for statistics
         model.setColumnIdentifiers(new String[]{"Name", "Free Throws Made", "Free Throws %", "Three Points Made", "Three Points %"});
 
-        // Populate statistics app.data rows
+        // Populate statistics data rows
         for (Player player : players) {
-            // Assuming you have methods to retrieve statistics from the database for each player
             int playerId = player.getId();
             String playerName = rosterController.getPlayerFullName(playerId);
-            int freeThrowsMade = rosterController.getFreeThrowsMade(playerId);
-            double freeThrowsPercentage = rosterController.getFreeThrowsPercentage(playerId);
-            int threePointsMade = rosterController.getThreePointsMade(playerId);
-            double threePointsPercentage = rosterController.getThreePointsPercentage(playerId);
+
+            // Assuming you have methods to retrieve total free throws and three-pointers for the player
+            int totalFreeThrowsMade = rosterController.getTotalFreeThrowsMade(playerId);
+            int totalFreeThrowsAttempted = rosterController.getTotalFreeThrowsAttempted(playerId);
+            int totalThreePointsMade = rosterController.getTotalThreePointsMade(playerId);
+            int totalThreePointsAttempted = rosterController.getTotalThreePointsAttempted(playerId);
+
+            // Calculate overall percentages
+            double overallFreeThrowsPercentage = calculatePercentage(totalFreeThrowsMade, totalFreeThrowsAttempted);
+            double overallThreePointsPercentage = calculatePercentage(totalThreePointsMade, totalThreePointsAttempted);
 
             // Add a row with player statistics
-            model.addRow(new Object[]{playerName, freeThrowsMade, freeThrowsPercentage, threePointsMade, threePointsPercentage});
+            model.addRow(new Object[]{playerName, totalFreeThrowsMade, overallFreeThrowsPercentage, totalThreePointsMade, overallThreePointsPercentage});
         }
 
         // Set the model to the stats table
         statsTable.setModel(model);
     }
+
+    private double calculatePercentage(int made, int attempted) {
+        if (attempted == 0) {
+            return 0; // Handle division by zero
+        }
+        return ((double) made / attempted) * 100;
+    }
+
 
 
 }

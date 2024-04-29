@@ -30,9 +30,7 @@ The Moravian University Women's Basketball Roster Management System is a softwar
    - Click on Artifacts.
    - Click on the "+" sign and select JAR -> From modules with dependencies.
    - Select the Main class and click OK.
-   - Click on the Output Layout tab.
-   - Click on the "+" sign and select Directory Content.
-   - Select the META-INF folder and click OK.
+   - Add any dependencies in the Available Elements section
    - Click Apply and OK.
    - Go to Build -> Build Artifacts -> Build.
    - The JAR file will be created in the out -> artifacts -> cs234_roster_jar folder.

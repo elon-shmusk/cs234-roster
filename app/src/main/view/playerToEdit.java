@@ -1,3 +1,11 @@
+/**
+ * This class represents a dialog for selecting a player to edit.
+ * It provides a list of players in the form of radio buttons, and options to edit, archive, or unarchive a player.
+ * The dialog is used in the context of a basketball team management application.
+ *
+ * @author Samuel Cadiz
+ * @author Fernando Peralta Castro
+ */
 package src.main.view;
 
 import src.main.controller.RosterController;

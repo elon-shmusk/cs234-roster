@@ -42,6 +42,7 @@ public class ArchivedPlayersPanel extends JDialog {
                 public void actionPerformed(ActionEvent e) {
                     rosterController.unarchivePlayer(player.getId());
                     rosterTab.refreshRoster();
+                    archiveTab.refreshArchive();
                     dispose();
                 }
             });

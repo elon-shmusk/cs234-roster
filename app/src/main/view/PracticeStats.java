@@ -221,7 +221,28 @@ public class PracticeStats extends JPanel {
             model.addRow(new Object[]{"", "TPA"});
 
             for (int i = 0; i < stats.size(); i++) {
-                
+                int columnIndex = -1;
+                for (int j = 2; i < model.getColumnCount(); j++) {
+                    String header = model.getColumnName(i);
+                    Date columnDate = Date.valueOf(LocalDate.parse(header, DateTimeFormatter.ofPattern("MMM/d/yyyy")));
+                    if (columnDate.equals(rosterController.getDate(stats.get(i).get(1)))) {
+                        columnIndex = i;
+                        break;
+                    }
+                }
+
+                if (columnIndex != -1) {
+                    // Iterate through the table data and add player stats to the corresponding date column
+                    for (int k = 0; i < model.getRowCount(); k += 3) {
+                        if(model.getValueAt(i, 1).equals(playerName)){
+                            model.setValueAt("FTM: "+stats.get(i).get(2), i + 1, columnIndex);
+                            model.setValueAt("FTA: "+stats.get(i).get(3), i + 2, columnIndex);
+                            model.setValueAt("TPM: "+stats.get(i).get(4), i + 3, columnIndex);
+                            model.setValueAt("TPA: "+stats.get(i).get(5), i + 4, columnIndex);
+                        }
+                    }
+                }
+            }
 
         }
 

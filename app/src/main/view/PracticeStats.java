@@ -129,6 +129,8 @@ public class PracticeStats extends JPanel {
         model.addColumn("Number");
         model.addColumn("Name");
 
+
+
         // Add columns for the days of the week
         LocalDate date = monday;
         for (int i = 0; i < 7; i++) {
@@ -141,14 +143,114 @@ public class PracticeStats extends JPanel {
     }
 
     private void openAddDialog() {
-        // Implementation of add dialog...
+        JDialog dialog = new JDialog();
+        dialog.setTitle("Add Player Stats");
+        dialog.setLayout(new BorderLayout());
+        dialog.setSize(400, 250);
+
+        JComboBox<String> playerComboBox = new JComboBox<>(playerName.toArray(new String[0]));
+        JTextField dateField = new JTextField();
+        JTextField ftmField = new JTextField();
+        JTextField ftaField = new JTextField();
+        JTextField tpmField = new JTextField();
+        JTextField tpaField = new JTextField();
+        JButton okButton = new JButton("OK");
+
+        okButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String playerName = (String) playerComboBox.getSelectedItem();
+                String dateText = dateField.getText();
+                String ftmText = ftmField.getText();
+                String ftaText = ftaField.getText();
+                String tpmText = tpmField.getText();
+                String tpaText = tpaField.getText();
+                try {
+                    Date date = Date.valueOf(LocalDate.parse(dateText, DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+                    int ftm = Integer.parseInt(ftmText);
+                    int fta = Integer.parseInt(ftaText);
+                    int tpm = Integer.parseInt(tpmText);
+                    int tpa = Integer.parseInt(tpaText);
+                    addPlayerStats(playerName,date, ftm, fta, tpm, tpa);
+                    dialog.dispose();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(dialog, "Invalid input. Please enter valid values.");
+                }
+            }
+        });
+        JPanel dialogPanel = new JPanel();
+        dialogPanel.setLayout(new GridLayout(0, 2));
+        dialogPanel.add(new JLabel("Player:"));
+        dialogPanel.add(playerComboBox);
+        dialogPanel.add(new JLabel("Date (MM/dd/yyyy):"));
+        dialogPanel.add(dateField);
+        dialogPanel.add(new JLabel("FTM:"));
+        dialogPanel.add(ftmField);
+        dialogPanel.add(new JLabel("FTA:"));
+        dialogPanel.add(ftaField);
+        dialogPanel.add(new JLabel("TPM:"));
+        dialogPanel.add(tpmField);
+        dialogPanel.add(new JLabel("TPA:"));
+        dialogPanel.add(tpaField);
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(okButton);
+        dialog.add(buttonPanel, BorderLayout.SOUTH);
+        dialog.add(dialogPanel, BorderLayout.CENTER);
+
+        dialog.setVisible(true);
     }
 
+    private void addPlayerStats(String playerName,Date date, int ftm, int fta, int tpm, int tpa) {
+        // Add player stats to the database
+        String firstName = playerName.split(" ")[0];
+        String lastName = playerName.split(" ")[1];
 
+        int playerId = rosterController.getPlayerId(firstName, lastName);
 
-    private void populateTable(List<Player> players) {
-        // Implementation of populateTable...
+        rosterController.addPlayerStats(playerId, date, ftm, fta, tpm, tpa);
+        refreshStats();
     }
+
+    private void populateTable(List<Player> players, ArrayList<ArrayList<Integer>> stats) {
+        // Plot player stats in the table to correspond with the player
+        for (Player player : players) {
+            model.addRow(new Object[]{player.getNumber(), player.getName()});
+            model.addRow(new Object[]{"", "FTM"});
+            model.addRow(new Object[]{"", "FTA"});
+            model.addRow(new Object[]{"", "TPM"});
+            model.addRow(new Object[]{"", "TPA"});
+
+            for (int i = 0; i < stats.size(); i++) {
+                int columnIndex = -1;
+                for (int j = 2; i < model.getColumnCount(); j++) {
+                    String header = model.getColumnName(i);
+                    Date columnDate = Date.valueOf(LocalDate.parse(header, DateTimeFormatter.ofPattern("MMM/d/yyyy")));
+                    if (columnDate.equals(rosterController.getDate(stats.get(i).get(1)))) {
+                        columnIndex = i;
+                        break;
+                    }
+                }
+
+                if (columnIndex != -1) {
+                    // Iterate through the table data and add player stats to the corresponding date column
+                    for (int k = 0; i < model.getRowCount(); k += 3) {
+                        if(model.getValueAt(i, 1).equals(playerName)){
+                            model.setValueAt("FTM: "+stats.get(i).get(2), i + 1, columnIndex);
+                            model.setValueAt("FTA: "+stats.get(i).get(3), i + 2, columnIndex);
+                            model.setValueAt("TPM: "+stats.get(i).get(4), i + 3, columnIndex);
+                            model.setValueAt("TPA: "+stats.get(i).get(5), i + 4, columnIndex);
+                        }
+                    }
+                }
+            }
+
+        }
+
+
+
+
+        
+        }
 
     /**
      * Refreshes the statistics by fetching the latest list of players and updating the table.
@@ -156,7 +258,8 @@ public class PracticeStats extends JPanel {
     public void refreshStats() {
         if (rosterController != null) {
             List<Player> players = rosterController.getAllPlayers();
-            populateTable(players);
+            ArrayList<ArrayList<Integer>> stats = rosterController.getAllStats();
+            populateTable(players, stats);
         } else {
             // Handle case where rosterController is not set
             System.out.println("RosterController is not set");

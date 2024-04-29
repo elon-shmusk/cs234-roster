@@ -509,6 +509,51 @@ public class RosterController {
         }
     }
 
+    public ArrayList<Integer> getStat(int playerId) {
+        String sql = "SELECT freeThrowsMade, freeThrowsAttempted, threePointsMade, threePointsAttempted FROM PlayerStats WHERE player_id = ?";
+        ArrayList<Integer> stats = new ArrayList<>();
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, playerId);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                stats.add(rs.getInt("freeThrowsMade"));
+                stats.add(rs.getInt("freeThrowsAttempted"));
+                stats.add(rs.getInt("threePointsMade"));
+                stats.add(rs.getInt("threePointsAttempted"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching player stats: " + e.getMessage());
+        }
+
+        return stats;
+    }
+
+    public ArrayList<ArrayList<Integer>> getAllStats() {
+        String sql = "SELECT player_id, date_id, freeThrowsMade, freeThrowsAttempted, threePointsMade, threePointsAttempted FROM PlayerStats";
+        ArrayList<ArrayList<Integer>> allStats = new ArrayList<>();
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                ArrayList<Integer> stats = new ArrayList<>();
+                stats.add(rs.getInt("player_id"));
+                stats.add(rs.getInt("date_id"));
+                stats.add(rs.getInt("freeThrowsMade"));
+                stats.add(rs.getInt("freeThrowsAttempted"));
+                stats.add(rs.getInt("threePointsMade"));
+                stats.add(rs.getInt("threePointsAttempted"));
+                allStats.add(stats);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching all player stats: " + e.getMessage());
+        }
+
+        return allStats;
+    }
+
     public int getTotalFreeThrowsMade(int playerId) {
         String sql = "SELECT SUM(freeThrowsMade) AS totalFreeThrowsMade FROM PlayerStats WHERE player_id = ?";
         int totalFreeThrowsMade = 0;
@@ -616,7 +661,7 @@ public class RosterController {
     }
 
 
-    private int getDateId(Date date) {
+    public int getDateId(Date date) {
         // Check if the date exists in the Dates table
         String sql = "SELECT date_id FROM Dates WHERE date = ?";
         int dateId = -1;
@@ -638,7 +683,24 @@ public class RosterController {
         return dateId;
     }
 
-    private int insertDate(Date date) {
+    public ArrayList<Date> getAllDates() {
+        String sql = "SELECT date FROM Dates";
+        ArrayList<Date> dates = new ArrayList<>();
+
+        try (Connection conn = DriverManager.getConnection(DB_URL);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                dates.add(rs.getDate("date"));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching dates: " + e.getMessage());
+        }
+
+        return dates;
+    }
+
+    public int insertDate(Date date) {
         String sql = "INSERT INTO Dates(date) VALUES(?)";
         int dateId = -1;
 

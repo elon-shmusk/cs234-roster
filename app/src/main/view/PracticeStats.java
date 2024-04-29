@@ -118,9 +118,9 @@ public class PracticeStats extends JPanel {
         });
 
 //        updateButton.addActionListener(e -> updateDatabase());
-        buttonPanel.add(prevWeekButton);
-        buttonPanel.add(nextWeekButton);
-        buttonPanel.add(updateButton);
+//        buttonPanel.add(prevWeekButton);
+//        buttonPanel.add(nextWeekButton);
+//        buttonPanel.add(updateButton);
         buttonPanel.add(addButton);
         add(buttonPanel, BorderLayout.NORTH);
 
@@ -151,7 +151,7 @@ public class PracticeStats extends JPanel {
         // Add columns for the days of the week
         LocalDate date = monday;
         for (int i = 0; i < 7; i++) {
-            model.addColumn(date.format(DateTimeFormatter.ofPattern("MM/d/yyyy")));
+            model.addColumn("");
             date = date.plusDays(1);
         }
 
@@ -167,16 +167,22 @@ public class PracticeStats extends JPanel {
         JDialog dialog = new JDialog();
         dialog.setTitle("Add Player Stats");
         dialog.setLayout(new BorderLayout());
-        dialog.setSize(400, 250);
+        dialog.setSize(600, 250);
 
         JComboBox<String> playerComboBox = new JComboBox<>(playerName.toArray(new String[0]));
+        playerComboBox.setFont(new Font("Arial", Font.PLAIN, 25));
         JTextField dateField = new JTextField();
+        dateField.setFont(new Font("Arial", Font.PLAIN, 25));
         JTextField ftmField = new JTextField();
+        ftmField.setFont(new Font("Arial", Font.PLAIN, 25));
         JTextField ftaField = new JTextField();
+        ftaField.setFont(new Font("Arial", Font.PLAIN, 25));
         JTextField tpmField = new JTextField();
+        tpmField.setFont(new Font("Arial", Font.PLAIN, 25));
         JTextField tpaField = new JTextField();
+        tpaField.setFont(new Font("Arial", Font.PLAIN, 25));
         JButton okButton = new JButton("OK");
-
+        okButton.setFont(new Font("Arial", Font.PLAIN, 25));
         okButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -201,17 +207,29 @@ public class PracticeStats extends JPanel {
         });
         JPanel dialogPanel = new JPanel();
         dialogPanel.setLayout(new GridLayout(0, 2));
-        dialogPanel.add(new JLabel("Player:"));
+        JLabel playerLabel = new JLabel("Player:");
+        playerLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+        dialogPanel.add(playerLabel);
         dialogPanel.add(playerComboBox);
-        dialogPanel.add(new JLabel("Date (MM/dd/yyyy):"));
+        JLabel dateLabel = new JLabel("Date (MM/DD/YYYY):");
+        dateLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+        dialogPanel.add(dateLabel);
         dialogPanel.add(dateField);
-        dialogPanel.add(new JLabel("FTM:"));
+        JLabel ftmLabel = new JLabel("Free Throws Made:");
+        ftmLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+        dialogPanel.add(ftmLabel);
         dialogPanel.add(ftmField);
-        dialogPanel.add(new JLabel("FTA:"));
+        JLabel ftaLabel = new JLabel("Free Throws Attempted:");
+        ftaLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+        dialogPanel.add(ftaLabel);
         dialogPanel.add(ftaField);
-        dialogPanel.add(new JLabel("TPM:"));
+        JLabel tpmLabel = new JLabel("Three-Pointers Made:");
+        tpmLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+        dialogPanel.add(tpmLabel);
         dialogPanel.add(tpmField);
-        dialogPanel.add(new JLabel("TPA:"));
+        JLabel tpaLabel = new JLabel("Three-Pointers Attempted:");
+        tpaLabel.setFont(new Font("Arial", Font.PLAIN, 25));
+        dialogPanel.add(tpaLabel);
         dialogPanel.add(tpaField);
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(okButton);
@@ -242,7 +260,28 @@ public class PracticeStats extends JPanel {
     }
 
     private void populateTable(List<Player> players, ArrayList<ArrayList<Integer>> stats) {
-        // Plot player stats in the table to correspond with the player
+        // Clear existing table data
+        model.setRowCount(0);
+
+        model.setColumnIdentifiers(new String[]{"Number", "Name", "Date", "", "", "", ""});
+        // Add rows to the table
+        for (int i = 0; i < players.size(); i++) {
+            Player player = players.get(i);
+
+            // Add a row with player number and name
+            model.addRow(new Object[]{player.getNumber(), player.getName()});
+
+            for (ArrayList<Integer> playerStats : stats) {
+                Date date = rosterController.getDate(playerStats.get(1));
+                ;
+                if (playerStats.get(0) == player.getId())
+
+                    model.addRow(new Object[]{"", "",date.toLocalDate().format(DateTimeFormatter.ofPattern("MM-dd-yyyy")) , "FTM:" + playerStats.get(2), "FTA:" + playerStats.get(3), "TPM:" + playerStats.get(4), "TPA:" + playerStats.get(5)});
+            }
+
+            // Add a row with player stats
+        }
+
 
 
 

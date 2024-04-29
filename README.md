@@ -40,7 +40,8 @@ The Moravian University Women's Basketball Roster Management System is a softwar
     - clone the repository
     - Create a virtual environment
     - Install the requirements
-    - Run the command `python3 jar2app.py -i <path to jar file> -o <output directory>`
+    - Run the command
+   `python3 jar2app.py <path to jar file>`
     - The executable file will be created in the output directory
 
 3. **Give the Executable File a copy of the database file:**

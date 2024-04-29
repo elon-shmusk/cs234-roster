@@ -134,7 +134,7 @@ public class PracticeStats extends JPanel {
         // Add columns for the days of the week
         LocalDate date = monday;
         for (int i = 0; i < 7; i++) {
-            model.addColumn(date.format(DateTimeFormatter.ofPattern("MMM/d/yyyy")));
+            model.addColumn(date.format(DateTimeFormatter.ofPattern("MM/d/yyyy")));
             date = date.plusDays(1);
         }
 
@@ -213,44 +213,10 @@ public class PracticeStats extends JPanel {
 
     private void populateTable(List<Player> players, ArrayList<ArrayList<Integer>> stats) {
         // Plot player stats in the table to correspond with the player
-        for (Player player : players) {
-            model.addRow(new Object[]{player.getNumber(), player.getName()});
-            model.addRow(new Object[]{"", "FTM"});
-            model.addRow(new Object[]{"", "FTA"});
-            model.addRow(new Object[]{"", "TPM"});
-            model.addRow(new Object[]{"", "TPA"});
-
-            for (int i = 0; i < stats.size(); i++) {
-                int columnIndex = -1;
-                for (int j = 2; i < model.getColumnCount(); j++) {
-                    String header = model.getColumnName(i);
-                    Date columnDate = Date.valueOf(LocalDate.parse(header, DateTimeFormatter.ofPattern("MMM/d/yyyy")));
-                    if (columnDate.equals(rosterController.getDate(stats.get(i).get(1)))) {
-                        columnIndex = i;
-                        break;
-                    }
-                }
-
-                if (columnIndex != -1) {
-                    // Iterate through the table data and add player stats to the corresponding date column
-                    for (int k = 0; i < model.getRowCount(); k += 3) {
-                        if(model.getValueAt(i, 1).equals(playerName)){
-                            model.setValueAt("FTM: "+stats.get(i).get(2), i + 1, columnIndex);
-                            model.setValueAt("FTA: "+stats.get(i).get(3), i + 2, columnIndex);
-                            model.setValueAt("TPM: "+stats.get(i).get(4), i + 3, columnIndex);
-                            model.setValueAt("TPA: "+stats.get(i).get(5), i + 4, columnIndex);
-                        }
-                    }
-                }
-            }
-
-        }
 
 
 
-
-        
-        }
+    }
 
     /**
      * Refreshes the statistics by fetching the latest list of players and updating the table.

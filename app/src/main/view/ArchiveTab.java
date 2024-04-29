@@ -1,3 +1,9 @@
+/**
+ * This class represents the ArchiveTab in the application's GUI.
+ * It displays a table of archived players and provides functionality to restore, update, filter, and unarchive players.
+ * It interacts with the RosterController to fetch and manipulate player data.
+ */
+
 package src.main.view;
 
 import javax.swing.*;
@@ -110,14 +116,9 @@ public class ArchiveTab extends JPanel {
      * Refreshes the archive tab by fetching the latest list of players and updating the table.
      */
     public void refreshArchive() {
-        List<Player> players = rosterController.getAllPlayers();
-        populateArchiveTable(players);
-
-        // Set the filter to "Archived"
-        filterComboBox.setSelectedItem("All");
-
         // Refresh the roster
         rosterTab.refreshRoster();
+        filterPlayers((String) Objects.requireNonNull(filterComboBox.getSelectedItem()));
     }
 
     /**

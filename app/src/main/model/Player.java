@@ -26,8 +26,16 @@ public class Player {
     private int threePointersAttempted;
 
 
-    // Constructor
-
+    /**
+     * Constructor for creating a player with basic details.
+     *
+     * @param id        the unique ID of the player
+     * @param firstName the first name of the player
+     * @param lastName  the last name of the player
+     * @param position  the position of the player
+     * @param number    the number of the player
+     * @param year      the year of the player
+     */
     public Player(int id, String firstName, String lastName, String position, int number, String year) {
         this.id = id;
         this.firstName = firstName;
@@ -37,7 +45,13 @@ public class Player {
         this.year = year;
     }
 
-
+    /**
+     * Constructor for creating a player with free throws details.
+     *
+     * @param id                  the unique ID of the player
+     * @param freeThrowsMade      the number of free throws made by the player
+     * @param freeThrowsAttempted the number of free throws attempted by the player
+     */
     public Player(int id, int freeThrowsMade, int freeThrowsAttempted) {
         this.id = id;
         this.freeThrowsMade = freeThrowsMade;

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/*
+/**
     * PlayerDatabase class is responsible for creating and managing the database that stores player information.
     * It creates the tables for Players, Dates, PlayerStats, and OverallStats.
     * It also provides methods to add, remove, and retrieve player information from the database.
@@ -20,7 +20,7 @@ public class PlayerDatabase {
     private static final String DB_URL = "jdbc:sqlite:app/data/players.db";
     private Connection connection;
 
-    /*
+    /**
         * Constructor establishes a connection to the database and creates the necessary tables.
         * If the database does not exist, it will be created.
         * If the tables do not exist, they will be created.
@@ -34,7 +34,7 @@ public class PlayerDatabase {
         }
     }
 
-    /*
+    /**
         * Method to create the tables for the database.
         * Tables include Players, Dates, PlayerStats, and OverallStats.
      */
@@ -86,7 +86,7 @@ public class PlayerDatabase {
         }
     }
 
-    /*
+    /**
         * Method to drop the tables from the database.
         * This method is used for testing purposes.
         * It will drop the Players, Dates, PlayerStats, and OverallStats tables.
@@ -107,7 +107,7 @@ public class PlayerDatabase {
     }
 
 
-    /*
+    /**
         * Method to add a player to the database.
         * Player information is inserted into the Players table.
         * @param player - the player to be added to the database
@@ -131,7 +131,7 @@ public class PlayerDatabase {
     }
 
 
-    /*
+    /**
         * Method to retrieve all players from the database.
         * Players are retrieved from the Players table.
         * @return a list of all players in the database
@@ -167,7 +167,7 @@ public class PlayerDatabase {
     }
 
 
-    /*
+    /**
         * Method to remove a player from the database by ID.
         * Player information is removed from the Players table.
         * @param playerId - the ID of the player to remove

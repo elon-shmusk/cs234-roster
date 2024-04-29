@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,10 +20,13 @@ public class ArchiveTab extends JPanel {
     private JButton updateButton;
     private JButton filterButton;
     private JComboBox<String> filterComboBox;
+    private JButton unarchiveButton; // Declare the unarchiveButton
+    private RosterTab rosterTab; // Add this line
 
-    public ArchiveTab(RosterController rosterController) {
+    public ArchiveTab(RosterController rosterController, RosterTab rosterTab) {
         super();
         this.rosterController = rosterController;
+        this.rosterTab = rosterTab; // Add this line
 
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createTitledBorder("Archive"));
@@ -76,12 +81,27 @@ public class ArchiveTab extends JPanel {
             filterPlayers((String) Objects.requireNonNull(filterComboBox.getSelectedItem()));
         });
 
+        JButton unarchiveButton = new JButton ("Unarchive"); // Checkbox for archiving
+        unarchiveButton.setFont(new Font("Arial", Font.PLAIN, 25));
+
+        unarchiveButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArchivedPlayersPanel archivedPlayersPanel = new ArchivedPlayersPanel(rosterController, rosterTab, ArchiveTab.this);
+                archivedPlayersPanel.setVisible(true);
+                // Refresh the screen
+                refreshArchive();
+            }
+        });
+
         // Panel for buttons and filter combo box
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.add(restoreButton);
         buttonPanel.add(updateButton);
+        buttonPanel.add(unarchiveButton); // Add the unarchiveButton to the buttonPanel
         buttonPanel.add(new JLabel("Filter:"));
         buttonPanel.add(filterComboBox);
+
 
         add(buttonPanel, BorderLayout.SOUTH);
     }
@@ -92,6 +112,12 @@ public class ArchiveTab extends JPanel {
     public void refreshArchive() {
         List<Player> players = rosterController.getAllPlayers();
         populateArchiveTable(players);
+
+        // Set the filter to "Archived"
+        filterComboBox.setSelectedItem("All");
+
+        // Refresh the roster
+        rosterTab.refreshRoster();
     }
 
     /**

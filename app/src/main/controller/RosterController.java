@@ -111,6 +111,9 @@ public class RosterController {
                     System.out.println("Error deleting player: " + e.getMessage());
                 }
 
+                // Refresh the archive tab
+                archiveTab.refreshArchive();
+
             } else {
                 System.out.println("Failed to archive player.");
             }

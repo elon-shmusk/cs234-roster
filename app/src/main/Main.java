@@ -28,7 +28,7 @@ public class Main {
             RosterTab rosterTab = new RosterTab(rosterController);
             StatsTab statsTab = new StatsTab(rosterController);
             PracticeStats practiceStats = new PracticeStats(rosterController);
-            ArchiveTab archiveTab = new ArchiveTab(rosterController);
+            ArchiveTab archiveTab = new ArchiveTab(rosterController, rosterTab);
 
             rosterController.setRosterTab(rosterTab);
             rosterController.setStatsTab(statsTab);

@@ -31,7 +31,7 @@ public class ArchiveTab extends JPanel {
         initializeComponents();
 
         // Populate the archive table with all players initially
-        populateArchiveTable(rosterController.getAllPlayers());
+        populateArchiveTable(rosterController.getArchivedPlayers());
     }
 
     /**
@@ -69,7 +69,7 @@ public class ArchiveTab extends JPanel {
         });
 
         // Filter combo box
-        filterComboBox = new JComboBox<>(new String[]{"All", "Active", "Archived"});
+        filterComboBox = new JComboBox<>(new String[]{"Archived", "Active", "All"});
         filterComboBox.setFont(new Font("Arial", Font.PLAIN, 20));
         filterComboBox.addActionListener(e -> {
             // Filter players based on selected option
@@ -138,11 +138,11 @@ public class ArchiveTab extends JPanel {
         List<Player> filteredPlayers;
 
         switch (filterOption) {
-            case "Active":
-                filteredPlayers = rosterController.getActivePlayers();
-                break;
             case "Archived":
                 filteredPlayers = rosterController.getArchivedPlayers();
+                break;
+            case "Active":
+                filteredPlayers = rosterController.getActivePlayers();
                 break;
             default:
                 List<Player> activePlayers = rosterController.getActivePlayers();

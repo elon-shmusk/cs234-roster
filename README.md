@@ -22,6 +22,36 @@ The Moravian University Women's Basketball Roster Management System is a softwar
 - **Filter Roster:** Users can filter the roster to view only active or archived players.
 - **Database Connectivity:** The system is connected to an SQLite database backend to store player information persistently.
 
+## Create Executable File
+
+1. **Create Jar File:** 
+   - Open Intellij IDEA.
+   - Go to File -> Project Structure.
+   - Click on Artifacts.
+   - Click on the "+" sign and select JAR -> From modules with dependencies.
+   - Select the Main class and click OK.
+   - Click on the Output Layout tab.
+   - Click on the "+" sign and select Directory Content.
+   - Select the META-INF folder and click OK.
+   - Click Apply and OK.
+   - Go to Build -> Build Artifacts -> Build.
+   - The JAR file will be created in the out -> artifacts -> cs234_roster_jar folder.
+
+2. **Create Executable File:**
+    - Go to https://github.com/dante-biase/jar2app 
+    - clone the repository
+    - Create a virtual environment
+    - Install the requirements
+    - Run the command `python3 jar2app.py -i <path to jar file> -o <output directory>`
+    - The executable file will be created in the output directory
+
+3. **Give the Executable File a copy of the database file:**
+    - Copy the directory app
+    - Two finger click on the executable file and click on "Show Package Contents"
+    - Go to the directory that contains the jar file
+    - Paste the app directory into the same directory as the jar file
+    - The executable file is now ready to be used
+
 ## How to Use
 
 1. **Installation:** 

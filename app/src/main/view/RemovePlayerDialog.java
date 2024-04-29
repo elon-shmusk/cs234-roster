@@ -1,3 +1,10 @@
+/**
+ * RemovePlayerDialog.java
+ * Implements a dialog for removing players from the roster.
+ * This dialog presents a list of players with checkboxes to select players for removal.
+ * Edited By Kaleb Missmer
+ */
+
 package src.main.view;
 
 import javax.swing.*;

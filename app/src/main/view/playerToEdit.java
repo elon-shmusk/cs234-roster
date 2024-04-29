@@ -152,11 +152,7 @@ public class playerToEdit extends JDialog {
     /**
      * Gets the selected player from the radio buttons.
      * @return the selected player
-<<<<<<< HEAD
-     * @author Samuel Cadiz
-=======
      * @author Fernando Peralta Castro
->>>>>>> 3da2f4a3d7ae7d5fb2bf8febee1239c2d9a5fd94
      */
     private Player getSelectedPlayer() {
         for (int i = 0; i < playerRadioButtons.size(); i++)

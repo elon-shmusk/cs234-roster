@@ -1,3 +1,13 @@
+/**
+ * PracticeStats.java
+ * This class is responsible for displaying the practice statistics of the players in a table.
+ * The table displays the player number, player name, and the statistics for each day of the week.
+ * The user can navigate through the weeks using the "Previous Week" and "Next Week" buttons.
+ * The user can also add a new player stat by clicking the "Add Stat" button.
+ * The user can update the database by clicking the "Update" button.
+ * Author: Samuel Cadiz, Kaleb Missmer
+ */
+
 package src.main.view;
 
 
@@ -28,6 +38,10 @@ public class PracticeStats extends JPanel {
     private JComboBox<String> playerComboBox;
     private ArrayList<String> playerName = new ArrayList<>();
 
+    /**
+     * Constructs a new PracticeStats panel.
+     * @param rosterController the roster controller
+     */
     public PracticeStats(RosterController rosterController) {
         super(new BorderLayout());
         this.rosterController = rosterController;
@@ -120,6 +134,9 @@ public class PracticeStats extends JPanel {
         });
     }
 
+    /**
+     * displays week
+     */
     private void displayWeek(LocalDate monday) {
         // Clear existing table data
         model.setRowCount(0);
@@ -142,6 +159,10 @@ public class PracticeStats extends JPanel {
         refreshStats();
     }
 
+
+    /**
+     * Opens a dialog to add a new player stat.
+     */
     private void openAddDialog() {
         JDialog dialog = new JDialog();
         dialog.setTitle("Add Player Stats");
@@ -200,6 +221,15 @@ public class PracticeStats extends JPanel {
         dialog.setVisible(true);
     }
 
+    /**
+     * Adds player stats to the database.
+     * @param playerName the name of the player
+     * @param date the date of the practice
+     * @param ftm the number of free throws made
+     * @param fta the number of free throws attempted
+     * @param tpm the number of three-pointers made
+     * @param tpa the number of three-pointers attempted
+     */
     private void addPlayerStats(String playerName,Date date, int ftm, int fta, int tpm, int tpa) {
         // Add player stats to the database
         String firstName = playerName.split(" ")[0];

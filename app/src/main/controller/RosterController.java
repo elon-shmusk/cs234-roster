@@ -1,3 +1,9 @@
+/**
+ * Controller class for managing the roster.
+ * This class handles the operations related to adding and removing players
+ * from the roster, as well as retrieving the list of all players.
+ */
+
 package src.main.controller;
 
 import src.main.model.*;
@@ -11,11 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * Controller class for managing the roster.
- * This class handles the operations related to adding and removing players
- * from the roster, as well as retrieving the list of all players.
- */
+
 public class RosterController {
     private static final String DB_URL = "jdbc:sqlite:app/data/players.db";
 
@@ -161,15 +163,11 @@ public class RosterController {
         archiveTab.refreshArchive();
     }
 
-    /**
-     * Updates the last name of a player in the roster.
-     * @param playerId the unique ID of the player
-     * @param lastName the new last name of the player
-     */
+
 
 
     /**
-     * Updates the last name of a player in the database.
+     * Sets the last name of a player in the database.
      * @param id the unique ID of the player to be updated
      * @param lastName the new last name of the player
      */
@@ -191,6 +189,11 @@ public class RosterController {
         }
     }
 
+    /**
+     * Updates the last name of a player in the roster.
+     * @param id the unique ID of the player
+     * @param lastName the new last name of the player
+     */
     public void updatePlayerLastName(int id, String lastName)
     {
         setPlayerLastName(id, lastName);
@@ -216,11 +219,7 @@ public class RosterController {
         archiveTab.refreshArchive();
     }
 
-    /**
-     * Updates the playing position of a player in the roster.
-     * @param playerId the unique ID of the player
-     * @param position the new playing position of the player
-     */
+
 
 
     /**
@@ -246,6 +245,11 @@ public class RosterController {
         }
     }
 
+    /**
+     * Updates the position of a player in the roster.
+     * @param id the unique ID of the player
+     * @param position the new position of the player
+     */
     public void updatePlayerPosition(int id, String position)
     {
         setPlayerPosition(id, position);
@@ -557,6 +561,12 @@ public class RosterController {
         return allStats;
     }
 
+    /**
+     * Retrieves the total number of free throws made by a player.
+     * @param playerId the unique ID of the player
+     * @return the total number of free throws made
+     */
+
     public int getTotalFreeThrowsMade(int playerId) {
         String sql = "SELECT SUM(freeThrowsMade) AS totalFreeThrowsMade FROM PlayerStats WHERE player_id = ?";
         int totalFreeThrowsMade = 0;
@@ -575,6 +585,12 @@ public class RosterController {
         return totalFreeThrowsMade;
     }
 
+
+    /**
+     * Retrieves the total number of three-pointers made by a player.
+     * @param playerId the unique ID of the player
+     * @return the total number of three-pointers made
+     */
     public int getTotalThreePointsMade(int playerId) {
         String sql = "SELECT SUM(threePointsMade) AS totalThreePointsMade FROM PlayerStats WHERE player_id = ?";
         int totalThreePointsMade = 0;
@@ -594,6 +610,12 @@ public class RosterController {
     }
 
 
+    /**
+     * Sets the total number of free throws Made by a player.
+     * @param playerId the unique ID of the player
+     * @return the total number of free throws Made
+     */
+
     public void setTotalFreeThrowsMade(int playerId, int totalFreeThrowsMade) {
         String sql = "UPDATE OverallStats SET total_freeThrowsMade = ? WHERE player_id = ?";
 
@@ -610,6 +632,12 @@ public class RosterController {
             System.out.println("Error updating total free throws made: " + e.getMessage());
         }
     }
+
+    /**
+     * Sets the total number of three-pointers made by a player.
+     * @param playerId the unique ID of the player
+     * @return the total number of three-pointers made
+     */
     public void setTotalThreePointsMade(int playerId, int totalThreePointsMade) {
         String sql = "UPDATE OverallStats SET total_threePointsMade = ? WHERE player_id = ?";
 
@@ -627,6 +655,12 @@ public class RosterController {
         }
     }
 
+
+    /**
+     * Retrieves the total number of free throws attempted by a player.
+     * @param playerId the unique ID of the player
+     * @return the total number of free throws attempted
+     */
     public int getTotalFreeThrowsAttempted(int playerId) {
         String sql = "SELECT SUM(freeThrowsAttempted) AS totalFreeThrowsAttempted FROM PlayerStats WHERE player_id = ?";
         int totalFreeThrowsAttempted = 0;
@@ -645,6 +679,12 @@ public class RosterController {
         return totalFreeThrowsAttempted;
     }
 
+
+    /**
+     * Retrieves the total number of three-pointers attempted by a player.
+     * @param playerId the unique ID of the player
+     * @return the total number of three-pointers attempted
+     */
     public int getTotalThreePointsAttempted(int playerId) {
         String sql = "SELECT SUM(threePointsAttempted) AS totalThreePointsAttempted FROM PlayerStats WHERE player_id = ?";
         int totalThreePointsAttempted = 0;
@@ -663,7 +703,10 @@ public class RosterController {
         return totalThreePointsAttempted;
     }
 
-
+/**
+     * Retrieves the total number of free throws attempted by a player.
+     * @return the total number of free throws attempted
+     */
     public int getDateId(Date date) {
         // Check if the date exists in the Dates table
         String sql = "SELECT date_id FROM Dates WHERE date = ?";
@@ -686,6 +729,11 @@ public class RosterController {
         return dateId;
     }
 
+
+    /**
+     * Retrieves the total number of three-pointers attempted by a player.
+     * @return the total number of three-pointers attempted
+     */
     public ArrayList<Date> getAllDates() {
         String sql = "SELECT date FROM Dates";
         ArrayList<Date> dates = new ArrayList<>();
@@ -703,6 +751,12 @@ public class RosterController {
         return dates;
     }
 
+
+    /**
+     * Inserts a new date into the Dates table.
+     * @param date the date to insert
+     * @return the ID of the inserted date
+     */
     public int insertDate(Date date) {
         String sql = "INSERT INTO Dates(date) VALUES(?)";
         int dateId = -1;
@@ -727,10 +781,7 @@ public class RosterController {
 
 
 
-    /**
-     * Retrieves the number of players in the roster.
-     * @return the number of players
-     */
+
     /**
      * Gets the number of players in the database.
      * @return the number of players in the database

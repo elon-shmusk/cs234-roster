@@ -1,3 +1,8 @@
+/*
+    * EditPlayerDialog.java
+    * This class provides a dialog for editing a player's information.
+    * It allows the user to change the player's first name, last name, year, position, and number.
+ */
 
 package src.main.view;
 

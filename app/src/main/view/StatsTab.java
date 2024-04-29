@@ -1,4 +1,13 @@
+/**
+ * StatsTab.java
+ * A panel that displays the statistics of players in a table format.
+ * Kaleb Missmer
+ */
+
+
 package src.main.view;
+
+
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -120,6 +129,12 @@ public class StatsTab extends JPanel {
         }
     }
 
+    /**
+     * Calculates the percentage of made shots out of attempted shots.
+     * @param made the number of made shots
+     * @param attempted the number of attempted shots
+     * @return the percentage of made shots out of attempted shots
+     */
     private double calculatePercentage(int made, int attempted) {
         if (attempted == 0) {
             return 0; // Handle division by zero

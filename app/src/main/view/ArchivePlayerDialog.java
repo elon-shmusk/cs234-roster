@@ -10,6 +10,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Dialog for archiving a player from the roster.
+ * This dialog provides a button to archive the selected player.
+ */
 public class ArchivePlayerDialog {
     private Connection connection;
 
@@ -18,6 +22,12 @@ public class ArchivePlayerDialog {
     private RosterController rosterController;
     private final String databaseUrl = "jdbc:sqlite:app/data/players.db"; // Update with your database name
 
+    /**
+     * Constructs a new ArchivePlayerDialog.
+     *
+     * @param rosterTab       the RosterTab associated with this dialog
+     * @param rosterController the RosterController to handle player archiving
+     */
     public ArchivePlayerDialog(RosterTab rosterTab, RosterController rosterController) {
         super();
         this.rosterTab = rosterTab;
@@ -45,6 +55,9 @@ public class ArchivePlayerDialog {
 
     }
 
+    /**
+     * Creates the 'archived' table if it does not exist.
+     */
     private void createTablesIfNotExist() {
         try (Statement statement = connection.createStatement()) {
             // Create 'archived' table if it does not exist

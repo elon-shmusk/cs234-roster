@@ -1,3 +1,11 @@
+/**
+ * RosterTab.java
+ * Sam and Kaleb Missmer
+ * 4/26/2021
+ * A panel that displays the roster in a table format.
+ * It allows for viewing and refreshing the list of players.
+ */
+
 package src.main.view;
 
 import javax.swing.*;

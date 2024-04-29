@@ -1,3 +1,8 @@
+/**
+ * The entry point of the basketball roster application.
+ * This class initializes the application and sets up the main GUI components.
+ */
+
 package src.main;
 
 import src.main.view.*;
@@ -6,10 +11,7 @@ import src.main.model.*;
 
 import javax.swing.*;
 
-/**
- * The entry point of the basketball roster application.
- * This class initializes the application and sets up the main GUI components.
- */
+
 public class Main {
 
     /**

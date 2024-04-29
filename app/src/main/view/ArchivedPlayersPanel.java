@@ -14,6 +14,13 @@ public class ArchivedPlayersPanel extends JDialog {
     private RosterTab rosterTab;
     private ArchiveTab archiveTab;
 
+
+    /**
+     * Constructs a new ArchivedPlayersPanel.
+     * @param rosterController the RosterController to handle player addition
+     * @param rosterTab the RosterTab associated with this dialog
+     * @param archiveTab the ArchiveTab associated with this dialog
+     */
     public ArchivedPlayersPanel(RosterController rosterController, RosterTab rosterTab, ArchiveTab archiveTab){
         super();
         this.rosterController = rosterController;
@@ -28,6 +35,9 @@ public class ArchivedPlayersPanel extends JDialog {
         populatePanel(); // Call the method here
     }
 
+    /**
+     * Populates the panel with archived players.
+     */
     public void populatePanel() {
         List<Player> archivedPlayers = rosterController.getArchivedPlayers();
 

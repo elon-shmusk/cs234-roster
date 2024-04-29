@@ -1,3 +1,9 @@
+/**
+ * This class is responsible for creating a new SQLite database file.
+ * It checks if the database file already exists and creates a new one if it does not.
+ * @author Kaleb
+ */
+
 package src.main;
 
 import java.io.File;
@@ -5,11 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * This class is responsible for creating a new SQLite database file.
- * It checks if the database file already exists and creates a new one if it does not.
- * @author Kaleb
- */
+
 public class CreateSQLiteDatabase {
 
     /**

@@ -9,10 +9,22 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/*
+    * PlayerDatabase class is responsible for creating and managing the database that stores player information.
+    * It creates the tables for Players, Dates, PlayerStats, and OverallStats.
+    * It also provides methods to add, remove, and retrieve player information from the database.
+    * Author: Kaleb Missmer
+ */
 public class PlayerDatabase {
     private static final String DB_URL = "jdbc:sqlite:app/data/players.db";
     private Connection connection;
 
+    /*
+        * Constructor establishes a connection to the database and creates the necessary tables.
+        * If the database does not exist, it will be created.
+        * If the tables do not exist, they will be created.
+     */
     public PlayerDatabase() {
         try {
             this.connection = DriverManager.getConnection(DB_URL);
@@ -21,6 +33,11 @@ public class PlayerDatabase {
             System.out.println("Error establishing connection: " + e.getMessage());
         }
     }
+
+    /*
+        * Method to create the tables for the database.
+        * Tables include Players, Dates, PlayerStats, and OverallStats.
+     */
 
     private void createTables() {
         String playerTableSQL = "CREATE TABLE IF NOT EXISTS Players (\n" +
@@ -34,7 +51,6 @@ public class PlayerDatabase {
 
         String datesTableSQL = "CREATE TABLE IF NOT EXISTS Dates (\n" +
                 " date_id INTEGER PRIMARY KEY,\n" +
-                " week_num INT NOT NULL,\n" +
                 " date DATE NOT NULL\n" +
                 ");";
 
@@ -70,25 +86,33 @@ public class PlayerDatabase {
         }
     }
 
+    /*
+        * Method to drop the tables from the database.
+        * This method is used for testing purposes.
+        * It will drop the Players, Dates, PlayerStats, and OverallStats tables.
+        * author Kaleb Missmer
+     */
     public void dropTables() {
-        String playerTableSQL = "DROP TABLE IF EXISTS Players;";
-        String datesTableSQL = "DROP TABLE IF EXISTS Dates;";
-        String statsTableSQL = "DROP TABLE IF EXISTS PlayerStats;";
-        String overallStatsTableSQL = "DROP TABLE IF EXISTS OverallStats;";
+
         String statsTableSQL1 = "DROP TABLE IF EXISTS Stats;";
 
         try {
             Statement stmt = connection.createStatement();
-            stmt.execute(playerTableSQL);
-            stmt.execute(datesTableSQL);
-            stmt.execute(statsTableSQL);
-            stmt.execute(overallStatsTableSQL);
+
+            stmt.execute(statsTableSQL1);
             System.out.println("Tables dropped successfully.");
         } catch (SQLException e) {
             System.out.println("Error dropping tables: " + e.getMessage());
         }
     }
 
+
+    /*
+        * Method to add a player to the database.
+        * Player information is inserted into the Players table.
+        * @param player - the player to be added to the database
+        * author Kaleb Missmer
+     */
     public void addPlayer(Player player) {
         String sql = "INSERT INTO Players(firstName, lastName, position, player_Num, year) VALUES(?,?,?,?,?)";
 
@@ -105,6 +129,14 @@ public class PlayerDatabase {
             System.out.println("Error adding player: " + e.getMessage());
         }
     }
+
+
+    /*
+        * Method to retrieve all players from the database.
+        * Players are retrieved from the Players table.
+        * @return a list of all players in the database
+        * author Kaleb Missmer
+     */
 
     public List<Player> getAllPlayers() {
         List<Player> players = new ArrayList<>();
@@ -134,6 +166,15 @@ public class PlayerDatabase {
         return players;
     }
 
+
+    /*
+        * Method to remove a player from the database by ID.
+        * Player information is removed from the Players table.
+        * @param playerId - the ID of the player to remove
+        * @return the player with the specified ID
+        * author Kaleb Missmer
+     */
+
     public void removePlayer(int playerId) {
         String sql = "DELETE FROM Players WHERE id = ?";
 
@@ -153,6 +194,13 @@ public class PlayerDatabase {
             System.out.println("Error removing player: " + e.getMessage());
         }
     }
+
+    /*
+        * Method to add a player to the archived table.
+        * Player information is inserted into the archived table.
+        * @param player - the player to be added to the archived table
+        * author Fernando
+     */
 
     public List<Player> getPlayersNotInArchived() {
         List<Player> players = new ArrayList<>();
@@ -182,6 +230,12 @@ public class PlayerDatabase {
         return players;
     }
 
+    /*
+        * Method to add a player to the archived table.
+        * Player information is inserted into the archived table.
+        * @param player - the player to be added to the archived table
+        * author Fernando
+     */
     public List<Player> getArchivedPlayers() {
         List<Player> archivedPlayers = new ArrayList<>();
         String sql = "SELECT * FROM archived";

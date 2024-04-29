@@ -22,7 +22,7 @@ public class Main {
             PlayerDatabase playerDatabase = new PlayerDatabase();
 
             // Drop existing tables
-            
+
             RosterController rosterController = new RosterController(playerDatabase);
 
             RosterTab rosterTab = new RosterTab(rosterController);

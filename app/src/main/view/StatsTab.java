@@ -5,14 +5,20 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.util.List;
+
+import org.slf4j.helpers.MessageFormatter;
 import src.main.controller.RosterController;
 import src.main.model.Player;
+import java.text.DecimalFormat;
+
 
 /**
  * A panel that displays the statistics of players in a table format.
  * Kaleb Missmer
  */
 public class StatsTab extends JPanel {
+    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.##");
+
     private JTable statsTable;
     private JScrollPane scrollPane;
     private RosterController rosterController;
@@ -102,12 +108,16 @@ public class StatsTab extends JPanel {
             double overallFreeThrowsPercentage = calculatePercentage(totalFreeThrowsMade, totalFreeThrowsAttempted);
             double overallThreePointsPercentage = calculatePercentage(totalThreePointsMade, totalThreePointsAttempted);
 
-            // Add a row with player statistics
-            model.addRow(new Object[]{playerName, totalFreeThrowsMade, overallFreeThrowsPercentage, totalThreePointsMade, overallThreePointsPercentage});
-        }
+            // Format percentages to two decimal places
+            String formattedFreeThrowsPercentage = DECIMAL_FORMAT.format(overallFreeThrowsPercentage);
+            String formattedThreePointsPercentage = DECIMAL_FORMAT.format(overallThreePointsPercentage);
 
-        // Set the model to the stats table
-        statsTable.setModel(model);
+            // Add a row with player statistics
+            model.addRow(new Object[]{playerName, totalFreeThrowsMade, formattedFreeThrowsPercentage + "%", totalThreePointsMade, formattedThreePointsPercentage + "%"});
+
+            statsTable.setModel(model);
+
+        }
     }
 
     private double calculatePercentage(int made, int attempted) {
